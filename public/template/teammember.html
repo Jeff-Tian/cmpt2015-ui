@@ -1,0 +1,16 @@
+<div ng-controller="gameteam" class="teammember">
+    <h2 class="title">选择你想扮演的角色</h2>
+    <div class="ui five column grid">
+        <div class="column item" ng-class="{selected:selected===item}" ng-repeat="item in teamMembers">
+            <div class="image" ng-click="select(item)">
+                <img src="//img.hcdlearning.com/FljmGyTPfltIym1q9ANyyH0LqNh7-small" alt="">
+                <i class="icon checkmark"></i>
+            </div>
+            <div class="name">
+                {{item.title}}
+            </div>
+        </div>
+        <div class="meta">你選擇扮演的CEO，首重具備優秀的執行力、綜觀大局的遠 見。说明文字说明文字说明文字说明文字说明文字说明文字 说明文字说明文字说明文字。
+        </div>
+    </div>
+</div>

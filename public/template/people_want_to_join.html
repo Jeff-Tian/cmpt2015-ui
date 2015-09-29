@@ -1,0 +1,27 @@
+<div class="people-want-to-join list" ng-controller="peopleWantToJoinCtrl">
+    <div class="persons ui items">
+        <div class="item ui grid">
+            <div class="sixteen wide column">
+                <div class="ui five column grid">
+                    <div class="img column" ng-repeat="person in persons">
+                        <div class="card">
+                            <div class="img">
+                                <img class="gender-{{person.gender.toLowerCase()}}" ng-src="{{person.avatar}}-small">
+                            </div>
+                            <div class="title">
+                                {{person.nick_name}}(CEO)
+                            </div>
+                            <div class="description">
+                                <div>清华大学</div>
+                                <div>设计系</div>
+                            </div>
+                        </div>
+                        <button class="btn">
+                            <i class="icon checkmark"></i>{{40013|translate}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,117 @@
+.teamjoin {
+    background-color: #FFF;
+}
+
+.teamjoin .actions {
+    height: 80px;
+    margin: 0 1em;
+}
+
+.teamjoin .toggle .join {
+    padding: 3px 0 3px 3px;
+    .border-radius(5px 0 0 5px);
+}
+
+.teamjoin .toggle .create {
+    padding: 3px 3px 3px 0;
+    .border-radius(0 5px 5px 0);
+}
+
+.teamjoin .toggle .join,
+.teamjoin .toggle .create {
+    width: 50%;
+    float: left;
+    background-color: #5F5F63;
+    color: #FFF;
+    overflow: hidden;
+    text-align: center;
+}
+
+.teamjoin .toggle .join .btn,
+.teamjoin .toggle .create .btn {
+    width: 100%;
+    text-align: center;
+    border: none;
+    .border-radius(5px);
+    font-size: 16px;
+    background-color: transparent;
+    height: 40px;
+}
+
+.teamjoin .toggle .btn.selected {
+    background-color: #FF001F;
+    outline: none;
+}
+
+.teamjoin .create-input {
+    position: relative;
+    line-height: 40px;
+    padding: 5px;
+    top: -5px;
+    margin-left: 0 !important;
+    background-color: #DDD;
+}
+
+.teamjoin .create-input .create-column:not(.row) {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.teamjoin .create-input.ui.popup:before {
+    background-color: #DDD;
+}
+
+.teamjoin .create-input .label {
+    font-size: 18px;
+    font-weight: 800;
+    color: #000;
+}
+
+.teamjoin .create-input .btn {
+    width: 100%;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    background-color: #FF001F;
+    color: #FFF;
+    height: 40px;
+    outline: none;
+}
+
+.teamjoin .create-input.ui.form .inline.fields {
+    margin-bottom: 0;
+}
+
+.teamjoin .contents {}
+
+.teamjoin .contents .tab-header {
+    padding: 0 2em;
+    border-bottom: 2px solid #FF001F;
+}
+
+.teamjoin .contents .tab-header .btn {
+    width: 100%;
+    text-align: center;
+    border: none;
+    border-radius: 5px 5px 0 0;
+    font-size: 18px;
+    background-color: #5F5F63;
+    color: #FFF;
+    height: 44px;
+    outline: none;
+}
+
+.teamjoin .contents .tab-header .btn.selected {
+    background-color: #FF001F;
+}
+
+.teamjoin .contents .ui.form .inline.fields {
+    margin-bottom: 0;
+}
+
+.teamjoin .contents .ui.form .inline.fields .field {
+    padding: 0 3px 0 0;
+}
+
+@import "teams-can-join.less";

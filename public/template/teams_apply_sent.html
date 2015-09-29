@@ -1,0 +1,34 @@
+<div class="teams-apply-sent list" ng-controller="teamsApplySentCtrl">
+    <div class="teams ui items">
+        <div class="item ui grid" ng-repeat="team in teams" ng-class="{expanded:team.expanded}">
+            <span class="name middle aligned content six wide column">
+                {{team.name}}
+            </span>
+            <div class="images ten wide column" ng-show="!team.expanded" ng-click="team.expanded=true">
+                <div class="ui five column grid">
+                    <div class="img column" ng-repeat="member in team.members">
+                        <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}-small">
+                    </div>
+                </div>
+            </div>
+            <div class="images" ng-show="team.expanded">
+                <div class="ui five column grid">
+                    <div class="img column" ng-repeat="member in team.members">
+                        <div class="card">
+                            <div class="img">
+                                <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}-small">
+                            </div>
+                            <div class="title">
+                                {{member.nick_name}}(CEO)
+                            </div>
+                            <div class="description">
+                                <div>清华大学</div>
+                                <div>设计系</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

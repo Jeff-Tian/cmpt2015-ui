@@ -1,0 +1,53 @@
+<div ng-controller="teamjoin" class="teamjoin">
+    <div class="actions ui grid">
+        <div class="six wide column">
+            <div class="toggle">
+                <div class="{{tab.name}}" ng-repeat="tab in tabs">
+                    <button class="btn" ng-class="{selected:selected===tab}" ng-click="toggle(tab)">
+                        {{tab.label|translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="ten wide column" ng-show="selected.name==='create'">
+            <div class="create-input ui form fluid custom popup center right transition visible">
+                <div class="inline fields">
+                    <div class="one wide field">
+                    </div>
+                    <div class="label four wide field">
+                        {{40006|translate}}
+                    </div>
+                    <div class="eight wide field">
+                        <input type="text" maxlength="100">
+                    </div>
+                    <div class="four wide field">
+                        <button class="btn">
+                            {{40007|translate}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="contents">
+        <div class="{{tab.name}}" ng-show="selected===tab" ng-repeat="tab in tabs">
+            <div class="tab-header ui form">
+                <div class="inline fields">
+                    <div class="four wide field" ng-repeat="child in tab.children">
+                        <button class="btn" ng-class="{selected: selected.tab===child}" ng-click="selectTab(child)">
+                            {{child.label|translate}}
+                            <span ng-if="number[child.name]">
+                                ({{number[child.name]}})
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="tabs">
+                <div class="content {{child.name}}" ng-show="selected.tab===child" ng-repeat="child in tab.children">
+                    <div ng-dynamic-directive="child.name">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

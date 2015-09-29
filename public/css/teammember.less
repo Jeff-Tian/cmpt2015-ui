@@ -1,0 +1,58 @@
+.teammember {
+    padding: 2em;
+    background-color: #FFF;
+}
+
+.teammember .title {
+    color: #8C8C8C;
+    margin-bottom: 2em;
+}
+
+.teammember .item {
+    text-align: center;
+    color: #8C8C8C;
+    font-size: 14px;
+}
+
+.teammember .item .image {
+    position: relative;
+    cursor: pointer;
+    margin: 0.5em;
+}
+
+.teammember .item .image .icon {
+    position: absolute;
+    bottom: -0.2em;
+    right: -0.2em;
+    font-size: 3em;
+    color: #FF3C42;
+    display: none;
+}
+
+.teammember .item img {
+    width: 100%;
+    border: 3px solid #C1C1C1;
+    border-radius: 50%;
+}
+
+.teammember .item.selected img {
+    border-color: #FF3C42;
+}
+
+.teammember .item.selected .image .icon {
+    display: block;
+}
+
+.teammember .item.male img {
+    border-color: #0069D4;
+}
+
+.teammember .item.female img {
+    border-color: #FF5E4A;
+}
+
+.teammember .meta {
+    font-size: 16px;
+    line-height: 1.2;
+    color: #646464;
+}

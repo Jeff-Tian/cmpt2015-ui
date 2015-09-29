@@ -1,0 +1,25 @@
+{
+  "name": "HCD-Cmpt2015",
+  "version": "1.0.0",
+  "private": true,
+  "authors": [
+    "Robbin.Zhu <robbin@59124.com>"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "public/dist",
+    "public/libs",
+    "node_modules"
+  ],
+  "dependencies": {
+    "angular": "~1.4.6",
+    "semantic-ui": "~2.1.4",
+    "angular-translate": "~2.8.0",
+    "jquery": "~2.1.4",
+    "angular-semantic-ui": "0.0.3"
+  }
+}

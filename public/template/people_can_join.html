@@ -1,0 +1,33 @@
+<div class="people-can-join list" ng-controller="peopleCanJoinCtrl">
+    <div class="ui search">
+        <div class="ui left icon input">
+            <i class="icon search"></i>
+            <input type="text" class="search-input" placeholder="{{40016|translate}}">
+        </div>
+    </div>
+    <div class="persons ui items">
+        <div class="item ui grid">
+            <div class="sixteen wide column">
+                <div class="ui five column grid">
+                    <div class="img column" ng-repeat="person in persons">
+                        <div class="card">
+                            <div class="img">
+                                <img class="gender-{{person.gender.toLowerCase()}}" ng-src="{{person.avatar}}-small">
+                            </div>
+                            <div class="title">
+                                {{person.nick_name}}(CEO)
+                            </div>
+                            <div class="description">
+                                <div>清华大学</div>
+                                <div>设计系</div>
+                            </div>
+                        </div>
+                        <button class="btn">
+                            <i class="icon plus"></i>{{40015|translate}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

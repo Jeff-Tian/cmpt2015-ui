@@ -8,6 +8,9 @@
   },
   "author": "",
   "license": "ISC",
+  "scripts": {
+    "install": "grunt"
+  },
   "dependencies": {
     "express": "^4.13.3"
   },

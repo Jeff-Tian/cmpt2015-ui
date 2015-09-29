@@ -25,7 +25,7 @@ angular
             40015: '邀请',
             40016: '搜寻合适队友。ex.财经系女',
             40017: '申请'
-        }).translations('zh', {
+        }).translations('cn', {
             40001: '加入战队',
             40002: '创建战队',
             40003: '候选战队',
@@ -44,7 +44,7 @@ angular
             40016: '搜寻合适队友。ex.财经系女',
             40017: '申请'
         });
-        $translate.use('zh');
+        $translate.use('cn');
     }])
     .directive('gameteam', function() {
         return {

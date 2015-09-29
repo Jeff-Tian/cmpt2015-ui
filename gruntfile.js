@@ -36,7 +36,7 @@ module.exports = function(grunt) {
                     'public/dist/main.js': ['public/dist/main.js']
                 },
                 options: {
-                    mangle: true
+                    mangle: false
                 }
             }
         },

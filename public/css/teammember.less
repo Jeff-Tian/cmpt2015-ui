@@ -1,6 +1,47 @@
 .teammember {
-    padding: 2em;
     background-color: #FFF;
+}
+
+.teammember .head {
+    background: #464954;
+    color: #FFF;
+    line-height: 2em;
+    padding: 1em;
+    button.btn {
+        .border-radius(3px);
+        background-color: #FFF;
+        color: #646464;
+        border: none;
+        padding: 0 1em;
+        float: right;
+        margin-left: 1em;
+    }
+}
+
+.teammember .body {
+    padding: 1em 2em;
+    .name {
+        line-height: 1.5em;
+        font-size: 1.2em;
+        label {
+            border: 1px solid #fff;
+            padding: 0 0.5em;
+        }
+        input {
+            border: 1px solid #ccc;
+            padding: 0 0.5em;
+            font-size: 1em;
+            line-height: 1.5em;
+            outline: none;
+        }
+        i.icon {
+            cursor: pointer;
+            font-size: 1.2em;
+            &.checkmark {
+                color: #009432;
+            }
+        }
+    }
 }
 
 .teammember .title {
@@ -14,19 +55,19 @@
     font-size: 14px;
 }
 
-.teammember .item .image {
+.teammember .item .img {
     position: relative;
     cursor: pointer;
     margin: 0.5em;
 }
 
-.teammember .item .image .icon {
+.teammember .item .img .icon {
     position: absolute;
-    bottom: -0.2em;
-    right: -0.2em;
-    font-size: 3em;
+    font-size: 2em;
     color: #FF3C42;
     display: none;
+    top: 0;
+    right: 0;
 }
 
 .teammember .item img {
@@ -37,9 +78,10 @@
 
 .teammember .item.selected img {
     border-color: #FF3C42;
+    border-style: solid;
 }
 
-.teammember .item.selected .image .icon {
+.teammember .item.selected .img .icon {
     display: block;
 }
 

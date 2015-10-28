@@ -1,16 +1,32 @@
-<div ng-controller="gameteam" class="teammember">
-    <h2 class="title">选择你想扮演的角色</h2>
-    <div class="ui five column grid">
-        <div class="column item" ng-class="{selected:selected===item}" ng-repeat="item in teamMembers">
-            <div class="image" ng-click="select(item)">
-                <img src="//img.hcdlearning.com/FljmGyTPfltIym1q9ANyyH0LqNh7-small" alt="">
-                <i class="icon checkmark"></i>
-            </div>
-            <div class="name">
-                {{item.title}}
-            </div>
+<div ng-controller="gameteamCtrl" class="teammember" ng-show="share_team || ms_team">
+    <div class="head" ng-show="!isSharePage && ms_team">
+        还差{{ms_team.members.length}}位队友,赶紧邀请朋友加入!
+        <button class="btn" ng-click="removeMember(ms_member)">
+            <i class="icon sign out"></i> 我要离队
+        </button>
+        <button class="btn">
+            <i class="icon wechat"></i> 微信邀请队友
+        </button>
+    </div>
+    <div class="body">
+        <div class="name">
+            队伍名称：
+            <label ng-show="!edit">{{(isSharePage? share_team : ms_team)['name']}}</label>
+            <input type="text" maxlength="20" ng-model="(isSharePage? share_team : ms_team)['name']" ng-show="edit">
+            <i class="icon write" ng-show="!isSharePage && isLeader && !edit" ng-click="edit=true"></i>
+            <i class="icon checkmark" ng-show="!isSharePage && isLeader && edit" ng-click="updateTeamName()"></i>
         </div>
-        <div class="meta">你選擇扮演的CEO，首重具備優秀的執行力、綜觀大局的遠 見。说明文字说明文字说明文字说明文字说明文字说明文字 说明文字说明文字说明文字。
+        <div class="ui grid"></div>
+        <div class="ui five column grid list">
+            <div class="column item" ng-class="{selected:selected===member}" ng-repeat="member in (isSharePage? share_team : ms_team)['members']">
+                <div class="img" ng-click="select(member)">
+                    <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}-small">
+                    <i class="icon remove circle" ng-if="member.member_id" ng-click="removeMember(member)"></i>
+                </div>
+                <div class="title">
+                    {{member.nick_name||member.member_id}}
+                </div>
+            </div>
         </div>
     </div>
 </div>

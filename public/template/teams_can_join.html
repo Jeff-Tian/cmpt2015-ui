@@ -8,7 +8,7 @@
     <div class="ui items">
         <div class="item ui grid" ng-repeat="team in teams" ng-class="{expanded:team.expanded}">
             <div class="middle aligned content two wide column">
-                <button class="btn">
+                <button class="btn" ng-click="sendApply(team)">
                     <i class="icon plus"></i>{{40017|translate}}
                 </button>
             </div>
@@ -30,7 +30,7 @@
                                 <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}-small">
                             </div>
                             <div class="title">
-                                {{member.nick_name}}(CEO)
+                                {{member.nick_name || '&nbsp;'}}
                             </div>
                             <div class="description">
                                 <div>清华大学</div>

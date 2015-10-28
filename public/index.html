@@ -5,26 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Document</title>
-    <link type="text/css" rel="stylesheet" href="/cmpt2015/libs/semantic-ui/dist/semantic.min.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="/libs/semantic-ui/dist/semantic.min.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="/dist/main.css" media="all" />
     <link type="text/css" rel="stylesheet" href="/cmpt2015/css/app.css" media="all" />
-    <link type="text/css" rel="stylesheet" href="/cmpt2015/dist/gameteam.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="/cmpt2015/dist/epic.css" media="all" />
 </head>
 
-<body ng-app="app">
+<body ng-app="app" ng-controller="baseCtr">
     <div class="ui container">
         <div class="ui grid">
             <div class="five wide column"></div>
-            <gameteam class="gameteam eleven wide column"></gameteam>
+            <epic class="gameteam eleven wide column"></epic>
         </div>
     </div>
+    <script src="/config.js"></script>
+    <script src="/libs/jquery/dist/jquery.min.js"></script>
+    <script src="/libs/semantic-ui/dist/semantic.min.js"></script>
+    <script src="/libs/angular/angular.min.js"></script>
+    <script src="/libs/angular-semantic-ui/dist/angular-semantic-ui.min.js"></script>
+    <script src="/libs/angular-translate/angular-translate.min.js"></script>
     <script src="/cmpt2015/config.js"></script>
-    <script src="/cmpt2015/libs/jquery/dist/jquery.min.js"></script>
-    <script src="/cmpt2015/libs/semantic-ui/dist/semantic.min.js"></script>
-    <script src="/cmpt2015/libs/angular/angular.min.js"></script>
-    <script src="/cmpt2015/libs/angular-semantic-ui/dist/angular-semantic-ui.min.js"></script>
-    <script src="/cmpt2015/libs/angular-translate/angular-translate.min.js"></script>
-    <script src="/cmpt2015/js/game.js"></script>
-    <script src="/cmpt2015/js/app.js"></script>
+    <script src="/cmpt2015/dist/main.js"></script>
+    <script src="/dist/main.js"></script>
 </body>
 
 </html>

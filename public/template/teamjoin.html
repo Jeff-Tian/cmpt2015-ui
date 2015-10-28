@@ -1,16 +1,18 @@
-<div ng-controller="teamjoin" class="teamjoin">
-    <div class="actions ui grid">
+<div ng-controller="teamjoinCtrl" class="teamjoin cloak" ng-show="!share_team && ms_member">
+    <div class="actions ui grid hide" ng-show="!share_team && ms_member && !ms_team">
         <div class="six wide column">
             <div class="toggle">
                 <div class="{{tab.name}}" ng-repeat="tab in tabs">
-                    <button class="btn" ng-class="{selected:selected===tab}" ng-click="toggle(tab)">
+                    <button class="btn" ng-class="{selected:selected===tab}" ng-click="toggle(tab)" ng-show="showTabHeader(tab)">
                         {{tab.label|translate}}
                     </button>
                 </div>
             </div>
         </div>
-        <div class="ten wide column" ng-show="selected.name==='create'">
-            <div class="create-input ui form fluid custom popup center right transition visible">
+    </div>
+    <div class="contents">
+        <div class="{{tab.name}}" ng-show="showTabContent(tab)" ng-repeat="tab in tabs">
+            <div class="create-input ui form" ng-controller="createTeamCtrl" ng-if="tab.name=='create' && !ms_team">
                 <div class="inline fields">
                     <div class="one wide field">
                     </div>
@@ -18,23 +20,19 @@
                         {{40006|translate}}
                     </div>
                     <div class="eight wide field">
-                        <input type="text" maxlength="100">
+                        <input type="text" maxlength="100" ng-model="name">
                     </div>
                     <div class="four wide field">
-                        <button class="btn">
+                        <button class="btn" ng-click="createTeam()">
                             {{40007|translate}}
                         </button>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="contents">
-        <div class="{{tab.name}}" ng-show="selected===tab" ng-repeat="tab in tabs">
-            <div class="tab-header ui form">
+            <div class="tab-header ui form" ng-show="tab.name!='create'||ms_team">
                 <div class="inline fields">
                     <div class="four wide field" ng-repeat="child in tab.children">
-                        <button class="btn" ng-class="{selected: selected.tab===child}" ng-click="selectTab(child)">
+                        <button class="btn" ng-class="{selected: selectedTab===child}" ng-click="selectTab(child)">
                             {{child.label|translate}}
                             <span ng-if="number[child.name]">
                                 ({{number[child.name]}})
@@ -43,8 +41,8 @@
                     </div>
                 </div>
             </div>
-            <div class="tabs">
-                <div class="content {{child.name}}" ng-show="selected.tab===child" ng-repeat="child in tab.children">
+            <div class="tabs" ng-show="tab.name!='create'||ms_team">
+                <div class="content {{child.name}}" ng-show="selectedTab === child" ng-repeat="child in tab.children">
                     <div ng-dynamic-directive="child.name">
                     </div>
                 </div>

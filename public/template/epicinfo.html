@@ -2,14 +2,19 @@
     <div class="head">
         <h2>{{ms_epic.title}}</h2>
         <div>{{ms_epic.title}}</div>
+        <i class="icon wechat"></i>
     </div>
     <div class="body">
         <div class="ui grid container">
-            <div class="eight wide column">
-                <i class="calendar icon"></i> {{ms_epic.game_from}}
+            <div class="sixteen wide column">
+                <i class="calendar icon"></i>
+                比赛时间：
+                {{formatDate(ms_epic.game_from)}} - {{formatDate(ms_epic.game_end)}}
             </div>
-            <div class="eight wide column">
-                <i class="flag icon"></i> {{ms_epic.sign_end}}
+            <div class="sixteen wide column">
+                <i class="flag icon"></i>
+                报名时间：
+                {{formatDate(ms_epic.sign_from)}} - {{formatDate(ms_epic.sign_end)}}
             </div>
             <div class="eight wide column">
                 <i class="checkered flag icon"></i> {{ms_epic.region}}

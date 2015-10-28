@@ -12,7 +12,7 @@
             <span class="name middle aligned content four wide column">
                 {{team.name}}
             </span>
-            <div class="images ten wide column" ng-show="!team.expanded" ng-click="team.expanded=true">
+            <div class="images ten wide column minor" ng-show="!team.expanded" ng-click="team.expanded=true">
                 <div class="ui five column grid">
                     <div class="img column" ng-repeat="member in team.members">
                         <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}-small">

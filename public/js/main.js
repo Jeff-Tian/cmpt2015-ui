@@ -177,8 +177,9 @@ angular
             teams.forEach($scope.fixTeam);
         };
         $scope.fixTeam = function(team) {
-            if (team.members.length < 5) {
-                team.members = team.members.concat($scope.empty.slice(team.members.length));
+            team.memberLength = team.members.length;
+            if (team.memberLength < 5) {
+                team.members = team.members.concat($scope.empty.slice(team.memberLength));
             }
             $scope.fixMembers(team.members);
         };
@@ -240,6 +241,25 @@ angular
         $scope.$on('acceptApplySuccess', loadTeam);
         $scope.$on('createTeamSuccess', loadTeam);
         $scope.$on('removeMemberSuccess', loadTeam);
+        $scope.formatDate = function(date) {
+            if (!date) {
+                return;
+            }
+            date = new Date(date);
+            date = [
+                date.getFullYear(),
+                date.getMonth() + 1,
+                date.getDate(),
+                date.getHours(),
+                date.getMinutes()
+            ];
+            date.forEach(function(val, index) {
+                if (val < 10) {
+                    date[index] = '0' + val;
+                }
+            });
+            return date[0] + '年' + date[1] + '月' + date[2] + '日 ' + date[3] + ':' + date[4];
+        };
         //$scope.$on('updateTeamNameSuccess', loadTeam);
     }])
     .controller('gameteamCtrl', ['$scope', '$http', function($scope, $http) {
@@ -368,6 +388,31 @@ angular
         };
     }])
     .controller('teamsCanJoinCtrl', ['$scope', '$http', function($scope, $http) {
+        var timeout;
+
+        function loadWithTime() {
+            clearTimeout(timeout);
+            timeout = setTimeout(searchTeams, 300);
+        }
+
+        function searchTeams() {
+            if ($scope.teams) {
+                $scope.teams.forEach(function(team) {
+                    team.expanded = false;
+                });
+            }
+            $http.post(cmpt2015 + '/team/recommend/', {
+                epic_id: $scope.ms_epic.epic_id,
+                name: $scope.teamName
+            }).success(function(teams) {
+                if (teams.isSuccess) {
+                    $scope.teams = teams.result ? Object.keys(teams.result).map(function(team) {
+                        return teams.result[team];
+                    }) : [];
+                    $scope.fixTeams($scope.teams);
+                }
+            });
+        }
         $scope.sendApply = function(team) {
             $http.post(cmpt2015 + '/team/apply', {
                 team_id: team.team_id
@@ -375,17 +420,12 @@ angular
                 //TODO show message here.
             });
         };
-        $scope.$on('teamsCanJoin', function() {
-            $http.get(cmpt2015 + '/team/recommend/' + $scope.ms_epic.epic_id)
-                .success(function(teams) {
-                    if (teams.isSuccess) {
-                        $scope.teams = teams.result ? Object.keys(teams.result).map(function(team) {
-                            return teams.result[team];
-                        }) : [];
-                        $scope.fixTeams($scope.teams);
-                    }
-                });
+        $scope.$watch('teamName', function(name) {
+            if (name) {
+                loadWithTime();
+            }
         });
+        $scope.$on('teamsCanJoin', searchTeams);
     }])
     .controller('teamsApplySentCtrl', ['$scope', '$http', function($scope, $http) {
         $scope.$on('teamsApplySent', function() {
@@ -429,44 +469,46 @@ angular
                 //TODO add message here
                 $scope.$emit('joinTeamSuccess', team);
                 if (json.isSuccess) {
-                    $scope.teams.splice($scope.teams.indexOf(team), 0, 1);
+                    $scope.teams.splice($scope.teams.indexOf(team), 1);
                 }
             });
         };
     }])
     .controller('peopleCanJoinCtrl', ['$scope', '$http', function($scope, $http) {
+        var timeout;
+
+        function loadWithTime() {
+            clearTimeout(timeout);
+            timeout = setTimeout(searchMember, 300);
+        }
+
+        function searchMember() {
+            $http.post(cmpt2015 + '/team/membersearch', {
+                name: $scope.memberName,
+                epic_id: $scope.ms_epic.epic_id
+            }).success(function(json) {
+                if (json.isSuccess) {
+                    $scope.persons = json.result || [];
+                    $scope.fixMembers($scope.persons);
+                }
+            });
+        }
+        $scope.$watch('memberName', function(name) {
+            if (name) {
+                loadWithTime();
+            }
+        });
+        $scope.$on('peopleCanJoin', searchMember);
         $scope.sendInvite = function(person) {
             $http.post(cmpt2015 + '/team/invite', {
-                be_invited_id: person.id,
+                be_invited_id: person.member_id,
                 team_id: $scope.ms_team.team_id
             }).success(function(json) {
                 if (json.isSuccess) {
-                    debugger
+                    $scope.persons.splice($scope.persons.indexOf(person), 1);
                 }
             });
         };
-        $scope.persons = [{
-            avatar: "//img.hcdlearning.com/FljmGyTPfltIym1q9ANyyH0LqNh7",
-            nick_name: "五花肉",
-            gender: "M",
-            id: '5f428d5d-f7ff-457c-8647-1c44380b51a7'
-        }, {
-            avatar: "//img.hcdlearning.com/FljmGyTPfltIym1q9ANyyH0LqNh7",
-            nick_name: "五花肉",
-            gender: "F"
-        }, {
-            avatar: "//img.hcdlearning.com/FljmGyTPfltIym1q9ANyyH0LqNh7",
-            nick_name: "五花肉",
-            gender: "M"
-        }, {
-            avatar: "//img.hcdlearning.com/FljmGyTPfltIym1q9ANyyH0LqNh7",
-            nick_name: "五花肉",
-            gender: "F"
-        }, {
-            avatar: "//img.hcdlearning.com/FljmGyTPfltIym1q9ANyyH0LqNh7",
-            nick_name: "五花肉",
-            gender: "M"
-        }];
     }])
     .controller('peopleInvitedCtrl', ['$scope', '$http', function($scope, $http) {
         $scope.$on('peopleInvited', function() {

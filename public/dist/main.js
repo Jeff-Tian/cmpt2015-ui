@@ -177,8 +177,9 @@ angular
             teams.forEach($scope.fixTeam);
         };
         $scope.fixTeam = function(team) {
-            if (team.members.length < 5) {
-                team.members = team.members.concat($scope.empty.slice(team.members.length));
+            team.memberLength = team.members.length;
+            if (team.memberLength < 5) {
+                team.members = team.members.concat($scope.empty.slice(team.memberLength));
             }
             $scope.fixMembers(team.members);
         };
@@ -240,6 +241,25 @@ angular
         $scope.$on('acceptApplySuccess', loadTeam);
         $scope.$on('createTeamSuccess', loadTeam);
         $scope.$on('removeMemberSuccess', loadTeam);
+        $scope.formatDate = function(date) {
+            if (!date) {
+                return;
+            }
+            date = new Date(date);
+            date = [
+                date.getFullYear(),
+                date.getMonth() + 1,
+                date.getDate(),
+                date.getHours(),
+                date.getMinutes()
+            ];
+            date.forEach(function(val, index) {
+                if (val < 10) {
+                    date[index] = '0' + val;
+                }
+            });
+            return date[0] + '年' + date[1] + '月' + date[2] + '日 ' + date[3] + ':' + date[4];
+        };
         //$scope.$on('updateTeamNameSuccess', loadTeam);
     }])
     .controller('gameteamCtrl', ['$scope', '$http', function($scope, $http) {
@@ -368,6 +388,31 @@ angular
         };
     }])
     .controller('teamsCanJoinCtrl', ['$scope', '$http', function($scope, $http) {
+        var timeout;
+
+        function loadWithTime() {
+            clearTimeout(timeout);
+            timeout = setTimeout(searchTeams, 300);
+        }
+
+        function searchTeams() {
+            if ($scope.teams) {
+                $scope.teams.forEach(function(team) {
+                    team.expanded = false;
+                });
+            }
+            $http.post(cmpt2015 + '/team/recommend/', {
+                epic_id: $scope.ms_epic.epic_id,
+                name: $scope.teamName
+            }).success(function(teams) {
+                if (teams.isSuccess) {
+                    $scope.teams = teams.result ? Object.keys(teams.result).map(function(team) {
+                        return teams.result[team];
+                    }) : [];
+                    $scope.fixTeams($scope.teams);
+                }
+            });
+        }
         $scope.sendApply = function(team) {
             $http.post(cmpt2015 + '/team/apply', {
                 team_id: team.team_id
@@ -375,17 +420,12 @@ angular
                 //TODO show message here.
             });
         };
-        $scope.$on('teamsCanJoin', function() {
-            $http.get(cmpt2015 + '/team/recommend/' + $scope.ms_epic.epic_id)
-                .success(function(teams) {
-                    if (teams.isSuccess) {
-                        $scope.teams = teams.result ? Object.keys(teams.result).map(function(team) {
-                            return teams.result[team];
-                        }) : [];
-                        $scope.fixTeams($scope.teams);
-                    }
-                });
+        $scope.$watch('teamName', function(name) {
+            if (name) {
+                loadWithTime();
+            }
         });
+        $scope.$on('teamsCanJoin', searchTeams);
     }])
     .controller('teamsApplySentCtrl', ['$scope', '$http', function($scope, $http) {
         $scope.$on('teamsApplySent', function() {
@@ -429,44 +469,46 @@ angular
                 //TODO add message here
                 $scope.$emit('joinTeamSuccess', team);
                 if (json.isSuccess) {
-                    $scope.teams.splice($scope.teams.indexOf(team), 0, 1);
+                    $scope.teams.splice($scope.teams.indexOf(team), 1);
                 }
             });
         };
     }])
     .controller('peopleCanJoinCtrl', ['$scope', '$http', function($scope, $http) {
+        var timeout;
+
+        function loadWithTime() {
+            clearTimeout(timeout);
+            timeout = setTimeout(searchMember, 300);
+        }
+
+        function searchMember() {
+            $http.post(cmpt2015 + '/team/membersearch', {
+                name: $scope.memberName,
+                epic_id: $scope.ms_epic.epic_id
+            }).success(function(json) {
+                if (json.isSuccess) {
+                    $scope.persons = json.result || [];
+                    $scope.fixMembers($scope.persons);
+                }
+            });
+        }
+        $scope.$watch('memberName', function(name) {
+            if (name) {
+                loadWithTime();
+            }
+        });
+        $scope.$on('peopleCanJoin', searchMember);
         $scope.sendInvite = function(person) {
             $http.post(cmpt2015 + '/team/invite', {
-                be_invited_id: person.id,
+                be_invited_id: person.member_id,
                 team_id: $scope.ms_team.team_id
             }).success(function(json) {
                 if (json.isSuccess) {
-                    debugger
+                    $scope.persons.splice($scope.persons.indexOf(person), 1);
                 }
             });
         };
-        $scope.persons = [{
-            avatar: "//img.hcdlearning.com/FljmGyTPfltIym1q9ANyyH0LqNh7",
-            nick_name: "五花肉",
-            gender: "M",
-            id: '5f428d5d-f7ff-457c-8647-1c44380b51a7'
-        }, {
-            avatar: "//img.hcdlearning.com/FljmGyTPfltIym1q9ANyyH0LqNh7",
-            nick_name: "五花肉",
-            gender: "F"
-        }, {
-            avatar: "//img.hcdlearning.com/FljmGyTPfltIym1q9ANyyH0LqNh7",
-            nick_name: "五花肉",
-            gender: "M"
-        }, {
-            avatar: "//img.hcdlearning.com/FljmGyTPfltIym1q9ANyyH0LqNh7",
-            nick_name: "五花肉",
-            gender: "F"
-        }, {
-            avatar: "//img.hcdlearning.com/FljmGyTPfltIym1q9ANyyH0LqNh7",
-            nick_name: "五花肉",
-            gender: "M"
-        }];
     }])
     .controller('peopleInvitedCtrl', ['$scope', '$http', function($scope, $http) {
         $scope.$on('peopleInvited', function() {
@@ -522,14 +564,19 @@ angular.module('cmpt2015').run(['$templateCache', function($templateCache) {
     "    <div class=\"head\">\n" +
     "        <h2>{{ms_epic.title}}</h2>\n" +
     "        <div>{{ms_epic.title}}</div>\n" +
+    "        <i class=\"icon wechat\"></i>\n" +
     "    </div>\n" +
     "    <div class=\"body\">\n" +
     "        <div class=\"ui grid container\">\n" +
-    "            <div class=\"eight wide column\">\n" +
-    "                <i class=\"calendar icon\"></i> {{ms_epic.game_from}}\n" +
+    "            <div class=\"sixteen wide column\">\n" +
+    "                <i class=\"calendar icon\"></i>\n" +
+    "                比赛时间：\n" +
+    "                {{formatDate(ms_epic.game_from)}} - {{formatDate(ms_epic.game_end)}}\n" +
     "            </div>\n" +
-    "            <div class=\"eight wide column\">\n" +
-    "                <i class=\"flag icon\"></i> {{ms_epic.sign_end}}\n" +
+    "            <div class=\"sixteen wide column\">\n" +
+    "                <i class=\"flag icon\"></i>\n" +
+    "                报名时间：\n" +
+    "                {{formatDate(ms_epic.sign_from)}} - {{formatDate(ms_epic.sign_end)}}\n" +
     "            </div>\n" +
     "            <div class=\"eight wide column\">\n" +
     "                <i class=\"checkered flag icon\"></i> {{ms_epic.region}}\n" +
@@ -554,7 +601,7 @@ angular.module('cmpt2015').run(['$templateCache', function($templateCache) {
     "    <div class=\"ui search\">\n" +
     "        <div class=\"ui left icon input\">\n" +
     "            <i class=\"icon search\"></i>\n" +
-    "            <input type=\"text\" class=\"search-input\" placeholder=\"{{40016|translate}}\">\n" +
+    "            <input type=\"text\" class=\"search-input\" placeholder=\"{{40016|translate}}\" ng-model=\"memberName\">\n" +
     "        </div>\n" +
     "    </div>\n" +
     "    <div class=\"persons ui items\">\n" +
@@ -703,7 +750,7 @@ angular.module('cmpt2015').run(['$templateCache', function($templateCache) {
   $templateCache.put('template/teammember.html',
     "<div ng-controller=\"gameteamCtrl\" class=\"teammember\" ng-show=\"share_team || ms_team\">\n" +
     "    <div class=\"head\" ng-show=\"!isSharePage && ms_team\">\n" +
-    "        还差{{ms_team.members.length}}位队友,赶紧邀请朋友加入!\n" +
+    "        还差{{5-ms_team.memberLength}}位队友,赶紧邀请朋友加入!\n" +
     "        <button class=\"btn\" ng-click=\"removeMember(ms_member)\">\n" +
     "            <i class=\"icon sign out\"></i> 我要离队\n" +
     "        </button>\n" +
@@ -743,7 +790,7 @@ angular.module('cmpt2015').run(['$templateCache', function($templateCache) {
     "            <span class=\"name middle aligned content six wide column\">\n" +
     "                {{team.name}}\n" +
     "            </span>\n" +
-    "            <div class=\"images ten wide column\" ng-show=\"!team.expanded\" ng-click=\"team.expanded=true\">\n" +
+    "            <div class=\"images ten wide column minor\" ng-show=\"!team.expanded\" ng-click=\"team.expanded=true\">\n" +
     "                <div class=\"ui five column grid\">\n" +
     "                    <div class=\"img column\" ng-repeat=\"member in team.members\">\n" +
     "                        <img class=\"gender-{{member.gender.toLowerCase()}}\" ng-src=\"{{member.avatar}}-small\">\n" +
@@ -789,7 +836,7 @@ angular.module('cmpt2015').run(['$templateCache', function($templateCache) {
     "            <span class=\"name middle aligned content four wide column\">\n" +
     "                {{team.name}}\n" +
     "            </span>\n" +
-    "            <div class=\"images ten wide column\" ng-show=\"!team.expanded\" ng-click=\"team.expanded=true\">\n" +
+    "            <div class=\"images ten wide column minor\" ng-show=\"!team.expanded\" ng-click=\"team.expanded=true\">\n" +
     "                <div class=\"ui five column grid\">\n" +
     "                    <div class=\"img column\" ng-repeat=\"member in team.members\">\n" +
     "                        <img class=\"gender-{{member.gender.toLowerCase()}}\" ng-src=\"{{member.avatar}}-small\">\n" +
@@ -825,7 +872,7 @@ angular.module('cmpt2015').run(['$templateCache', function($templateCache) {
     "    <div class=\"ui search\">\n" +
     "        <div class=\"ui left icon input\">\n" +
     "            <i class=\"icon search\"></i>\n" +
-    "            <input type=\"text\" class=\"search-input\" placeholder=\"{{40016|translate}}\">\n" +
+    "            <input type=\"text\" class=\"search-input\" placeholder=\"{{40016|translate}}\" ng-model=\"teamName\">\n" +
     "        </div>\n" +
     "    </div>\n" +
     "    <div class=\"ui items\">\n" +
@@ -838,7 +885,7 @@ angular.module('cmpt2015').run(['$templateCache', function($templateCache) {
     "            <span class=\"name middle aligned content four wide column\">\n" +
     "                {{team.name}}\n" +
     "            </span>\n" +
-    "            <div class=\"images ten wide column\" ng-show=\"!team.expanded\" ng-click=\"team.expanded=true\">\n" +
+    "            <div class=\"images ten wide column minor\" ng-show=\"!team.expanded\" ng-click=\"team.expanded=true\">\n" +
     "                <div class=\"ui five column grid\">\n" +
     "                    <div class=\"img column\" ng-repeat=\"member in team.members\">\n" +
     "                        <img class=\"gender-{{member.gender.toLowerCase()}}\" ng-src=\"{{member.avatar}}-small\">\n" +

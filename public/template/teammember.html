@@ -1,6 +1,6 @@
 <div ng-controller="gameteamCtrl" class="teammember" ng-show="share_team || ms_team">
     <div class="head" ng-show="!isSharePage && ms_team">
-        还差{{ms_team.members.length}}位队友,赶紧邀请朋友加入!
+        还差{{5-ms_team.memberLength}}位队友,赶紧邀请朋友加入!
         <button class="btn" ng-click="removeMember(ms_member)">
             <i class="icon sign out"></i> 我要离队
         </button>

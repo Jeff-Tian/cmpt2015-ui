@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
+    "install": "bower install"
   },
   "dependencies": {
   },

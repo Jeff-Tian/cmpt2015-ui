@@ -1,5 +1,6 @@
 .list {
     margin: 0;
+    position: relative;
 }
 
 .list .search {
@@ -107,4 +108,30 @@
 
 .list .item .name.content {
     font-size: 1.2em;
+}
+
+.list .message {
+    line-height: 2em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    color: #FFF;
+    font-size: 16px;
+}
+
+.list .message i.icon {
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.list .message .text {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 1em 2em;
+}
+
+.list .message .error {
+    background: rgba(175, 31, 31, 0.7);
+    padding: 1em 2em;
 }

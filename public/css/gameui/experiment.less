@@ -1,0 +1,81 @@
+/*
+* - @Bridge+
+*/
+
+.game-ui {
+    .experiment-content {
+        margin-top: 2rem;
+        .experiment-card {
+            border-radius: 0;
+            box-shadow: 0px 2px 0px 0px #d4d4d5;
+            background-image: url("../img/experiment-content.png@{version}");
+            background-repeat: no-repeat;
+            background-position: right bottom;
+            background-size: 100px 100px;
+            .experiment-name {
+                border-radius: 0 !important;
+                background-image: url("../img/card-header.png@{version}");
+                background-repeat: no-repeat;
+                background-position: left;
+                background-size: 70px 70px;
+                width: 100%;
+                .epic_header {
+                    color: @color-white;
+                    display: table-cell;
+                    vertical-align: middle;
+                    height: 46px;
+                }
+            }
+        }
+        .experiment-card:last-child,
+        .experiment-card:first-child {
+            border-radius: 0 !important;
+        }
+    }
+}
+
+.bplus {
+    .game-ui {
+        .experiment-content {
+            .experiment-card {
+                .experiment-name {
+                    background-color: #a8a8a8;
+                }
+                .dimmer {
+                    background-color: @color-grey-dimmer;
+                }
+                &.available {
+                    .experiment-name {
+                        background-color: @color-brand;
+                    }
+                    .dimmer {
+                        background-color: @color-brand-dimmer;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.hcdlearning {
+    .game-ui {
+        .experiment-content {
+            .experiment-card {
+                .experiment-name {
+                    background-color: #a8a8a8;
+                }
+                .dimmer {
+                    background-color: @color-grey-dimmer;
+                }
+                &.available {
+                    .experiment-name {
+                        background-color: @color-hcdlearning;
+                    }
+                    .dimmer {
+                        background-color: @color-hcdlearning-dimmer;
+                    }
+                }
+            }
+        }
+    }
+}

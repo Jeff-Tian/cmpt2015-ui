@@ -1,4 +1,14 @@
 <div class="teams-apply-sent list" ng-controller="teamsApplySentCtrl">
+    <div class="message" ng-show="message.show">
+        <div class="error" ng-show="message.error">
+            {{message.error|translate}}
+            <i class="remove icon" ng-click="message.show=false"></i>
+        </div>
+        <div class="text" ng-show="message.text">
+            {{message.text|translate}}
+            <i class="remove icon" ng-click="message.show=false"></i>
+        </div>
+    </div>
     <div class="teams ui items">
         <div class="item ui grid" ng-repeat="team in teams" ng-class="{expanded:team.expanded}">
             <span class="name middle aligned content six wide column">
@@ -7,7 +17,7 @@
             <div class="images ten wide column minor" ng-show="!team.expanded" ng-click="team.expanded=true">
                 <div class="ui five column grid">
                     <div class="img column" ng-repeat="member in team.members">
-                        <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}-small">
+                        <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
                     </div>
                 </div>
             </div>
@@ -16,15 +26,15 @@
                     <div class="img column" ng-repeat="member in team.members">
                         <div class="card">
                             <div class="img">
-                                <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}-small">
+                                <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
                             </div>
                             <div class="title">
-                                {{member.nick_name || '&nbsp;'}}
+                                {{member.nick_name || member.real_name}}
                             </div>
-                            <div class="description">
+                            <!--<div class="description">
                                 <div>清华大学</div>
                                 <div>设计系</div>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>

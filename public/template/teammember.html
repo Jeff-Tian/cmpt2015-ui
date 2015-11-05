@@ -1,16 +1,17 @@
-<div ng-controller="gameteamCtrl" class="teammember" ng-show="share_team || ms_team">
+<div ng-controller="gameteamCtrl" class="teammember cloak" ng-show="share_team || ms_team">
     <div class="head" ng-show="!isSharePage && ms_team">
-        还差{{5-ms_team.memberLength}}位队友,赶紧邀请朋友加入!
+        <span ng-if="(ms_epic.max_team_member_count|| 5) > ms_team.memberLength">还差{{(ms_epic.max_team_member_count|| 5) - ms_team.memberLength}}位队友,赶紧邀请朋友加入!</span>
+        <span ng-if="(ms_epic.max_team_member_count|| 5) == ms_team.memberLength">已完成组队!</span>
         <button class="btn" ng-click="removeMember(ms_member)">
-            <i class="icon sign out"></i> 我要离队
+            <i class="icon sign out"></i> {{40021|translate}}
         </button>
         <button class="btn">
-            <i class="icon wechat"></i> 微信邀请队友
+            <i class="icon wechat"></i> {{40018|translate}}
         </button>
     </div>
     <div class="body">
         <div class="name">
-            队伍名称：
+            {{40022|translate}}
             <label ng-show="!edit">{{(isSharePage? share_team : ms_team)['name']}}</label>
             <input type="text" maxlength="20" ng-model="(isSharePage? share_team : ms_team)['name']" ng-show="edit">
             <i class="icon write" ng-show="!isSharePage && isLeader && !edit" ng-click="edit=true"></i>
@@ -20,11 +21,11 @@
         <div class="ui five column grid list">
             <div class="column item" ng-class="{selected:selected===member}" ng-repeat="member in (isSharePage? share_team : ms_team)['members']">
                 <div class="img" ng-click="select(member)">
-                    <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}-small">
+                    <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
                     <i class="icon remove circle" ng-if="member.member_id" ng-click="removeMember(member)"></i>
                 </div>
                 <div class="title">
-                    {{member.nick_name||member.member_id}}
+                    {{member.nick_name||member.real_name}}
                 </div>
             </div>
         </div>

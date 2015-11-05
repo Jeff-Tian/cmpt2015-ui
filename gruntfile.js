@@ -26,7 +26,7 @@ module.exports = function(grunt) {
         concat: {
             options: {},
             dist: {
-                src: ['public/js/main.js', 'public/dist/main.js'],
+                src: ['public/js/epic.js', 'public/dist/main.js'],
                 dest: 'public/dist/main.js'
             }
         },
@@ -48,7 +48,8 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    'public/dist/epic.css': 'public/css/epic.less'
+                    'public/dist/epic.css': 'public/css/epic.less',
+                    'public/dist/gameui.css': 'public/css/gameui/main.less'
                 }
             }
         },
@@ -60,7 +61,7 @@ module.exports = function(grunt) {
             }
         },
         ngtemplates: {
-            cmpt2015: {
+            cmpt: {
                 cwd: 'public',
                 src: 'template/**.html',
                 dest: 'public/dist/main.js'
@@ -72,6 +73,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.registerTask("default", ['ngtemplates', 'concat'/*, 'uglify'*/, 'less', 'cssmin']);
+    grunt.registerTask("default", ['ngtemplates', 'concat', 'uglify' , 'less', 'cssmin']);
     grunt.registerTask("release", ['ngtemplates', 'concat', 'uglify', 'less', 'cssmin']);
 };

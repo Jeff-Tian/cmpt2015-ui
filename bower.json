@@ -1,5 +1,5 @@
 {
-  "name": "HCD-Cmpt2015",
+  "name": "HCD-COMPETION",
   "version": "1.0.0",
   "private": true,
   "authors": [
@@ -15,5 +15,6 @@
     "node_modules"
   ],
   "dependencies": {
+    "echarts": "~2.2.7"
   }
 }

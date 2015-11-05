@@ -1,4 +1,14 @@
 <div class="people-invited list" ng-controller="peopleInvitedCtrl">
+    <div class="message" ng-show="message.show">
+        <div class="error" ng-show="message.error">
+            {{message.error|translate}}
+            <i class="remove icon" ng-click="message.show=false"></i>
+        </div>
+        <div class="text" ng-show="message.text">
+            {{message.text|translate}}
+            <i class="remove icon" ng-click="message.show=false"></i>
+        </div>
+    </div>
     <div class="persons ui items">
         <div class="item ui grid">
             <div class="sixteen wide column">
@@ -6,15 +16,15 @@
                     <div class="img column" ng-repeat="person in persons">
                         <div class="card">
                             <div class="img">
-                                <img class="gender-{{person.gender.toLowerCase()}}" ng-src="{{person.avatar}}-small">
+                                <img class="gender-{{person.gender.toLowerCase()}}" ng-src="{{person.avatar}}">
                             </div>
                             <div class="title">
-                                {{person.nick_name}}(CEO)
+                                {{person.nick_name||person.real_name}}
                             </div>
-                            <div class="description">
+                            <!--<div class="description">
                                 <div>清华大学</div>
                                 <div>设计系</div>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>

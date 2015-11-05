@@ -1,0 +1,86 @@
+/*
+* - @Bridge+
+*/
+
+.game-ui {
+    .national-content {
+        margin-top: 2rem;
+        .national-cards {
+            max-height: 500px;
+            overflow-y: scroll;
+            margin: -0.875em -0.5em !important;
+            .card {
+                border-radius: 0;
+                box-shadow: 0px 2px 0px 0px #d4d4d5;
+                background-image: url("../img/national-content.png?version=@{version}");
+                background-repeat: no-repeat;
+                background-position: right bottom;
+                background-size: 100px 100px;
+                .national-name {
+                    background-image: url("../img/card-header.png?version=@{version}");
+                    background-repeat: no-repeat;
+                    background-position: left;
+                    background-size: 48px 48px;
+                    border-radius: 0 !important;
+                    .epic_header {
+                        color: @color-white;
+                    }
+                }
+            }
+            .card:last-child,
+            .card:first-child {
+                border-radius: 0 !important;
+            }
+        }
+    }
+}
+
+.bplus {
+    .game-ui {
+        .national-content {
+            .national-cards {
+                .card {
+                    .national-name {
+                        background-color: #a8a8a8;
+                    }
+                    .dimmer {
+                        background-color: @color-grey-dimmer;
+                    }
+                    &.available {
+                        .national-name {
+                            background-color: @color-brand;
+                        }
+                        .dimmer {
+                            background-color: @color-brand-dimmer;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.hcdlearning {
+    .game-ui {
+        .national-content {
+            .national-cards {
+                .card {
+                    .national-name {
+                        background-color: #a8a8a8;
+                    }
+                    .dimmer {
+                        background-color: @color-grey-dimmer;
+                    }
+                    &.available {
+                        .national-name {
+                            background-color: @color-hcdlearning;
+                        }
+                        .dimmer {
+                            background-color: @color-hcdlearning-dimmer;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

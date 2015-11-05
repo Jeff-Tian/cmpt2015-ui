@@ -1,0 +1,94 @@
+.game-ui {
+    position: relative;
+    margin-top: 1em;
+    .ui.vertical.menu {
+        .border-radius(0);
+        .item {
+            .border-radius(0);
+            i.icon {
+                float: left;
+                background-repeat: no-repeat;
+                margin-right: 2rem;
+            }
+            i.icon.b-home {
+                background: url('../img/icon/home-active.png@{version}') no-repeat;
+                width: 32px;
+                height: 26px;
+                margin-top: -5px;
+                margin-left: 1px;
+            }
+            i.icon.b-experiment {
+                background: url('../img/icon/experiment-active.png@{version}') no-repeat;
+                width: 32px;
+                height: 32px;
+                margin-top: -8px;
+                margin-left: 0px;
+            }
+            i.icon.b-national {
+                background: url('../img/icon/national-active.png@{version}') no-repeat;
+                width: 32px;
+                height: 34px;
+                margin-top: -9px;
+                margin-left: 2.5px;
+            }
+            i.icon.b-season {
+                background: url('../img/icon/season-active.png@{version}') no-repeat;
+                width: 32px;
+                height: 29px;
+                margin-top: -6.5px;
+                margin-left: 2.5px;
+            }
+            i.icon.b-record {
+                background: url('../img/icon/record-active.png@{version}') no-repeat;
+                width: 32px;
+                height: 27px;
+                margin-top: -5.5px;
+                margin-left: 4px;
+            }
+            i.icon.b-rank {
+                background: url('../img/icon/rank-active.png@{version}') no-repeat;
+                width: 32px;
+                height: 27px;
+                margin-top: -5.5px;
+                margin-left: 2.5px;
+            }
+        }
+        .item.active,
+        .item:hover {
+            background: #5F5F5F;
+            .border-radius(0);
+            color: @color-white;
+            i.icon.b-home {
+                background: url('../img/icon/home.png@{version}') no-repeat;
+            }
+            i.icon.b-experiment {
+                background: url('../img/icon/experiment.png@{version}') no-repeat;
+            }
+            i.icon.b-season {
+                background: url('../img/icon/season.png@{version}') no-repeat;
+            }
+            i.icon.b-national {
+                background: url('../img/icon/national.png@{version}') no-repeat;
+            }
+            i.icon.b-record {
+                background: url('../img/icon/record.png@{version}') no-repeat;
+            }
+            i.icon.b-rank {
+                background: url('../img/icon/rank.png@{version}') no-repeat;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width:768px) and (max-width:992px) {
+    .game-ui {
+        .ui.vertical.menu {
+            .item {
+                padding: 0.9rem 0.5rem;
+                i.icon {
+                    margin-right: 0.5rem;
+                }
+            }
+        }
+    }
+}

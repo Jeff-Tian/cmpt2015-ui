@@ -29,6 +29,7 @@
                     </div>
                 </div>
             </div>
+            <div class="ui form" ng-if="tab.name=='create' && !ms_team">&nbsp;</div>
             <div class="tab-header ui form" ng-show="tab.name!='create'||ms_team">
                 <div class="inline fields">
                     <div class="four wide field" ng-repeat="child in tab.children">

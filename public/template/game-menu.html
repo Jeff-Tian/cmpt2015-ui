@@ -1,0 +1,20 @@
+<div class="ui fluid large vertical menu">
+    <div class="profile-box" ng-if="ms_member">
+        <img class="image" ng-src="{{ms_member.avatar}}">
+        <span>
+            {{ms_member.nick_name||ms_member.real_name}}
+        </span>
+    </div>
+    <a ng-href="{{cmpt}}/" class="item" ng-class="{'active':page==='index'}">
+        <i class="b-home icon"></i> {{40025|translate}}
+    </a>
+    <a ng-repeat="series in all_series" ng-href="{{cmpt}}/{{series.series_type}}.html?series_id={{series.series_id}}" class="item" ng-class="{'active':page===series.series_type}">
+        <i class="icon b-{{series.series_type}}"></i> {{series.title}}
+    </a>
+    <a ng-if="ms_member" ng-href="{{cmpt}}/record.html" class="item" ng-class="{'active':page==='record'}">
+        <i class="b-record icon"></i> {{40026|translate}}
+    </a>
+    <a ng-if="ms_member" ng-href="{{cmpt}}/rank.html" class="item" ng-class="{'active':page==='rank'}">
+        <i class="b-rank icon"></i> {{40027|translate}}
+    </a>
+</div>

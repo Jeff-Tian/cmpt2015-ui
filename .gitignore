@@ -1,5 +1,4 @@
 node_modules
 public/libs
-public/dist
 *.DS_Store
 *.orig

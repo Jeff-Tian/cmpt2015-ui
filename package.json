@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "install": "bower install & grunt"
+    "install": "bower install"
   },
   "dependencies": {
   },

@@ -1,5 +1,5 @@
 <div class="series_banner">
-    <img ng-src="{{cmpt}}/img/banner_experiment.gif">
+    <img ng-src="/{{lang}}{{cmpt}}/img/banner_experiment.gif">
 </div>
 <div class="experiment-content" ng-controller="experimentCtrl">
     <div class="ui three column grid">
@@ -32,7 +32,7 @@
                                 {{epic.description}}
                             </p>
                             <div class="label">
-                                <a ng-href="{{cmpt}}/epic.html?epic_id={{epic.epic_id}}">
+                                <a ng-href="/{{lang}}{{cmpt}}/epic?epic_id={{epic.epic_id}}">
                                     {{40019|translate}}
                                 </a>
                             </div>

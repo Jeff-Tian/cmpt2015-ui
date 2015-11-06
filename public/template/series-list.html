@@ -1,8 +1,8 @@
 <div ng-controller="seriesCtrl">
     <div ng-repeat="series in all_series">
         <div class="series_banner">
-            <a ng-href="{{cmpt}}/{{series.series_type}}.html?series_id={{series.series_id}}">
-                <img ng-src="{{cmpt}}/img/banner_{{series.series_type}}.png" />
+            <a ng-href="/{{lang}}{{cmpt}}/{{series.series_type}}?series_id={{series.series_id}}">
+                <img ng-src="/{{lang}}{{cmpt}}/img/banner_{{series.series_type}}.png" />
             </a>
         </div>
         <div class="available-lists">
@@ -10,7 +10,7 @@
                 <div class="ui grid">
                     <div class="twelve wide column">
                         <div class="list-title">
-                            <a ng-href="{{cmpt}}/epic.html?epic_id={{epic.epic_id}}">
+                            <a ng-href="/{{lang}}{{cmpt}}/epic?epic_id={{epic.epic_id}}">
                                 <h3>
                                     {{epic.title}}
                                     {{getTime(epic)}}

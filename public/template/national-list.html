@@ -1,5 +1,5 @@
 <div class="series_banner">
-    <img ng-src="{{cmpt}}/img/banner_national.gif">
+    <img ng-src="/{{lang}}{{cmpt}}/img/banner_national.gif">
 </div>
 <div class="national-content">
     <div class="ui grid">
@@ -32,7 +32,7 @@
                             <div class="center">
                                 <p>{{epic.description}}</p>
                                 <div class="label">
-                                    <a ng-href="{{cmpt}}/epic.html?epic_id={{epic.epic_id}}">
+                                    <a ng-href="/{{lang}}{{cmpt}}/epic?epic_id={{epic.epic_id}}">
                                     {{40019|translate}}
                                 </a>
                                 </div>

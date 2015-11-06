@@ -28,6 +28,16 @@
                         </button>
                     </div>
                 </div>
+                <div class="message" ng-show="message.show">
+                    <div class="error" ng-show="message.error">
+                        {{message.error|translate}}
+                        <i class="remove icon" ng-click="message.show=false"></i>
+                    </div>
+                    <div class="text" ng-show="message.text">
+                        {{message.text|translate}}
+                        <i class="remove icon" ng-click="message.show=false"></i>
+                    </div>
+                </div>
             </div>
             <div class="ui form" ng-if="tab.name=='create' && !ms_team">&nbsp;</div>
             <div class="tab-header ui form" ng-show="tab.name!='create'||ms_team">

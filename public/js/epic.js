@@ -71,6 +71,7 @@ angular
             40202: '天',
             40203: '月',
             40204: '年',
+            70006: '该用户无权限加入此队伍',
             70008: '该用户已经属于一个队伍，不能再被加入队伍'
         };
         $translate
@@ -618,14 +619,18 @@ angular
         };
     }])
     .controller('createTeamCtrl', ['$scope', '$http', function($scope, $http) {
+        $scope.message = {};
         $scope.createTeam = function() {
             if ($scope.name) {
                 $http.post(cmpt + '/team/create', {
                     name: $scope.name,
                     epic_id: $scope.ms_epic.epic_id
-                }).success(function(team) {
-                    if (team.isSuccess) {
+                }).success(function(json) {
+                    if (json.isSuccess) {
                         $scope.$emit('createTeamSuccess');
+                        $scope.hideMessage($scope);
+                    } else {
+                        $scope.showError(json.code, $scope);
                     }
                 });
             }
@@ -662,13 +667,10 @@ angular
             }).success(function(json) {
                 if (json.isSuccess) {
                     //$scope.teams.splice($scope.teams.indexOf(team), 1);
-                    $scope.message.text = 40050;
-                    $scope.message.error = null;
+                    $scope.showMessage(40050, $scope);
                 } else {
-                    $scope.message.error = json.code;
-                    $scope.message.text = null;
+                    $scope.showError(json.code, $scope);
                 }
-                $scope.message.show = true;
             });
         };
         $scope.$watch('teamName', function(val) {

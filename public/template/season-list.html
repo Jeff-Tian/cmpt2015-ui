@@ -1,7 +1,7 @@
 <div class="series_banner">
     <img ng-src="{{cmpt}}/img/banner_season.gif">
 </div>
-<div class="season-content" ng-controller="seasonCtrl">
+<div class="season-content cloak" ng-controller="seasonCtrl">
     <div class="timeline">
         <div class="timeline-content" ng-repeat="epic in epics" ng-class="{first: epic === epics[0], last: epic === epics.length - 1}">
             <div class="ui three column grid timeline-content-grid available">
@@ -30,8 +30,7 @@
                         <div class="dimmer season-dimmer" ng-class="{active: item.show}">
                             <div class="content">
                                 <div class="center">
-                                    <p>
-                                        {{item.description}}
+                                    <p ng-bind-html="item.description|trusted">
                                     </p>
                                     <div class="label">
                                         <a ng-href="/{{lang}}{{cmpt}}/epic?epic_id={{item.epic_id}}">

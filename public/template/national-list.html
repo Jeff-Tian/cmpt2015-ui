@@ -1,14 +1,14 @@
 <div class="series_banner">
     <img ng-src="{{cmpt}}/img/banner_national.gif">
 </div>
-<div class="national-content">
+<div class="national-content" ng-controller="nationalCtrl">
     <div class="ui grid">
         <div class="ten wide column map-column">
-            <div china-map ng-model='selectPosition'></div>
+            <div china-map></div>
         </div>
         <div class="six wide column">
             <div class="ui cards national-cards">
-                <div class="card available" ng-repeat="epic in ms_series.epics" ng-click="epic.show=!epic.show">
+                <div class="card available" ng-repeat="epic in nationalEpics" ng-click="epic.show=!epic.show">
                     <div class="content national-name">
                         <div class="epic_header">{{epic.title}}</div>
                     </div>
@@ -18,7 +18,7 @@
                                 <i class="calendar icon"></i> {{formatDate(epic.epic_game_from)}}
                             </div>
                             <div>
-                                <i class="user icon"></i> {{item.memberCount||0}}{{40020 | translate}}
+                                <i class="user icon"></i> {{epic.memberCount||0}}{{40020 | translate}}
                             </div>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                     <div class="dimmer national-dimmer" ng-class="{active: epic.show}">
                         <div class="content">
                             <div class="center">
-                                <p>{{epic.description}}</p>
+                                <p ng-bind-html="epic.description|trusted"></p>
                                 <div class="label">
                                     <a ng-href="/{{lang}}{{cmpt}}/epic?epic_id={{epic.epic_id}}">
                                     {{40019|translate}}

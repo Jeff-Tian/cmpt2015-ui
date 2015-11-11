@@ -49,6 +49,7 @@ angular
             40056: '暂时没有收到加入队伍的申请',
             40057: '暂时没有邀请任何人',
             40058: '成功接受申请',
+            40059: '没有候选战队',
             40060: '中国',
             40061: '西北',
             40062: '华北',
@@ -66,11 +67,21 @@ angular
             40105: '西南地区',
             40106: '西北地区',
             40107: '港澳台',
+            40108: "辽宁、吉林、黑龙江",
+            40109: "北京、天津、河北</br>山西、内蒙古",
+            40110: "山东、江苏、安徽、</br>浙江、福建、上海",
+            40111: "广东、广西、海南",
+            40112: "湖北、湖南、河南、江西",
+            40113: "四川、云南、贵州、</br>西藏、重庆",
+            40114: "宁夏、新疆、青海、</br>陕西、甘肃",
+            40115: "香港、澳门、台湾",
             40200: '分钟',
             40201: '小时',
             40202: '天',
             40203: '月',
             40204: '年',
+            40210: '微信邀请朋友观赛',
+            40211: '换一批',
             70006: '该用户无权限加入此队伍',
             70008: '该用户已经属于一个队伍，不能再被加入队伍'
         };
@@ -206,10 +217,9 @@ angular
     .directive('chinaMap', ['$filter', '$translate', function($filter, $translate) {
         return {
             restrict: 'AE',
-            require: 'ngModel',
             template: '<div id="china-map" style="height:400px">',
             link: {
-                post: function(scope, element, attrs, ngModel) {
+                post: function($scope, element, attrs, ngModel) {
                     require.config({
                         paths: {
                             echarts: cmpt + '/libs/echarts/build/dist'
@@ -219,12 +229,15 @@ angular
                         'echarts',
                         'echarts/chart/map',
                     ], function(ec) {
+                        var translations = {};
                         var jsonPath = cmpt + '/json/area.json';
                         require('echarts/util/mapData/params').params.area = {
                             getGeoJson: function(callback) {
                                 $.getJSON(jsonPath, function(json) {
                                     json.features.forEach(function(feature) {
-                                        feature.properties.name = $translate.instant(feature.properties.id);
+                                        var text = $translate.instant(feature.properties.id);
+                                        feature.properties.name = text;
+                                        translations[text] = feature.properties.id;
                                     });
                                     callback(json);
                                 });
@@ -233,17 +246,20 @@ angular
 
                         var myChart = ec.init(element.children().get(0));
                         myChart.setOption({
-                            //tooltip: {
-                            //    trigger: 'item',
-                            //    formatter: '{b}'
-                            //},
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: function(params, ticket, callback) {
+                                    return $translate.instant((translations[params[1]] | 0) + 8);
+                                }
+                            },
                             series: [{
                                 name: '中国',
                                 type: 'map',
                                 mapType: 'area',
+                                selectedMode: 'single',
                                 itemStyle: {
                                     normal: {
-                                        color: 'rgb(147,187,215)',
+                                        color: '#93BBD7',
                                         label: {
                                             show: true
                                         }
@@ -263,14 +279,83 @@ angular
                         });
                         window.onresize = myChart.resize;
 
-                        //myChart.on(require('echarts/config').EVENT.MAP_SELECTED, function(param) {
-                        //    ngModel.$setViewValue(param.target);
-                        //});
+                        myChart.on(require('echarts/config').EVENT.MAP_SELECTED, function(param) {
+                            //console.log(translations[param.target]);
+                            $scope.$emit('area/choose', translations[param.target]);
+                            //ngModel.$setViewValue(translations[param.target]);
+                        });
                     });
                 }
             }
         };
     }])
+    .directive('pop', ['$compile', function($compile) {
+        return {
+            restrict: "A",
+            scope: {
+                content: '@',
+                klass: '@'
+            },
+            link: function(scope, element, attrs) {
+                var $pop = $('<div class="pop"></div>').addClass(scope.klass).appendTo('body');
+                var dom = $(scope.content);
+                $compile(dom[0])(scope.$parent);
+                $pop.append(dom);
+                var timeout;
+                $(element)
+                    .on('mouseenter', function() {
+                        var offset = $(element).offset(),
+                            width = $(this).width(),
+                            height = $(this).height();
+                        clearTimeout(timeout);
+                        $pop.removeClass('animate').css({
+                            'top': offset.top + height / 2,
+                            'left': offset.left
+                        }).addClass('show');
+                        timeout = setTimeout(function() {
+                            $pop.addClass('animate');
+                        }, 100);
+                    })
+                    .on('mouseleave', function() {
+                        clearTimeout(timeout);
+                        $pop.removeClass('animate');
+                        timeout = setTimeout(function() {
+                            $pop.removeClass('show');
+                        }, 500);
+                    });
+            }
+        }
+    }])
+    .directive('qrcode', function($document) {
+        return {
+            restrict: "A",
+            scope: {
+                src: '='
+            },
+            link: function($scope, element, attrs) {
+                if (!$scope.src) {
+                    return;
+                }
+                $(element).qrcode({
+                    text: $scope.src,
+                    width: 120,
+                    height: 120
+                });
+            }
+        }
+    })
+    .directive('additional', function() {
+        return {
+            restrict: "E",
+            templateUrl: 'template/additional.html'
+        };
+    })
+    .directive('countdown', function() {
+        return {
+            restrict: "E",
+            templateUrl: 'template/countdown.html'
+        };
+    })
     .controller('epicBaseCtrl', ['$scope', '$http', '$translate', function($scope, $http, $translate) {
         function updateLeader() {
             if ($scope.ms_member && $scope.ms_team) {
@@ -327,10 +412,10 @@ angular
             if (!epic) {
                 return epic;
             }
-            epic.epic_game_end = new Date(epic.epic_game_end);
-            epic.epic_game_from = new Date(epic.epic_game_from);
-            epic.epic_sign_end = new Date(epic.epic_sign_end);
-            epic.epic_sign_from = new Date(epic.epic_sign_from);
+            epic.epic_game_end = new Date(epic.epic_game_end || epic.game_end);
+            epic.epic_game_from = new Date(epic.epic_game_from || epic.game_from);
+            epic.epic_sign_end = new Date(epic.epic_sign_end || epic.sign_end);
+            epic.epic_sign_from = new Date(epic.epic_sign_from || epic.sign_from);
             return epic;
         };
         $scope.fixSeries = function(series) {
@@ -339,6 +424,14 @@ angular
             }
             series.epics.forEach($scope.fixEpic);
             return series;
+        };
+        var protocol = location.protocol;
+        var host = location.host;
+        $scope.QRCode = function(epic_id, team_id) {
+            if (!(epic_id && team_id)) {
+                return;
+            }
+            return protocol + '//' + host + '/' + $scope.lang + cmpt + '/epic?epic_id=' + epic_id + '&team_id=' + team_id;
         };
         if (search) {
             search = search.split('&');
@@ -389,7 +482,8 @@ angular
         });
         $http.get(cmpt + '/game/series/my/').success(function(json) {
             if (json && json.isSuccess) {
-                $scope.all_series = $scope.fixSeries(json.result);
+                json.result.forEach($scope.fixSeries);
+                $scope.all_series = json.result;
             }
         });
         $scope.$watch('ms_team', function(ms_team) {
@@ -427,28 +521,7 @@ angular
         };
         var now = $scope.now = new Date;
         var hour = 3600 * 1000;
-        var day = 24 * hour;
-        var month = 30 * day;
-        var year = 12 * month;
-        $scope.getDeltaTime = function(to) {
-            var delta = new Date(to) - now;
-            if ((delta /= hour) < 1) {
-                /*minute*/
-                return Math.ceil(delta * 60);
-            } else if ((delta /= 24) < 1) {
-                /*hour*/
-                return Math.ceil(delta * 24);
-            } else if ((delta /= 30) < 1) {
-                /*day*/
-                return Math.ceil(delta * 30);
-            } else if ((delta /= 12) < 1) {
-                /*month*/
-                return Math.ceil(delta * 12);
-            } else {
-                /*year*/
-                return Math.ceil(delta);
-            }
-        };
+        var day = $scope.day = 24 * hour;
         $scope.getDeltaDays = function(to) {
             var delta = new Date(to) - now;
             return Math.ceil(delta / day);
@@ -478,7 +551,7 @@ angular
             $scope.message.error = error;
             $scope.message.show = true;
         };
-        $scope.hideMessage = function(message, $scope) {
+        $scope.hideMessage = function($scope) {
             $scope.message.show = false;
         };
         $scope.translateRegion = function(region) {
@@ -582,14 +655,6 @@ angular
                 $scope.selectedTab = selected.children[0];
             }
         });
-        //$scope.$watch('selected', function() {
-        //    if (!$scope.selected) {
-        //        return $scope.selected = $scope.tabs[0];
-        //    }
-        //    if ($scope.selected.name == 'join' && !$scope.selected.show) {
-        //        $scope.selected = $scope.tabs[1];
-        //    }
-        //});
         $scope.toggle = function(tab) {
             $scope.selected = tab;
         };
@@ -651,13 +716,18 @@ angular
                     team.expanded = false;
                 });
             }
-            $http.post(cmpt + '/team/recommend/', {
+            $http.post(cmpt + '/team/search/', {
                 epic_id: $scope.ms_epic.epic_id,
                 name: $scope.teamName
-            }).success(function(teams) {
-                if (teams.isSuccess) {
-                    $scope.teams = teams.result ? teams.result.teams : [];
+            }).success(function(json) {
+                if (json.isSuccess) {
+                    $scope.teams = (json.result && json.result.teams) ? json.result.teams : [];
                     $scope.fixTeams($scope.teams);
+                    if (!$scope.teams.length) {
+                        $scope.showMessage(40059, $scope);
+                    } else {
+                        $scope.hideMessage($scope);
+                    }
                 }
             });
         }
@@ -666,7 +736,7 @@ angular
                 team_id: team.team_id
             }).success(function(json) {
                 if (json.isSuccess) {
-                    //$scope.teams.splice($scope.teams.indexOf(team), 1);
+                    $scope.teams.splice($scope.teams.indexOf(team), 1);
                     $scope.showMessage(40050, $scope);
                 } else {
                     $scope.showError(json.code, $scope);
@@ -680,6 +750,7 @@ angular
             loadWithTime();
         });
         $scope.$on('teamsCanJoin', searchTeams);
+        $scope.searchTeam = searchTeams;
     }])
     .controller('teamsApplySentCtrl', ['$scope', '$http', function($scope, $http) {
         $scope.message = {};
@@ -763,6 +834,8 @@ angular
                     $scope.fixMembers($scope.persons);
                     if (!$scope.persons.length) {
                         $scope.showMessage(40054, $scope);
+                    } else {
+                        $scope.hideMessage($scope);
                     }
                 }
             });
@@ -773,6 +846,7 @@ angular
             }
             loadWithTime();
         });
+        $scope.searchMember = searchMember;
         $scope.$on('peopleCanJoin', searchMember);
         $scope.sendInvite = function(person) {
             $http.post(cmpt + '/team/invite', {
@@ -800,6 +874,8 @@ angular
                         $scope.fixMembers($scope.persons);
                         if (!$scope.persons.length) {
                             $scope.showMessage(40057, $scope);
+                        } else {
+                            $scope.hideMessage($scope);
                         }
                     }
                 });
@@ -815,6 +891,8 @@ angular
                         $scope.fixMembers($scope.members);
                         if (!$scope.members.length) {
                             $scope.showMessage(40056, $scope);
+                        } else {
+                            $scope.hideMessage($scope);
                         }
                     }
                 });
@@ -828,18 +906,44 @@ angular
                 $scope.$emit('acceptApplySuccess');
                 if (json.isSuccess) {
                     $scope.showMessage(40058, $scope);
-                    $scope.members.splice($scope.members.indexOf(member), 0, 1);
+                    $scope.members.splice($scope.members.indexOf(member), 1);
                 } else {
                     $scope.showError(json.code, $scope);
                 }
             });
         };
     }])
-    .controller('seriesCtrl', ['$scope', '$http', function($scope, $http) {
-
-    }])
+    .controller('seriesCtrl', ['$scope', '$http', function($scope, $http) {}])
     .controller('experimentCtrl', ['$scope', '$http', function($scope, $http) {
 
+    }])
+    .controller('nationalCtrl', ['$scope', '$http', function($scope, $http) {
+        var isNational;
+
+        $scope.$watch('ms_series.epics', function(val) {
+            if (!val) {
+                return;
+            }
+            val.forEach(function(epic) {
+                if (epic.region) {
+                    epic.regionCode = $scope.translateRegion(epic.region);
+                }
+                if (epic.regionCode == 40060) {
+                    isNational = true;
+                }
+            });
+            if (isNational) {
+                $scope.nationalEpics = val;
+            }
+        });
+        $scope.$on('area/choose', function(e, areaCode) {
+            if (isNational) {
+                return;
+            }
+            $scope.nationalEpics = $scope.ms_series.epics.map(function(epic) {
+                return epic.regionCode = areaCode;
+            });
+        });
     }])
     .controller('seasonCtrl', ['$scope', '$http', function($scope, $http) {
         $scope.$watch('ms_series', function(series) {
@@ -865,4 +969,38 @@ angular
             });
             temp = null;
         });
+    }])
+    .controller('countdownCtrl', ['$scope', '$timeout', function($scope, $timeout) {
+        $scope.countdownMsg = '';
+        var now = $scope.ms_epic.epic_game_from;
+        var hours, minutes, seconds;
+        var timestamp;
+        var second = 1000;
+        var minute = 60 * second;
+        var hour = 60 * minute;
+
+        function countdown() {
+            timestamp = now - Date.now();
+            if (timestamp < 0) {
+                $scope.showStart = true;
+                return;
+            }
+            timestamp /= second;
+            timestamp |= 0;
+            seconds = timestamp % 60;
+            timestamp /= 60;
+            timestamp |= 0;
+            minutes = timestamp % 60;
+            timestamp /= 60;
+            timestamp |= 0;
+            hours = timestamp % 60;
+            $scope.countdownMsg = (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+            $timeout(countdown, 1000);
+        }
+        $timeout(countdown, 1000);
+    }])
+    .filter('trusted', ['$sce', function($sce) {
+        return function(text) {
+            return $sce.trustAsHtml(text);
+        }
     }]);

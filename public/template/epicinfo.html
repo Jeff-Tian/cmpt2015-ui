@@ -1,8 +1,10 @@
 <div class="epicinfo">
     <div class="head">
         <h2>{{ms_epic.title}}</h2>
-        <div>{{ms_epic.title}}</div>
-        <i class="icon wechat"></i>
+        <div>{{ms_epic.subtitle}}</div>
+        <div ng-if="ms_epic.epic_id && ms_team.team_id">
+            <i class="big wechat icon home-wechat-share" pop klass="qrpop" content="<div class='qrcode' qrcode src='QRCode(ms_epic.epic_id, ms_team.team_id)'></div>"></i>
+        </div>
     </div>
     <div class="body">
         <div class="ui grid container">
@@ -16,13 +18,11 @@
                 <i class="checkered flag icon"></i> {{translateRegion(ms_epic.region)|translate}}
             </div>
             <div class="eight wide column">
-                <i class="user icon"></i>
+                <i class="user icon"></i> {{ms_epic.memberCount}}
             </div>
         </div>
         <div class="grid">
-            <div class="sixteen wide column">
-                <p>规则:5人组队参赛,4-6队同场竞技,进行4轮决策(第1轮 2H/ 第2轮 2H/ 第3轮 2H/ 第4轮 2H),最后 以市场份额增量及累积净利润为指标,评判优胜。</p>
-                <p>流程:09月30日初赛、10月16日全国复赛、10月28日全国决赛</p>
+            <div class="sixteen wide column" ng-bind-html="epic.description|trusted">
             </div>
         </div>
     </div>

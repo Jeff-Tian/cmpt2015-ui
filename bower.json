@@ -15,6 +15,7 @@
     "node_modules"
   ],
   "dependencies": {
-    "echarts": "~2.2.7"
+    "echarts": "~2.2.7",
+    "jquery-qrcode": "*"
   }
 }

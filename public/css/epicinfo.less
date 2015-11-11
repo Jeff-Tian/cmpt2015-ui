@@ -15,6 +15,9 @@
             height: 3em;
             margin-top: -1.5em;
             cursor: pointer;
+            &:hover {
+                color: #32CD32;
+            }
         }
     }
     .body {
@@ -29,4 +32,22 @@
         padding-top: 0.5em;
         padding-bottom: 0.5em;
     }
+}
+
+.additional {
+    line-height: 40px;
+    background: #FFF;
+    font-size: 2em;
+    margin-top: 1em;
+    div {
+        padding: 1em;
+    }
+    p {
+        font-size: 16px;
+    }
+}
+
+.cloak {
+    opacity: 0;
+    .transition(opacity 500ms ease-out);
 }

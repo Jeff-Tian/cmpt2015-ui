@@ -1,11 +1,10 @@
 .profile-box {
     background-color: @color-white;
-    padding: 1em;
     .image {
         display: block;
-        width: 80%;
+        width: 180px;
         margin: 0 auto;
-        height: auto;
+        height: 180px;
         .border-radius(50%);
     }
     span {
@@ -45,16 +44,31 @@
         .list-title,
         .list-content {
             padding: 1em 0 0 40px;
+            line-height: 30px;
+            padding-bottom: 1em;
             a {
                 color: #000;
             }
-        }
-        .list-content {
-            font-size: @fontsize-l;
-            padding-bottom: 1em;
+            .icon.user {
+                font-size: 30px;
+                line-height: 30px;
+                overflow: hidden;
+                vertical-align: bottom;
+                height: 30px;
+                color: #C8C8C8;
+                width: 30px;
+                .border-radius(50%);
+                border: 1px solid #C8C8C8;
+                text-align: center;
+            }
+            .icon.user.active {
+                color: #FF001F;
+                background: #AAA;
+            }
         }
         .wechat {
             padding: 2em;
+            cursor: pointer;
             &:hover,
             &:active {
                 color: limegreen;

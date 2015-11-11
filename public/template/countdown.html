@@ -1,0 +1,16 @@
+<div class="countdown" ng-if="((ms_epic.max_team_member_count|| 5) == ms_team.memberLength) && ms_epic.epic_game_from > (now + day)" ng-controller="countdownCtrl">
+    <div ng-show="!showStart">
+        <span class="timestamp">
+            {{countdownMsg}}
+        </span> 比赛即将开始
+    </div>
+    <div ng-show="showStart">
+        <a href="/" class="btn">开始比赛</a>
+    </div>
+    <button class="btn invite-btn" ng-if="ms_epic.epic_id && ms_team.team_id" pop klass="qrpop" content="<div class='qrcode' qrcode src='QRCode(ms_epic.epic_id, ms_team.team_id)'></div>">
+        <i class="icon wechat"></i> {{40210|translate}}
+    </button>
+    <div>
+        请召集所有队员，准备比赛
+    </div>
+</div>

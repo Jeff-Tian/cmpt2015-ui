@@ -26,7 +26,7 @@ module.exports = function(grunt) {
         concat: {
             options: {},
             dist: {
-                src: ['public/js/epic.js', 'public/dist/main.js'],
+                src: ['public/js/epic.js', 'public/js/popup.js', 'public/dist/main.js'],
                 dest: 'public/dist/main.js'
             }
         },
@@ -73,6 +73,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.registerTask("default", ['ngtemplates', 'concat', 'uglify' , 'less', 'cssmin']);
+    grunt.registerTask("default", ['ngtemplates', 'concat', 'less', 'cssmin']);
     grunt.registerTask("release", ['ngtemplates', 'concat', 'uglify', 'less', 'cssmin']);
 };

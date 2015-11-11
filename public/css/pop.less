@@ -1,0 +1,47 @@
+.pop {
+    position: absolute;
+    display: none;
+    background: #fff;
+    .transition(all 500ms);
+    .transform(scale(0, 0));
+    .transform-origin(right center);
+}
+
+.pop.hide {
+    display: block;
+}
+
+.pop.show {
+    display: block;
+}
+
+.pop.animate {
+    .transform(scale(1, 1));
+}
+
+.pop.qrpop {
+    margin-top: -70px;
+    margin-left: -150px;
+    padding: 10px;
+    border: 1px solid #d4d4d5;
+    .border-radius(5px);
+    .box-shadow(0 2px 4px 0 rgba(34, 36, 38, .12));
+}
+
+.pop .qrcode:before {
+    position: absolute;
+    content: '';
+    width: .75em;
+    height: .75em;
+    background: #fff;
+    .transform(rotate(45deg));
+    z-index: 2;
+    top: 50%;
+    right: -.375em;
+    bottom: auto;
+    left: auto;
+    margin-top: -.375em;
+    border: 1px solid #bababc;
+    border-left: none;
+    border-bottom: none;
+}

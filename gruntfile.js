@@ -48,15 +48,14 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    'public/dist/epic.css': 'public/css/epic.less',
-                    'public/dist/gameui.css': 'public/css/gameui/main.less'
+                    'public/dist/competion.css': ['public/css/gameui/main.less', 'public/css/epic.less']
                 }
             }
         },
         cssmin: {
             compress: {
                 files: {
-                    'public/dist/epic.css': ['public/dist/epic.css']
+                    'public/dist/competion.css': ['public/dist/competion.css']
                 }
             }
         },

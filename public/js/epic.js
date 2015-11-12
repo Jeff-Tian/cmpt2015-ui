@@ -327,7 +327,7 @@ angular
             }
         }
     }])
-    .directive('qrcode', function($document) {
+    .directive('qrcode', function() {
         return {
             restrict: "A",
             scope: {

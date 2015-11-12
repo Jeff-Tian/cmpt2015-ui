@@ -22,42 +22,42 @@
   margin-right: 2rem;
 }
 .game-ui .ui.vertical.menu .item i.icon.b-home {
-  background: url('../img/icon/home-active.png?201511111748') no-repeat;
+  background: url('../img/icon/home-active.png?201511121334') no-repeat;
   width: 32px;
   height: 26px;
   margin-top: -5px;
   margin-left: 1px;
 }
 .game-ui .ui.vertical.menu .item i.icon.b-experiment {
-  background: url('../img/icon/experiment-active.png?201511111748') no-repeat;
+  background: url('../img/icon/experiment-active.png?201511121334') no-repeat;
   width: 32px;
   height: 32px;
   margin-top: -8px;
   margin-left: 0px;
 }
 .game-ui .ui.vertical.menu .item i.icon.b-national {
-  background: url('../img/icon/national-active.png?201511111748') no-repeat;
+  background: url('../img/icon/national-active.png?201511121334') no-repeat;
   width: 32px;
   height: 34px;
   margin-top: -9px;
   margin-left: 2.5px;
 }
 .game-ui .ui.vertical.menu .item i.icon.b-season {
-  background: url('../img/icon/season-active.png?201511111748') no-repeat;
+  background: url('../img/icon/season-active.png?201511121334') no-repeat;
   width: 32px;
   height: 29px;
   margin-top: -6.5px;
   margin-left: 2.5px;
 }
 .game-ui .ui.vertical.menu .item i.icon.b-record {
-  background: url('../img/icon/record-active.png?201511111748') no-repeat;
+  background: url('../img/icon/record-active.png?201511121334') no-repeat;
   width: 32px;
   height: 27px;
   margin-top: -5.5px;
   margin-left: 4px;
 }
 .game-ui .ui.vertical.menu .item i.icon.b-rank {
-  background: url('../img/icon/rank-active.png?201511111748') no-repeat;
+  background: url('../img/icon/rank-active.png?201511121334') no-repeat;
   width: 32px;
   height: 27px;
   margin-top: -5.5px;
@@ -74,27 +74,27 @@
 }
 .game-ui .ui.vertical.menu .item.active i.icon.b-home,
 .game-ui .ui.vertical.menu .item:hover i.icon.b-home {
-  background: url('../img/icon/home.png?201511111748') no-repeat;
+  background: url('../img/icon/home.png?201511121334') no-repeat;
 }
 .game-ui .ui.vertical.menu .item.active i.icon.b-experiment,
 .game-ui .ui.vertical.menu .item:hover i.icon.b-experiment {
-  background: url('../img/icon/experiment.png?201511111748') no-repeat;
+  background: url('../img/icon/experiment.png?201511121334') no-repeat;
 }
 .game-ui .ui.vertical.menu .item.active i.icon.b-season,
 .game-ui .ui.vertical.menu .item:hover i.icon.b-season {
-  background: url('../img/icon/season.png?201511111748') no-repeat;
+  background: url('../img/icon/season.png?201511121334') no-repeat;
 }
 .game-ui .ui.vertical.menu .item.active i.icon.b-national,
 .game-ui .ui.vertical.menu .item:hover i.icon.b-national {
-  background: url('../img/icon/national.png?201511111748') no-repeat;
+  background: url('../img/icon/national.png?201511121334') no-repeat;
 }
 .game-ui .ui.vertical.menu .item.active i.icon.b-record,
 .game-ui .ui.vertical.menu .item:hover i.icon.b-record {
-  background: url('../img/icon/record.png?201511111748') no-repeat;
+  background: url('../img/icon/record.png?201511121334') no-repeat;
 }
 .game-ui .ui.vertical.menu .item.active i.icon.b-rank,
 .game-ui .ui.vertical.menu .item:hover i.icon.b-rank {
-  background: url('../img/icon/rank.png?201511111748') no-repeat;
+  background: url('../img/icon/rank.png?201511121334') no-repeat;
 }
 .bplus .game-ui {
   padding-top: 100px;
@@ -121,13 +121,13 @@
 .game-ui .national-content .national-cards .card {
   border-radius: 0;
   box-shadow: 0px 2px 0px 0px #d4d4d5;
-  background-image: url("../img/national-content.png?version=?201511111748");
+  background-image: url("../img/national-content.png?version=?201511121334");
   background-repeat: no-repeat;
   background-position: right bottom;
   background-size: 100px 100px;
 }
 .game-ui .national-content .national-cards .card .national-name {
-  background-image: url("../img/card-header.png?version=?201511111748");
+  background-image: url("../img/card-header.png?version=?201511121334");
   background-repeat: no-repeat;
   background-position: left;
   background-size: 48px 48px;
@@ -173,14 +173,14 @@
 .game-ui .experiment-content .experiment-card {
   border-radius: 0;
   box-shadow: 0px 2px 0px 0px #d4d4d5;
-  background-image: url("../img/experiment-content.png?201511111748");
+  background-image: url("../img/experiment-content.png?201511121334");
   background-repeat: no-repeat;
   background-position: right bottom;
   background-size: 100px 100px;
 }
 .game-ui .experiment-content .experiment-card .experiment-name {
   border-radius: 0 !important;
-  background-image: url("../img/card-header.png?201511111748");
+  background-image: url("../img/card-header.png?201511121334");
   background-repeat: no-repeat;
   background-position: left;
   background-size: 70px 70px;
@@ -238,7 +238,7 @@
 }
 .game-ui .season-content .timeline .timeline-content .timeline-content-grid .column .season-card {
   border-radius: 0;
-  background-image: url("../img/season-content.png?201511111748");
+  background-image: url("../img/season-content.png?201511121334");
   background-repeat: no-repeat;
   background-position: right bottom;
   background-size: 55px 42px;
@@ -246,7 +246,7 @@
 }
 .game-ui .season-content .timeline .timeline-content .timeline-content-grid .column .season-card .season-name {
   border-radius: 0 !important;
-  background-image: url("../img/card-header.png?201511111748");
+  background-image: url("../img/card-header.png?201511121334");
   background-repeat: no-repeat;
   background-position: left;
   background-size: 48px 48px;
@@ -262,25 +262,25 @@
   padding-right: 3rem;
 }
 .game-ui .season-content .timeline .timeline-content .timeline-content-grid .time-line {
-  background-image: url("../img/time-line.png?201511111748");
+  background-image: url("../img/time-line.png?201511121334");
   background-repeat: no-repeat;
   background-position: top;
   background-size: 28px auto;
 }
 .game-ui .season-content .timeline .timeline-content .timeline-content-grid.available.available .time-line {
-  background-image: url("../img/time-line-active.png?201511111748");
+  background-image: url("../img/time-line-active.png?201511121334");
 }
 .game-ui .season-content .timeline .timeline-content.first .timeline-content-grid .time-line {
-  background-image: url("../img/time-line-first.png?201511111748");
+  background-image: url("../img/time-line-first.png?201511121334");
 }
 .game-ui .season-content .timeline .timeline-content.first .timeline-content-grid.available .time-line {
-  background-image: url("../img/time-line-active-first.png?201511111748");
+  background-image: url("../img/time-line-active-first.png?201511121334");
 }
 .game-ui .season-content .timeline .timeline-content.last .timeline-content-grid .time-line {
-  background-image: url("../img/time-line-last.png?201511111748");
+  background-image: url("../img/time-line-last.png?201511121334");
 }
 .game-ui .season-content .timeline .timeline-content.last .timeline-content-grid.available .time-line {
-  background-image: url("../img/time-line-active-last.png?201511111748");
+  background-image: url("../img/time-line-active-last.png?201511121334");
 }
 .game-ui .season-content .timeline .timeline-content:nth-child(odd) {
   background: #e5e5e5;
@@ -490,7 +490,7 @@
 }
 .game-ui .record-list .ui.grid .record-card .record-name {
   border-radius: 0 !important;
-  background-image: url("../img/card-header.png?201511111748");
+  background-image: url("../img/card-header.png?201511121334");
   background-repeat: no-repeat;
   background-position: left top;
   background-size: 70px 70px;

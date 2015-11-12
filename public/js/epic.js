@@ -82,6 +82,7 @@ angular
             40204: '年',
             40210: '微信邀请朋友观赛',
             40211: '换一批',
+            40404: '未登录',
             70006: '该用户无权限加入此队伍',
             70008: '该用户已经属于一个队伍，不能再被加入队伍'
         };
@@ -369,9 +370,9 @@ angular
             }
             $http.post(cmpt + '/team/memberteam', {
                 epic_id: $scope.epic_id
-            }).success(function(team) {
-                if (team.isSuccess) {
-                    $scope.ms_team = team.result;
+            }).success(function(json) {
+                if (json.isSuccess) {
+                    $scope.ms_team = json.result;
                     if ($scope.ms_team) {
                         $scope.fixTeam($scope.ms_team);
                     }
@@ -983,6 +984,7 @@ angular
             timestamp = now - Date.now();
             if (timestamp < 0) {
                 $scope.showStart = true;
+                $scope.showInGaming = true;
                 return;
             }
             timestamp /= second;

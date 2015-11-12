@@ -1,4 +1,4 @@
-<div ng-controller="teamjoinCtrl" class="teamjoin cloak" ng-show="!share_team && ms_member">
+<div ng-controller="teamjoinCtrl" class="teamjoin cloak" ng-show="!share_team && ms_member" ng-if="ms_epic.epic_sign_end < now">
     <div class="actions ui grid hide" ng-show="!share_team && ms_member && !ms_team">
         <div class="six wide column">
             <div class="toggle">

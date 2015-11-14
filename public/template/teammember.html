@@ -10,6 +10,7 @@
         </button>
     </div>
     <div class="head" ng-show="isSharePage && share_team">
+        <span>&nbsp;</span>
         <button class="btn" ng-if="ms_epic.epic_id && share_team.team_id" pop klass="qrpop" content="<div class='logo-mask'></div><div class='qrcode' qrcode src='QRCode(ms_epic.epic_id, share_team.team_id)'></div>">
             <i class="icon wechat"></i> {{40018|translate}}
         </button>

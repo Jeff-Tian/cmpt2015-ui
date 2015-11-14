@@ -32,7 +32,7 @@ angular
             40022: '队伍名称：',
             40023: '比赛时间：',
             40024: '报名时间：',
-            40025: '我的比赛',
+            40025: '游戏首页',
             40026: '我的比赛记录',
             40027: '我的比赛排名',
             40030: '比赛已结束，结束时间',
@@ -203,6 +203,12 @@ angular
             templateUrl: 'template/game-menu.html'
         };
     })
+    .directive('gameIndexMenu', function() {
+        return {
+            restrict: "E",
+            templateUrl: 'template/game-index-menu.html'
+        };
+    })
     .directive('gamePersonalRecord', function() {
         return {
             restrict: "E",
@@ -260,7 +266,7 @@ angular
                                 selectedMode: 'single',
                                 itemStyle: {
                                     normal: {
-                                        color: '#93BBD7',
+                                        color: '#CCC',
                                         label: {
                                             show: true
                                         }
@@ -382,6 +388,8 @@ angular
 
         var search = location.search.slice(1);
         var unknown = cmpt + '/img/unknown.png?' + (typeof buildDate == 'undefined' ? '' : buildDate);
+        var unknownMan = cmpt + '/img/male_default.png?' + (typeof buildDate == 'undefined' ? '' : buildDate);
+        var unknownWoMan = cmpt + '/img/female_default.png?' + (typeof buildDate == 'undefined' ? '' : buildDate);
         $scope.empty = [{}, {}, {}, {}, {}];
         $scope.isLeader = false;
         $scope.cmpt = cmpt;
@@ -403,10 +411,22 @@ angular
         };
         $scope.fixMember = function(member) {
             member.gender = member.gender || 'U';
-            if (member.member_id && member.avatar) {
-                member.avatar += '-small';
-            } else {
+            if (!member.member_id) {
                 member.avatar = unknown;
+            } else {
+                if (member.avatar) {
+                    member.avatar += '-small';
+                } else {
+                    if (member.gender == 'U') {
+                        member.avatar = unknown;
+                    } else if (member.gender == 'M') {
+                        member.avatar = unknownMan;
+                    } else if (member.gender == 'W') {
+                        member.avatar = unknownWoMan;
+                    } else {
+                        member.avatar = unknown;
+                    }
+                }
             }
         };
         $scope.fixEpic = function(epic) {

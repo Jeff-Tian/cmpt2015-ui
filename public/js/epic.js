@@ -306,7 +306,9 @@ angular
             link: function(scope, element, attrs) {
                 var $pop = $('<div class="pop"></div>').addClass(scope.klass).appendTo('body');
                 var dom = $(scope.content);
-                $compile(dom[0])(scope.$parent);
+                dom.each(function(i, dom) {
+                    $compile(dom)(scope.$parent);
+                });
                 $pop.append(dom);
                 var timeout;
                 $(element)

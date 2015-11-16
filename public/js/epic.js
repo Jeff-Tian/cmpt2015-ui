@@ -32,7 +32,7 @@ angular
             40022: '队伍名称：',
             40023: '比赛时间：',
             40024: '报名时间：',
-            40025: '游戏首页',
+            40025: '我的参赛信息',
             40026: '我的比赛记录',
             40027: '我的比赛排名',
             40030: '比赛已结束，结束时间',
@@ -203,12 +203,6 @@ angular
             templateUrl: 'template/game-menu.html'
         };
     })
-    .directive('gameIndexMenu', function() {
-        return {
-            restrict: "E",
-            templateUrl: 'template/game-index-menu.html'
-        };
-    })
     .directive('gamePersonalRecord', function() {
         return {
             restrict: "E",
@@ -365,6 +359,25 @@ angular
             templateUrl: 'template/countdown.html'
         };
     })
+    .directive('inputEnter', ['$parse', function ($parse) {
+        return {
+            restrict: "A",
+            compile: function ($element, attr) {
+                var fn = $parse(attr['inputEnter']);
+                return function (scope, element) {
+                    element.bind('keypress', function (event) {
+                        if(event.keyCode == 13) {
+                            scope.$apply(function () {
+                                fn(scope, {
+                                    $event: event
+                                });
+                            });
+                        }
+                    });
+                };
+            }
+        };
+    }])
     .controller('epicBaseCtrl', ['$scope', '$http', '$translate', function($scope, $http, $translate) {
         function updateLeader() {
             if ($scope.ms_member && $scope.ms_team) {

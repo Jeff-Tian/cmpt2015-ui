@@ -32,7 +32,7 @@
                     </div>
                 </div>
             </div>
-            <div class="images" ng-show="team.expanded">
+            <div class="images expanded" ng-show="team.expanded">
                 <div class="ui five column grid">
                     <div class="img column" ng-repeat="member in team.members">
                         <div class="card">
@@ -40,12 +40,12 @@
                                 <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
                             </div>
                             <div class="title">
-                                {{member.nick_name || member.real_name}}
+                                {{member.show_name}}
                             </div>
-                            <!--<div class="description">
-                                <div>清华大学</div>
-                                <div>设计系</div>
-                            </div>-->
+                            <div class="description">
+                                <div>&nbsp;{{member.graduate}}</div>
+                                <div>&nbsp;{{member.major}}</div>
+                            </div>
                         </div>
                     </div>
                 </div>

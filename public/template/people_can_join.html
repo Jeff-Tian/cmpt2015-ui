@@ -25,12 +25,12 @@
                                 <img class="gender-{{person.gender.toLowerCase()}}" ng-src="{{person.avatar}}">
                             </div>
                             <div class="title">
-                                {{person.nick_name||person.real_name}}
+                                {{person.show_name}}
                             </div>
-                            <!--<div class="description">
-                                <div>清华大学</div>
-                                <div>设计系</div>
-                            </div>-->
+                            <div class="description">
+                                <div>&nbsp;{{person.graduate}}</div>
+                                <div>&nbsp;{{person.major}}</div>
+                            </div>
                         </div>
                         <button class="btn" ng-click="sendInvite(person)">
                             <i class="icon plus"></i>{{40015|translate}}

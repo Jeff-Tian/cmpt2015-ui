@@ -413,6 +413,7 @@ angular
         };
         $scope.fixMember = function(member) {
             member.gender = member.gender || 'U';
+            member.show_name = member.real_name || member.nick_name || member.wechat;
             if (!member.member_id) {
                 member.avatar = unknown;
             } else {
@@ -423,7 +424,7 @@ angular
                         member.avatar = unknown;
                     } else if (member.gender == 'M') {
                         member.avatar = unknownMan;
-                    } else if (member.gender == 'W') {
+                    } else if (member.gender == 'F') {
                         member.avatar = unknownWoMan;
                     } else {
                         member.avatar = unknown;

@@ -1,5 +1,5 @@
 <div ng-controller="gameteamCtrl" class="teammember cloak" ng-show="share_team || ms_team">
-    <div class="head" ng-if="ms_epic.epic_sign_end < now" ng-show="!isSharePage && ms_team">
+    <div class="head" ng-if="ms_epic.epic_sign_end > now" ng-show="!isSharePage && ms_team">
         <span ng-if="(ms_epic.max_team_member_count|| 5) > ms_team.memberLength">还差{{(ms_epic.max_team_member_count|| 5) - ms_team.memberLength}}位队友,赶紧邀请朋友加入!</span>
         <span ng-if="(ms_epic.max_team_member_count|| 5) == ms_team.memberLength">已完成组队!请在游戏开始前回此页面进行游戏</span>
         <button class="btn" ng-click="removeMember(ms_member)">
@@ -31,7 +31,7 @@
                     <i class="icon remove circle" ng-if="member.member_id" ng-click="removeMember(member)"></i>
                 </div>
                 <div class="title">
-                    {{member.nick_name||member.real_name}}
+                    {{member.show_name}}
                 </div>
             </div>
         </div>

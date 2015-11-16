@@ -59,6 +59,14 @@ angular
             40066: '华东',
             40067: '华南',
             40068: '港澳台',
+            40070: '比赛已结束！',
+            40071: '比赛已结束，组队未成功！期待下次比赛吧~ ',
+            40072: '比赛已开始！加油！',
+            40073: '报名已结束，组队未成功！期待下次比赛吧~ ',
+            40074: '组队报名成功！比赛时间',
+            40075: '组队成功！比赛时间',
+            40076: '请在报名截止时间',
+            40077: '前完成组队' ,
             40100: '东北地区',
             40101: '华北地区',
             40102: '华东地区',
@@ -575,6 +583,22 @@ angular
             }
             if (epic.epic_sign_from < now) {
                 return $translate.instant(40033) + $scope.formatDate(epic.epic_sign_end);
+            }
+            return $translate.instant(40034) + $scope.formatDate(epic.epic_sign_from);
+        };
+        $scope.getTeamTime = function(epic, delta) {
+            var full = delta >= 0;
+            if (epic.epic_game_end < now) {
+                return $translate.instant(full ? 40070 : 40071);
+            }
+            if (epic.epic_game_from < now) {
+                return $translate.instant(full ? 40072 : 40073);
+            }
+            if (epic.epic_sign_end < now) {
+                return full? ($translate.instant(40074) +  $scope.formatDate(epic.epic_game_from)) : $translate.instant(40073);
+            }
+            if (epic.epic_sign_from < now) {
+                return full ? ($translate.instant(40075) + $scope.formatDate(epic.epic_game_from)) : ($translate.instant(40076) + $scope.formatDate(epic.epic_sign_end) + $translate.instant(40077));
             }
             return $translate.instant(40034) + $scope.formatDate(epic.epic_sign_from);
         };

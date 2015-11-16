@@ -13,14 +13,14 @@
                             <a ng-href="/{{lang}}{{cmpt}}/epic?epic_id={{epic.epic_id}}">
                                 <h3>
                                     {{epic.title}}, 
-                                    {{getTime(epic)}}
+                                    {{getTeamTime(epic, epic.team.teamMemberCount - epic.max_team_member_count)}}
                                 </h3>
                             </a>
                         </div>
                         <div class="list-content">
                             <i class="user icon" ng-class="{active: epic.team.teamMemberCount >= epic.max_team_member_count}"></i>
                             <label>
-                                {{epic.team.teamMemberCount}}/{{epic.max_team_member_count}}
+                                {{epic.team.teamMemberCount}} / {{epic.max_team_member_count}}
                             </label>
                             <label>
                                 {{epic.team.name}}

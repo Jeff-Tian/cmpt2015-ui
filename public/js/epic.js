@@ -453,6 +453,10 @@ angular
         $scope.fixMember = function(member) {
             member.gender = member.gender || 'U';
             member.show_name = member.real_name || member.nick_name || member.wechat;
+            if (member.education) {
+                member.university = member.education.university;
+                member.major = member.education.major;
+            }
             if (!member.member_id) {
                 member.avatar = unknown;
             } else {

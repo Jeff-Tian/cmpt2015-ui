@@ -4,7 +4,7 @@
 <div class="experiment-content" ng-controller="experimentCtrl">
     <div class="ui three column grid">
         <div class="column" ng-repeat="epic in ms_series.epics">
-            <div class="ui card experiment-card available" ng-class="{available: now > epic.epic_sign_end}" ng-click="epic.show=!epic.show">
+            <div class="ui card experiment-card" ng-class="{available: epic.epic_game_end > now}" ng-click="epic.show=!epic.show">
                 <div class="content experiment-name">
                     <div class="epic_header">
                         {{epic.title}}

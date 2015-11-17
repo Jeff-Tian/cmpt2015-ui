@@ -13,35 +13,39 @@
         </div>
     </div>
     <div class="ui items">
-        <div class="item ui grid" ng-repeat="team in teams" ng-class="{expanded:team.expanded}">
-            <div class="middle aligned content two wide column">
-                <button class="btn" ng-click="acceptInvite(team)">
-                    <i class="icon plus"></i>{{40013|translate}}
-                </button>
-            </div>
-            <span class="name middle aligned content four wide column">
-                {{team.name}}
-            </span>
-            <div class="images ten wide column minor" ng-show="!team.expanded" ng-click="team.expanded=true">
-                <div class="ui five column grid">
-                    <div class="img column" ng-repeat="member in team.members">
-                        <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
+        <div ng-repeat="team in teams" class="ui items">
+            <div class="item ui grid" ng-class="{expanded:team.expanded}" ng-click="team.expanded=!team.expanded">
+                <div class="middle aligned content two wide column">
+                    <button class="btn" ng-click="acceptInvite(team)">
+                        <i class="icon plus"></i>{{40013|translate}}
+                    </button>
+                </div>
+                <span class="name middle aligned content four wide column">
+                    {{team.name}}
+                </span>
+                <div class="images ten wide column minor" ng-class="{invisible:team.expanded}">
+                    <div class="ui five column grid">
+                        <div class="img column" ng-repeat="member in team.members">
+                            <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="images expanded" ng-show="team.expanded">
-                <div class="ui five column grid">
-                    <div class="img column" ng-repeat="member in team.members">
-                        <div class="card">
-                            <div class="img">
-                                <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
-                            </div>
-                            <div class="title">
-                                {{member.show_name}}
-                            </div>
-                            <div class="description">
-                                <div>&nbsp;{{member.graduate}}</div>
-                                <div>&nbsp;{{member.major}}</div>
+            <div class="item ui grid images-expanded" ng-show="team.expanded">
+                <div class="images expanded">
+                    <div class="ui five column grid">
+                        <div class="img column" ng-repeat="member in team.members">
+                            <div class="card">
+                                <div class="img">
+                                    <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
+                                </div>
+                                <div class="title">
+                                    {{member.show_name}}
+                                </div>
+                                <div class="description">
+                                    <div>{{member.university || '&nbsp;'}}</div>
+                                    <div>{{member.major || '&nbsp;'}}</div>
+                                </div>
                             </div>
                         </div>
                     </div>

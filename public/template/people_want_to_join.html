@@ -22,8 +22,8 @@
                                 {{member.show_name}}
                             </div>
                             <div class="description">
-                                <div>&nbsp;{{member.graduate}}</div>
-                                <div>&nbsp;{{member.major}}</div>
+                                <div>{{member.university || '&nbsp;'}}</div>
+                                <div>{{member.major || '&nbsp;'}}</div>
                             </div>
                         </div>
                         <button class="btn" ng-click="acceptApply(member)">

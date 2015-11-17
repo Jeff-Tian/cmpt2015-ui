@@ -8,7 +8,7 @@
         <div class="available-lists">
             <div class="available-list" ng-if="epic.team" ng-repeat="epic in series.epics">
                 <div class="ui grid">
-                    <div class="twelve wide column">
+                    <div class="sixteen wide column">
                         <div class="list-title">
                             <a ng-href="/{{lang}}{{cmpt}}/epic?epic_id={{epic.epic_id}}">
                                 <h3>
@@ -27,11 +27,11 @@
                             </label>
                         </div>
                     </div>
-                    <div class="two wide column">
+                    <!--<div class="two wide column">
                         <div class="wechat">
                             <i class="big wechat icon home-wechat-share" pop klass="qrpop" content="<div class='logo-mask'></div><div class='qrcode' qrcode src='QRCode(epic.epic_id, epic.team.id)'></div>"></i>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>

@@ -8,7 +8,7 @@
         </div>
         <div class="six wide column">
             <div class="ui cards national-cards">
-                <div class="card available" ng-repeat="epic in nationalEpics" ng-click="epic.show=!epic.show">
+                <div class="card" ng-class="{available:epic.epic_game_end > now}" ng-repeat="epic in nationalEpics" ng-click="epic.show=!epic.show">
                     <div class="content national-name">
                         <div class="epic_header">{{epic.title}}</div>
                     </div>

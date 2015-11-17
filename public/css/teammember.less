@@ -19,11 +19,12 @@
 }
 
 .teammember .body {
-    padding: 1em 2em;
     .name {
         line-height: 1.5em;
         font-size: 1.3em;
         font-weight: 600;
+        margin: 0.5em 0;
+        padding: 1em 2em;
         label {
             border: 1px solid #fff;
             padding: 0 0.5em;
@@ -62,30 +63,31 @@
 .teammember .item .img {
     position: relative;
     cursor: pointer;
-    margin: 0.5em;
 }
 
-.teammember .item .img .icon {
+.teammember .item .img .icon.remove {
     position: absolute;
     font-size: 2em;
     color: #FF3C42;
     display: none;
-    top: 0;
+    top: 0.5em;
     right: 0;
 }
 
 .teammember .item img {
     width: 100%;
     border: 3px solid #C1C1C1;
-    border-radius: 50%;
+    .border-radius(50%);
 }
 
-.teammember .item.selected img {
+.teammember .selected img.gender-m,
+.teammember .selected img.gender-m,
+.teammember .selected img.gender-m {
     border-color: #FF3C42;
     border-style: solid;
 }
 
-.teammember .item.selected .img .icon {
+.teammember .selected .img .icon.remove {
     display: block;
 }
 

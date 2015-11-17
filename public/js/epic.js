@@ -66,7 +66,7 @@ angular
             40074: '组队报名成功！比赛时间',
             40075: '组队成功！比赛时间',
             40076: '请在报名截止时间',
-            40077: '前完成组队' ,
+            40077: '前完成组队',
             40100: '东北地区',
             40101: '华北地区',
             40102: '华东地区',
@@ -367,15 +367,15 @@ angular
             templateUrl: 'template/countdown.html'
         };
     })
-    .directive('inputEnter', ['$parse', function ($parse) {
+    .directive('inputEnter', ['$parse', function($parse) {
         return {
             restrict: "A",
-            compile: function ($element, attr) {
+            compile: function($element, attr) {
                 var fn = $parse(attr['inputEnter']);
-                return function (scope, element) {
-                    element.bind('keypress', function (event) {
-                        if(event.keyCode == 13) {
-                            scope.$apply(function () {
+                return function(scope, element) {
+                    element.bind('keypress', function(event) {
+                        if (event.keyCode == 13) {
+                            scope.$apply(function() {
                                 fn(scope, {
                                     $event: event
                                 });
@@ -410,9 +410,27 @@ angular
         }
 
         var search = location.search.slice(1);
-        var unknown = cmpt + '/img/unknown.png?' + (typeof buildDate == 'undefined' ? '' : buildDate);
-        var unknownMan = cmpt + '/img/male_default.png?' + (typeof buildDate == 'undefined' ? '' : buildDate);
-        var unknownWoMan = cmpt + '/img/female_default.png?' + (typeof buildDate == 'undefined' ? '' : buildDate);
+        var version = (function() {
+            if (typeof buildDate !== 'undefined') {
+                return buildDate;
+            }
+            if (angular && angular.bplus && angular.bplus.config && angular.bplus.config.cdn && angular.bplus.config.cdn.version) {
+                return angular.bplus.config.cdn.version;
+            }
+            return '';
+        })();
+        var cdn = (function() {
+            if (typeof cdn !== 'undefined') {
+                return cdn;
+            }
+            if (angular && angular.bplus && angular.bplus.config && angular.bplus.config.cdn && angular.bplus.config.cdn.normal) {
+                return angular.bplus.config.cdn.normal.slice(0, -1);
+            }
+            return '';
+        })();
+        var unknown = cdn + cmpt + '/img/unknown.png?' + version;
+        var unknownMan = cdn + cmpt + '/img/male_default.png?' + version;
+        var unknownWoMan = cdn + cmpt + '/img/female_default.png?' + version;
         $scope.empty = [{}, {}, {}, {}, {}];
         $scope.isLeader = false;
         $scope.cmpt = cmpt;
@@ -595,7 +613,7 @@ angular
                 return $translate.instant(full ? 40072 : 40073);
             }
             if (epic.epic_sign_end < now) {
-                return full? ($translate.instant(40074) +  $scope.formatDate(epic.epic_game_from)) : $translate.instant(40073);
+                return full ? ($translate.instant(40074) + $scope.formatDate(epic.epic_game_from)) : $translate.instant(40073);
             }
             if (epic.epic_sign_from < now) {
                 return full ? ($translate.instant(40075) + $scope.formatDate(epic.epic_game_from)) : ($translate.instant(40076) + $scope.formatDate(epic.epic_sign_end) + $translate.instant(40077));
@@ -888,6 +906,7 @@ angular
         function searchMember() {
             $http.post(cmpt + '/team/membersearch', {
                 name: $scope.memberName,
+                university: $scope.memberName,
                 epic_id: $scope.ms_epic.epic_id
             }).success(function(json) {
                 if (json.isSuccess) {

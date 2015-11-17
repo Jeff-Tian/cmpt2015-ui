@@ -4,7 +4,7 @@
 <div class="season-content cloak" ng-controller="seasonCtrl">
     <div class="timeline">
         <div class="timeline-content" ng-repeat="epic in epics" ng-class="{first: epic === epics[0], last: epic === epics.length - 1}">
-            <div class="ui three column grid timeline-content-grid available">
+            <div class="ui three column grid timeline-content-grid" ng-class="{available: epic.epic_game_end > now}">
                 <div class="three wide column">
                     <p class="text-right">
                         {{formatDate(epic.date,true)}}
@@ -13,7 +13,7 @@
                 <div class="one wide column time-line">
                 </div>
                 <div class="twelve wide column">
-                    <div ng-repeat="item in epic.epics" class="ui card season-card fluid available" ng-click="item.show=!item.show">
+                    <div ng-repeat="item in epic.epics" class="ui card season-card fluid" ng-class="{available: epic.epic_game_end > now}" ng-click="item.show=!item.show">
                         <div class="content season-name">
                             <div class="epic_header">{{item.title}} {{translateRegion(item.region)|translate}}</div>
                         </div>

@@ -28,8 +28,8 @@
                                 {{person.show_name}}
                             </div>
                             <div class="description">
-                                <div>&nbsp;{{person.graduate}}</div>
-                                <div>&nbsp;{{person.major}}</div>
+                                <div>{{person.university || '&nbsp;'}}</div>
+                                <div>{{person.major || '&nbsp;'}}</div>
                             </div>
                         </div>
                         <button class="btn" ng-click="sendInvite(person)">

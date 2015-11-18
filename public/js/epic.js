@@ -77,6 +77,7 @@ angular
             40080: '大赛详情',
             40081: '全国商战模拟游戏大赛',
             40082: '官网',
+            40083: '搜寻队伍',
             40100: '东北地区',
             40101: '华北地区',
             40102: '华东地区',
@@ -472,7 +473,7 @@ angular
             if ($scope.site == 'bplus') {
                 return '/zh/youth';
             }
-            return '';
+            return '/zh/competion';
         })();
         $scope.wechatName = $scope.site == 'bplus' ? 40040 : 40041;
         $scope.portalLink = $scope.site == 'bplus' ? 40042: 40043;

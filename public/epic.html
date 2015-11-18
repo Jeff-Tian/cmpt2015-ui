@@ -3,32 +3,22 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=320, user-scalable=0">
     <title>Document</title>
     <link rel="shortcut icon" href="/assets/img/hcd-icon.ico" />
-    <link type="text/css" rel="stylesheet" href="/libs/semantic-ui/dist/semantic.min.css" media="all" />
-    <link type="text/css" rel="stylesheet" href="/dist/main.css" media="all" />
-    <link type="text/css" rel="stylesheet" href="/cmpt/css/app.css" media="all" />
-    <link type="text/css" rel="stylesheet" href="/cmpt/dist/epic.css" media="all" />
-    <link type="text/css" rel="stylesheet" href="/cmpt/dist/gameui.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="//cdn.bridgeplus.cn/bower/semantic-ui/dist/semantic.min.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="/cmpt/dist/competion.css" media="all" />
 </head>
 
-<body ng-app="cmpt" ng-controller="epicBaseCtrl" ng-init="page='epic'" class="cloak bplus">
-    <div class="ui container game-ui">
-        <div class="ui grid">
-            <div class="four wide column">
-                <game-menu></game-menu>
-            </div>
-            <div class="twelve wide column">
-                <epic></epic>
-            </div>
-        </div>
+<body ng-app="cmpt" ng-init="page='epic';site='bplus'" class="cloak bplus mobile-bplus">
+    <div class="game-ui cloak" ng-controller="epicBaseCtrl">
+        <epic-mobile></epic-mobile>
     </div>
-    <script src="/libs/jquery/dist/jquery.min.js"></script>
-    <script src="/libs/semantic-ui/dist/semantic.min.js"></script>
-    <script src="/libs/angular/angular.min.js"></script>
-    <script src="/libs/angular-semantic-ui/dist/angular-semantic-ui.min.js"></script>
-    <script src="/libs/angular-translate/angular-translate.min.js"></script>
+    <script src="//cdn.bridgeplus.cn/bower/jquery/dist/jquery.min.js"></script>
+    <script src="//cdn.bridgeplus.cn/bower/semantic-ui/dist/semantic.min.js"></script>
+    <script src="//cdn.bridgeplus.cn/bower/angular/angular.min.js"></script>
+    <script src="//cdn.bridgeplus.cn/bower/angular-translate/angular-translate.min.js"></script>
+    <script src="//cdn.bridgeplus.cn/cmpt/libs/jquery-qrcode/jquery.qrcode.min.js"></script>
     <script src="/cmpt/config.js"></script>
     <script src="/cmpt/dist/main.js"></script>
 </body>

@@ -2,7 +2,7 @@
     <div class="head">
         <h2>{{ms_epic.title}}</h2>
         <div>{{ms_epic.subtitle}}</div>
-        <div ng-if="ms_epic.epic_id && ms_team.team_id">
+        <div ng-if="!isSharePage && ms_epic.epic_id && ms_team.team_id">
             <i class="big wechat icon home-wechat-share" pop klass="qrpop" content="<div class='logo-mask'></div><div class='qrcode' qrcode src='QRCode(ms_epic.epic_id, ms_team.team_id)'></div>"></i>
         </div>
     </div>

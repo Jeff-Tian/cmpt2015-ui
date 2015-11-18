@@ -40,6 +40,11 @@ angular
             40032: '已结束报名，比赛开始时间',
             40033: '已开始报名，报名结束时间',
             40034: '即将开始报名，报名开始时间',
+            40040: 'Bridge+',
+            40041: '合得',
+            40042: 'http://www.bridgeplus.cn',
+            40043: 'http://www.hcdlearning.com',
+            40044: '服务号',
             40050: '申请已发送成功！',
             40051: '暂时没有已提交的申请',
             40052: '暂时没有被邀请',
@@ -67,6 +72,11 @@ angular
             40075: '组队成功！比赛时间',
             40076: '请在报名截止时间',
             40077: '前完成组队',
+            40078: '我的战队',
+            40079: '正在参加',
+            40080: '大赛详情',
+            40081: '全国商战模拟游戏大赛',
+            40082: '官网',
             40100: '东北地区',
             40101: '华北地区',
             40102: '华东地区',
@@ -113,6 +123,12 @@ angular
             templateUrl: 'template/epic.html'
         };
     })
+    .directive('epicMobile', function() {
+        return {
+            restrict: "E",
+            templateUrl: 'template/epic_mobile.html'
+        };
+    })
     .directive('epicinfo', function() {
         return {
             restrict: "E",
@@ -125,10 +141,28 @@ angular
             templateUrl: 'template/teammember.html'
         };
     })
+    .directive('teammemberMobile', function() {
+        return {
+            restrict: "E",
+            templateUrl: 'template/teammember_mobile.html'
+        };
+    })
     .directive('teamjoin', function() {
         return {
             restrict: "E",
             templateUrl: 'template/teamjoin.html'
+        };
+    })
+    .directive('headerMobile', function() {
+        return {
+            restrict: "E",
+            templateUrl: 'template/header_mobile.html'
+        };
+    })
+    .directive('footerMobile', function() {
+        return {
+            restrict: "E",
+            templateUrl: 'template/footer_mobile.html'
         };
     })
     .directive('ngDynamicDirective', ['$compile', '$parse', function($compile, $parse) {
@@ -434,6 +468,14 @@ angular
         $scope.empty = [{}, {}, {}, {}, {}];
         $scope.isLeader = false;
         $scope.cmpt = cmpt;
+        $scope.gameLink = (function() {
+            if ($scope.site == 'bplus') {
+                return '/zh/youth';
+            }
+            return '';
+        })();
+        $scope.wechatName = $scope.site == 'bplus' ? 40040 : 40041;
+        $scope.portalLink = $scope.site == 'bplus' ? 40042: 40043;
         if (!$translate.preferredLanguage()) {
             $translate.use($scope.lang || 'cn');
         }
@@ -498,7 +540,7 @@ angular
             if (!(epic_id && team_id)) {
                 return;
             }
-            return protocol + '//' + host + '/' + $scope.lang + cmpt + '/epic?epic_id=' + epic_id + '&team_id=' + team_id;
+            return protocol + '//' + host + '/' + $scope.lang + cmpt + '/shared_epic?epic_id=' + epic_id + '&team_id=' + team_id;
         };
         if (search) {
             search = search.split('&');

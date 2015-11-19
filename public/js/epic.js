@@ -476,7 +476,7 @@ angular
             return '/zh/competion';
         })();
         $scope.wechatName = $scope.site == 'bplus' ? 40040 : 40041;
-        $scope.portalLink = $scope.site == 'bplus' ? 40042: 40043;
+        $scope.portalLink = $scope.site == 'bplus' ? 40042 : 40043;
         if (!$translate.preferredLanguage()) {
             $translate.use($scope.lang || 'cn');
         }
@@ -1045,8 +1045,7 @@ angular
 
     }])
     .controller('nationalCtrl', ['$scope', '$http', function($scope, $http) {
-        var isNational;
-
+        $scope.nationalEpics = [];
         $scope.$watch('ms_series.epics', function(val) {
             if (!val) {
                 return;
@@ -1056,19 +1055,17 @@ angular
                     epic.regionCode = $scope.translateRegion(epic.region);
                 }
                 if (epic.regionCode == 40060) {
-                    isNational = true;
+                    $scope.nationalEpics.push(epic);
                 }
             });
-            if (isNational) {
-                $scope.nationalEpics = val;
-            }
+            $scope.filterEpics = [].concat($scope.nationalEpics);
         });
+        $scope.filterEpics = [];
         $scope.$on('area/choose', function(e, areaCode) {
-            if (isNational) {
-                return;
-            }
-            $scope.nationalEpics = $scope.ms_series.epics.map(function(epic) {
-                return epic.regionCode = areaCode;
+            $scope.$apply(function() {
+                $scope.filterEpics = $scope.ms_series.epics.filter(function(epic) {
+                    return epic.regionCode == areaCode;
+                }).concat($scope.nationalEpics);
             });
         });
     }])

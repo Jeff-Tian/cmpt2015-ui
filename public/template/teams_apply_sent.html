@@ -1,48 +1,48 @@
 <div class="teams-apply-sent list" ng-controller="teamsApplySentCtrl">
-    <div class="message" ng-show="message.show">
-        <div class="error" ng-show="message.error">
-            {{message.error|translate}}
-            <i class="remove icon" ng-click="message.show=false"></i>
-        </div>
-        <div class="text" ng-show="message.text">
-            {{message.text|translate}}
-            <i class="remove icon" ng-click="message.show=false"></i>
-        </div>
-    </div>
-    <div class="teams ui items">
-        <div ng-repeat="team in teams" class="ui items">
-            <div class="item ui grid" ng-class="{expanded:team.expanded}" ng-click="team.expanded=!team.expanded">
-                <span class="name middle aligned content six wide column">
-                    {{team.name}}
-                </span>
-                <div class="images ten wide column minor" ng-class="{invisible:team.expanded}">
-                    <div class="ui five column grid">
-                        <div class="img column" ng-repeat="member in team.members">
-                            <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="item ui grid images-expanded" ng-show="team.expanded">
-                <div class="images expanded">
-                    <div class="ui five column grid">
-                        <div class="img column" ng-repeat="member in team.members">
-                            <div class="card">
-                                <div class="img">
-                                    <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
-                                </div>
-                                <div class="title">
-                                    {{member.show_name}}
-                                </div>
-                                <div class="description">
-                                    <div class="university">{{member.university || '&nbsp;'}}</div>
-                                    <div class="major">{{member.major || '&nbsp;'}}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="message" ng-show="message.show">
+		<div class="error" ng-show="message.error">
+			{{message.error|translate}}
+			<i class="remove icon" ng-click="message.show=false"></i>
+		</div>
+		<div class="text" ng-show="message.text">
+			{{message.text|translate}}
+			<i class="remove icon" ng-click="message.show=false"></i>
+		</div>
+	</div>
+	<div class="teams ui items">
+		<div ng-repeat="team in teams" class="ui items">
+			<div class="item ui grid" ng-class="{expanded:team.expanded}" ng-click="team.expanded=!team.expanded">
+				<span class="name middle aligned content six wide column">
+					{{team.name}}
+				</span>
+				<div class="images ten wide column minor" ng-class="{invisible:team.expanded}">
+					<div class="ui five column grid">
+						<div class="img column" ng-repeat="member in team.members">
+							<img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="item ui grid images-expanded" ng-show="team.expanded">
+				<div class="images expanded">
+					<div class="ui five column grid">
+						<div class="img column" ng-repeat="member in team.members">
+							<div class="card">
+								<div class="img">
+									<img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
+								</div>
+								<div class="title">
+									{{member.show_name}}
+								</div>
+								<div class="description">
+									<div class="university">{{member.university || '&nbsp;'}}</div>
+									<div class="major">{{member.major || '&nbsp;'}}</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

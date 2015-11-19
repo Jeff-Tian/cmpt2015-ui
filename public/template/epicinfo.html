@@ -1,29 +1,29 @@
 <div class="epicinfo">
-    <div class="head">
-        <h2>{{ms_epic.title}}</h2>
-        <div>{{ms_epic.subtitle}}</div>
-        <div ng-if="!isSharePage && ms_epic.epic_id && ms_team.team_id">
-            <i class="big wechat icon home-wechat-share" pop klass="qrpop" content="<div class='logo-mask'></div><div class='qrcode' qrcode src='QRCode(ms_epic.epic_id, ms_team.team_id)'></div>"></i>
-        </div>
-    </div>
-    <div class="body">
-        <div class="ui grid container">
-            <div class="sixteen wide column">
-                <i class="calendar icon"></i> {{40023|translate}} {{formatDate(ms_epic.game_from)}} - {{formatDate(ms_epic.game_end)}}
-            </div>
-            <div class="sixteen wide column">
-                <i class="flag icon"></i> {{40024|translate}} {{formatDate(ms_epic.sign_from)}} - {{formatDate(ms_epic.sign_end)}}
-            </div>
-            <div class="eight wide column">
-                <i class="checkered flag icon"></i> {{translateRegion(ms_epic.region)|translate}}
-            </div>
-            <div class="eight wide column">
-                <i class="user icon"></i> {{ms_epic.memberCount}}
-            </div>
-        </div>
-        <div class="grid">
-            <div class="sixteen wide column" ng-bind-html="ms_epic.description|trusted">
-            </div>
-        </div>
-    </div>
+	<div class="head">
+		<h2>{{ms_epic.title}}</h2>
+		<div>{{ms_epic.subtitle}}</div>
+		<div ng-if="!isSharePage && ms_epic.epic_id && ms_team.team_id">
+			<i class="big wechat icon home-wechat-share" pop klass="qrpop" content="<div class='logo-mask'></div><div class='qrcode' qrcode src='QRCode(ms_epic.epic_id, ms_team.team_id)'></div>"></i>
+		</div>
+	</div>
+	<div class="body">
+		<div class="ui grid container">
+			<div class="sixteen wide column">
+				<i class="calendar icon"></i> {{40023|translate}} {{formatDate(ms_epic.game_from)}} - {{formatDate(ms_epic.game_end)}}
+			</div>
+			<div class="sixteen wide column">
+				<i class="flag icon"></i> {{40024|translate}} {{formatDate(ms_epic.sign_from)}} - {{formatDate(ms_epic.sign_end)}}
+			</div>
+			<div class="eight wide column">
+				<i class="checkered flag icon"></i> {{translateRegion(ms_epic.region)|translate}}
+			</div>
+			<div class="eight wide column">
+				<i class="user icon"></i> {{ms_epic.memberCount}}
+			</div>
+		</div>
+		<div class="grid">
+			<div class="sixteen wide column" ng-bind-html="ms_epic.description|trusted">
+			</div>
+		</div>
+	</div>
 </div>

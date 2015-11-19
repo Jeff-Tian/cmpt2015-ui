@@ -1,32 +1,32 @@
 <div ng-controller="gameteamCtrl" class="teammember cloak" ng-show="share_team">
-    <div class="body list">
-        <div class="instruction" ng-if="share_team && ms_epic">
-            {{40078|translate}}<b>{{share_team.name}}</b>，{{40079|translate}}<b>{{(ms_epic.description||40081)|translate}}</b>
-        </div>
-        <div class="name">
-            <label>{{share_team.name}}</label>
-        </div>
-        <div class="ui items">
-            <div class="item ui grid images-expanded">
-                <div class="images expanded">
-                    <div class="ui two column grid item">
-                        <div class="column img" ng-repeat="member in share_team.members">
-                            <div class="card">
-                                <div class="img">
-                                    <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
-                                </div>
-                                <div class="title">
-                                    {{member.show_name}}
-                                </div>
-                                <div class="description">
-                                    <div class="university">{{member.university || '&nbsp;'}}</div>
-                                    <div class="major">{{member.major || '&nbsp;'}}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="body list">
+		<div class="instruction" ng-if="share_team && ms_epic">
+			{{40078|translate}}<b>{{share_team.name}}</b>，{{40079|translate}}<b>{{(ms_epic.description||40081)|translate}}</b>
+		</div>
+		<div class="name">
+			<label>{{share_team.name}}</label>
+		</div>
+		<div class="ui items">
+			<div class="item ui grid images-expanded">
+				<div class="images expanded">
+					<div class="ui two column grid item">
+						<div class="column img" ng-repeat="member in share_team.members">
+							<div class="card">
+								<div class="img">
+									<img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
+								</div>
+								<div class="title">
+									{{member.show_name}}
+								</div>
+								<div class="description">
+									<div class="university">{{member.university || '&nbsp;'}}</div>
+									<div class="major">{{member.major || '&nbsp;'}}</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

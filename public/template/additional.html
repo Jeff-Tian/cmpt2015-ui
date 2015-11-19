@@ -1,14 +1,14 @@
 <div class="additional" ng-if="!share_team && !ms_team && ms_epic && ms_member">
-    <div ng-show="ms_epic.max_team_member_count <= ms_epic.memberCount">
-        报名已满
-        <p>已有{{ms_epic.memberCount}}人报名完成。
-            <br/> 真可惜错过了这场比赛,赶紧抢先报名其他的比赛吧。!</p>
-    </div>
-    <div ng-show="ms_epic.game_from > now">
-        报名尚未开始
-        <p>看看其他可以报名的比赛吧!</p>
-    </div>
-    <div ng-show="ms_epic.game_end < now">
-        报名已经结束
-    </div>
+	<div ng-show="ms_epic.max_team_member_count <= ms_epic.memberCount">
+		报名已满
+		<p>已有{{ms_epic.memberCount}}人报名完成。
+			<br/> 真可惜错过了这场比赛,赶紧抢先报名其他的比赛吧。!</p>
+	</div>
+	<div ng-show="ms_epic.game_from > now">
+		报名尚未开始
+		<p>看看其他可以报名的比赛吧!</p>
+	</div>
+	<div ng-show="ms_epic.game_end < now">
+		报名已经结束
+	</div>
 </div>

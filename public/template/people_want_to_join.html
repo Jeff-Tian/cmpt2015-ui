@@ -1,37 +1,37 @@
 <div class="people-want-to-join list" ng-controller="peopleWantToJoinCtrl">
-    <div class="message" ng-show="message.show">
-        <div class="error" ng-show="message.error">
-            {{message.error|translate}}
-            <i class="remove icon" ng-click="message.show=false"></i>
-        </div>
-        <div class="text" ng-show="message.text">
-            {{message.text|translate}}
-            <i class="remove icon" ng-click="message.show=false"></i>
-        </div>
-    </div>
-    <div class="persons ui items">
-        <div class="item ui grid">
-            <div class="sixteen wide column">
-                <div class="ui five column grid">
-                    <div class="img column" ng-repeat="member in members">
-                        <div class="card">
-                            <div class="img">
-                                <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
-                            </div>
-                            <div class="title">
-                                {{member.show_name}}
-                            </div>
-                            <div class="description">
-                                <div class="university">{{member.university || '&nbsp;'}}</div>
-                                <div class="major">{{member.major || '&nbsp;'}}</div>
-                            </div>
-                        </div>
-                        <button class="btn" ng-click="acceptApply(member)">
-                            <i class="icon checkmark"></i>{{40013|translate}}
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="message" ng-show="message.show">
+		<div class="error" ng-show="message.error">
+			{{message.error|translate}}
+			<i class="remove icon" ng-click="message.show=false"></i>
+		</div>
+		<div class="text" ng-show="message.text">
+			{{message.text|translate}}
+			<i class="remove icon" ng-click="message.show=false"></i>
+		</div>
+	</div>
+	<div class="persons ui items">
+		<div class="item ui grid">
+			<div class="sixteen wide column">
+				<div class="ui five column grid">
+					<div class="img column" ng-repeat="member in members">
+						<div class="card">
+							<div class="img">
+								<img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
+							</div>
+							<div class="title">
+								{{member.show_name}}
+							</div>
+							<div class="description">
+								<div class="university">{{member.university || '&nbsp;'}}</div>
+								<div class="major">{{member.major || '&nbsp;'}}</div>
+							</div>
+						</div>
+						<button class="btn" ng-click="acceptApply(member)">
+							<i class="icon checkmark"></i>{{40013|translate}}
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

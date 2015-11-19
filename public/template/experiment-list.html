@@ -1,44 +1,44 @@
 <div class="series_banner">
-    <img ng-src="{{cmpt}}/img/banner_experiment.gif">
+	<img ng-src="{{cmpt}}/img/banner_experiment.gif">
 </div>
 <div class="experiment-content" ng-controller="experimentCtrl">
-    <div class="ui three column grid">
-        <div class="column" ng-repeat="epic in ms_series.epics">
-            <div class="ui card experiment-card" ng-class="{available: epic.epic_game_end > now}" ng-click="epic.show=!epic.show">
-                <div class="content experiment-name">
-                    <div class="epic_header">
-                        {{epic.title}}
-                    </div>
-                </div>
-                <div class="content">
-                    <div class="description">
-                        <div>
-                            <i class="calendar icon"></i> {{formatDate(epic.epic_game_from, true)}}
-                        </div>
-                        <div>
-                            <i class="user icon"></i> {{epic.memberCount||0}} {{40020 | translate}}
-                        </div>
-                    </div>
-                </div>
-                <div class="extra content">
-                    <div class="text-right">
-                        {{getTime(epic)}}
-                    </div>
-                </div>
-                <div class="dimmer experiment-dimmer" ng-class="{active: epic.show}">
-                    <div class="content">
-                        <div class="center">
-                            <p ng-bind-html="epic.description|trusted">
-                            </p>
-                            <div class="label">
-                                <a ng-href="/{{lang}}{{cmpt}}/epic?epic_id={{epic.epic_id}}">
-                                    {{40019|translate}}
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="ui three column grid">
+		<div class="column" ng-repeat="epic in ms_series.epics">
+			<div class="ui card experiment-card" ng-class="{available: epic.epic_game_end > now}" ng-click="epic.show=!epic.show">
+				<div class="content experiment-name">
+					<div class="epic_header">
+						{{epic.title}}
+					</div>
+				</div>
+				<div class="content">
+					<div class="description">
+						<div>
+							<i class="calendar icon"></i> {{formatDate(epic.epic_game_from, true)}}
+						</div>
+						<div>
+							<i class="user icon"></i> {{epic.memberCount||0}} {{40020 | translate}}
+						</div>
+					</div>
+				</div>
+				<div class="extra content">
+					<div class="text-right">
+						{{getTime(epic)}}
+					</div>
+				</div>
+				<div class="dimmer experiment-dimmer" ng-class="{active: epic.show}">
+					<div class="content">
+						<div class="center">
+							<p ng-bind-html="epic.description|trusted">
+							</p>
+							<div class="label">
+								<a ng-href="/{{lang}}{{cmpt}}/epic?epic_id={{epic.epic_id}}">
+									{{40019|translate}}
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

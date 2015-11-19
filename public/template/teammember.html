@@ -1,51 +1,51 @@
 <div ng-controller="gameteamCtrl" class="teammember cloak" ng-show="share_team || ms_team">
-    <div class="head" ng-if="ms_epic.epic_sign_end > now" ng-show="!isSharePage && ms_team">
-        <span ng-if="(ms_epic.max_team_member_count|| 5) > ms_team.memberLength">还差{{(ms_epic.max_team_member_count|| 5) - ms_team.memberLength}}位队友,赶紧邀请朋友加入!</span>
-        <span ng-if="(ms_epic.max_team_member_count|| 5) == ms_team.memberLength">已完成组队!请在游戏开始前回此页面进行游戏</span>
-        <button class="btn" ng-click="removeMember(ms_member)">
-            <i class="icon sign out"></i> {{40021|translate}}
-        </button>
-        <!--<button class="btn" ng-if="ms_epic.epic_id && ms_team.team_id" pop klass="qrpop" content="<div class='logo-mask'></div><div class='qrcode' qrcode src='QRCode(ms_epic.epic_id, ms_team.team_id)'></div>">
-            <i class="icon wechat"></i> {{40018|translate}}
-        </button>-->
-    </div>
-    <!--<div class="head" ng-show="isSharePage && share_team">
-        <span>&nbsp;</span>
-        <button class="btn" ng-if="ms_epic.epic_id && share_team.team_id" pop klass="qrpop" content="<div class='logo-mask'></div><div class='qrcode' qrcode src='QRCode(ms_epic.epic_id, share_team.team_id)'></div>">
-            <i class="icon wechat"></i> {{40018|translate}}
-        </button>
-    </div>-->
-    <div class="body list">
-        <div class="name">
-            {{40022|translate}}
-            <label ng-show="!edit">{{(isSharePage? share_team : ms_team)['name']}}</label>
-            <input type="text" maxlength="20" ng-model="(isSharePage? share_team : ms_team)['name']" ng-show="edit">
-            <i class="icon write" ng-show="!isSharePage && isLeader && !edit" ng-click="edit=true"></i>
-            <i class="icon checkmark" ng-show="!isSharePage && isLeader && edit" ng-click="updateTeamName()"></i>
-        </div>
-        <div class="ui items">
-            <div class="item ui grid images-expanded">
-                <div class="images expanded">
-                    <div class="ui five column grid item">
-                        <div class="column img" ng-class="{selected:selected===member}" ng-repeat="member in (isSharePage? share_team : ms_team)['members']">
-                            <div class="card">
-                                <div class="img" ng-click="select(member)">
-                                    <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
-                                    <i class="icon remove circle" ng-if="member.member_id" ng-click="removeMember(member)"></i>
-                                </div>
-                                <div class="title">
-                                    {{member.show_name}}
-                                </div>
-                                <div class="description">
-                                    <div class="university">{{member.university || '&nbsp;'}}</div>
-                                    <div class="major">{{member.major || '&nbsp;'}}</div>
-                                    <div class="mobile-num">{{member.mobile || '&nbsp;'}}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="head" ng-if="ms_epic.epic_sign_end > now" ng-show="!isSharePage && ms_team">
+		<span ng-if="(ms_epic.max_team_member_count|| 5) > ms_team.memberLength">还差{{(ms_epic.max_team_member_count|| 5) - ms_team.memberLength}}位队友,赶紧邀请朋友加入!</span>
+		<span ng-if="(ms_epic.max_team_member_count|| 5) == ms_team.memberLength">已完成组队!请在游戏开始前回此页面进行游戏</span>
+		<button class="btn" ng-click="removeMember(ms_member)">
+			<i class="icon sign out"></i> {{40021|translate}}
+		</button>
+		<!--<button class="btn" ng-if="ms_epic.epic_id && ms_team.team_id" pop klass="qrpop" content="<div class='logo-mask'></div><div class='qrcode' qrcode src='QRCode(ms_epic.epic_id, ms_team.team_id)'></div>">
+			<i class="icon wechat"></i> {{40018|translate}}
+		</button>-->
+	</div>
+	<!--<div class="head" ng-show="isSharePage && share_team">
+		<span>&nbsp;</span>
+		<button class="btn" ng-if="ms_epic.epic_id && share_team.team_id" pop klass="qrpop" content="<div class='logo-mask'></div><div class='qrcode' qrcode src='QRCode(ms_epic.epic_id, share_team.team_id)'></div>">
+			<i class="icon wechat"></i> {{40018|translate}}
+		</button>
+	</div>-->
+	<div class="body list">
+		<div class="name">
+			{{40022|translate}}
+			<label ng-show="!edit">{{(isSharePage? share_team : ms_team)['name']}}</label>
+			<input type="text" maxlength="20" ng-model="(isSharePage? share_team : ms_team)['name']" ng-show="edit">
+			<i class="icon write" ng-show="!isSharePage && isLeader && !edit" ng-click="edit=true"></i>
+			<i class="icon checkmark" ng-show="!isSharePage && isLeader && edit" ng-click="updateTeamName()"></i>
+		</div>
+		<div class="ui items">
+			<div class="item ui grid images-expanded">
+				<div class="images expanded">
+					<div class="ui five column grid item">
+						<div class="column img" ng-class="{selected:selected===member}" ng-repeat="member in (isSharePage? share_team : ms_team)['members']">
+							<div class="card">
+								<div class="img" ng-click="select(member)">
+									<img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
+									<i class="icon remove circle" ng-if="member.member_id" ng-click="removeMember(member)"></i>
+								</div>
+								<div class="title">
+									{{member.show_name}}
+								</div>
+								<div class="description">
+									<div class="university">{{member.university || '&nbsp;'}}</div>
+									<div class="major">{{member.major || '&nbsp;'}}</div>
+									<div class="mobile-num">{{member.mobile || '&nbsp;'}}</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

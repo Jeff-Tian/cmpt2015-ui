@@ -1,14 +1,14 @@
 <div class="ui fluid large vertical menu cloak">
-    <a ng-href="/{{lang}}{{cmpt}}/" class="item" ng-class="{'active':page==='index'}">
-        <i class="b-home icon"></i> {{40025|translate}}
-    </a>
-    <a ng-repeat="series in all_series" ng-href="/{{lang}}{{cmpt}}/{{series.series_type}}?series_id={{series.series_id}}" class="item" ng-class="{'active':page===series.series_type}">
-        <i class="icon b-{{series.series_type}}"></i> {{series.title}}
-    </a>
-    <!--<a ng-if="ms_member" ng-href="/{{lang}}{{cmpt}}/record" class="item" ng-class="{'active':page==='record'}">
-        <i class="b-record icon"></i> {{40026|translate}}
-    </a>
-    <a ng-if="ms_member" ng-href="/{{lang}}{{cmpt}}/rank" class="item" ng-class="{'active':page==='rank'}">
-        <i class="b-rank icon"></i> {{40027|translate}}
-    </a>-->
+	<a ng-href="/{{lang}}{{cmpt}}/" class="item" ng-class="{'active':page==='index'}">
+		<i class="b-home icon"></i> {{40025|translate}}
+	</a>
+	<a ng-repeat="series in all_series" ng-href="/{{lang}}{{cmpt}}/{{series.series_type}}?series_id={{series.series_id}}" class="item" ng-class="{'active':page===series.series_type}">
+		<i class="icon b-{{series.series_type}}"></i> {{series.title}}
+	</a>
+	<!--<a ng-if="ms_member" ng-href="/{{lang}}{{cmpt}}/record" class="item" ng-class="{'active':page==='record'}">
+		<i class="b-record icon"></i> {{40026|translate}}
+	</a>
+	<a ng-if="ms_member" ng-href="/{{lang}}{{cmpt}}/rank" class="item" ng-class="{'active':page==='rank'}">
+		<i class="b-rank icon"></i> {{40027|translate}}
+	</a>-->
 </div>

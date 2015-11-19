@@ -1,48 +1,48 @@
 <div class="series_banner">
-    <img ng-src="{{cmpt}}/img/banner_season.gif">
+	<img ng-src="{{cmpt}}/img/banner_season.gif">
 </div>
 <div class="season-content cloak" ng-controller="seasonCtrl">
-    <div class="timeline">
-        <div class="timeline-content" ng-repeat="epic in epics" ng-class="{first: epic === epics[0], last: epic === epics.length - 1}">
-            <div class="ui three column grid timeline-content-grid" ng-class="{available: epic.epic_game_end > now}">
-                <div class="three wide column">
-                    <p class="text-right">
-                        {{formatDate(epic.date,true)}}
-                    </p>
-                </div>
-                <div class="one wide column time-line">
-                </div>
-                <div class="twelve wide column">
-                    <div ng-repeat="item in epic.epics" class="ui card season-card fluid" ng-class="{available: epic.epic_game_end > now}" ng-click="item.show=!item.show">
-                        <div class="content season-name">
-                            <div class="epic_header">{{item.title}} {{translateRegion(item.region)|translate}}</div>
-                        </div>
-                        <div class="content">
-                            <div class="description">
-                                <div class="left floated">
-                                    <i class="user icon"></i> {{item.memberCount||0}}{{40020 | translate}}
-                                </div>
-                                <div class="right floated">
-                                    {{getTime(item)}}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="dimmer season-dimmer" ng-class="{active: item.show}">
-                            <div class="content">
-                                <div class="center">
-                                    <p ng-bind-html="item.description|trusted">
-                                    </p>
-                                    <div class="label">
-                                        <a ng-href="/{{lang}}{{cmpt}}/epic?epic_id={{item.epic_id}}">
-                                            {{40019|translate}}
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="timeline">
+		<div class="timeline-content" ng-repeat="epic in epics" ng-class="{first: epic === epics[0], last: epic === epics.length - 1}">
+			<div class="ui three column grid timeline-content-grid" ng-class="{available: epic.epic_game_end > now}">
+				<div class="three wide column">
+					<p class="text-right">
+						{{formatDate(epic.date,true)}}
+					</p>
+				</div>
+				<div class="one wide column time-line">
+				</div>
+				<div class="twelve wide column">
+					<div ng-repeat="item in epic.epics" class="ui card season-card fluid" ng-class="{available: epic.epic_game_end > now}" ng-click="item.show=!item.show">
+						<div class="content season-name">
+							<div class="epic_header">{{item.title}} {{translateRegion(item.region)|translate}}</div>
+						</div>
+						<div class="content">
+							<div class="description">
+								<div class="left floated">
+									<i class="user icon"></i> {{item.memberCount||0}}{{40020 | translate}}
+								</div>
+								<div class="right floated">
+									{{getTime(item)}}
+								</div>
+							</div>
+						</div>
+						<div class="dimmer season-dimmer" ng-class="{active: item.show}">
+							<div class="content">
+								<div class="center">
+									<p ng-bind-html="item.description|trusted">
+									</p>
+									<div class="label">
+										<a ng-href="/{{lang}}{{cmpt}}/epic?epic_id={{item.epic_id}}">
+											{{40019|translate}}
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

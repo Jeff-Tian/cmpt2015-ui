@@ -1,46 +1,46 @@
 <div class="people-can-join list" ng-controller="peopleCanJoinCtrl">
-    <div class="message" ng-show="message.show">
-        <div class="error" ng-show="message.error">
-            {{message.error|translate}}
-            <i class="remove icon" ng-click="message.show=false"></i>
-        </div>
-        <div class="text" ng-show="message.text">
-            {{message.text|translate}}
-            <i class="remove icon" ng-click="message.show=false"></i>
-        </div>
-    </div>
-    <div class="ui search">
-        <div class="ui left icon input">
-            <i class="icon search"></i>
-            <input type="text" class="search-input" placeholder="{{40016|translate}}" ng-model="memberName">
-        </div>
-    </div>
-    <div class="persons ui items">
-        <div class="item ui grid">
-            <div class="sixteen wide column">
-                <div class="ui five column grid">
-                    <div class="img column" ng-repeat="person in persons">
-                        <div class="card">
-                            <div class="img">
-                                <img class="gender-{{person.gender.toLowerCase()}}" ng-src="{{person.avatar}}">
-                            </div>
-                            <div class="title">
-                                {{person.show_name}}
-                            </div>
-                            <div class="description">
-                                <div class="university">{{person.university || '&nbsp;'}}</div>
-                                <div class="major">{{person.major || '&nbsp;'}}</div>
-                            </div>
-                        </div>
-                        <button class="btn" ng-click="sendInvite(person)">
-                            <i class="icon plus"></i>{{40015|translate}}
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="change item" ng-show="persons.length">
-            <button class="btn" ng-click="searchMember()">{{40211|translate}}</button>
-        </div>
-    </div>
+	<div class="message" ng-show="message.show">
+		<div class="error" ng-show="message.error">
+			{{message.error|translate}}
+			<i class="remove icon" ng-click="message.show=false"></i>
+		</div>
+		<div class="text" ng-show="message.text">
+			{{message.text|translate}}
+			<i class="remove icon" ng-click="message.show=false"></i>
+		</div>
+	</div>
+	<div class="ui search">
+		<div class="ui left icon input">
+			<i class="icon search"></i>
+			<input type="text" class="search-input" placeholder="{{40016|translate}}" ng-model="memberName">
+		</div>
+	</div>
+	<div class="persons ui items">
+		<div class="item ui grid">
+			<div class="sixteen wide column">
+				<div class="ui five column grid">
+					<div class="img column" ng-repeat="person in persons">
+						<div class="card">
+							<div class="img">
+								<img class="gender-{{person.gender.toLowerCase()}}" ng-src="{{person.avatar}}">
+							</div>
+							<div class="title">
+								{{person.show_name}}
+							</div>
+							<div class="description">
+								<div class="university">{{person.university || '&nbsp;'}}</div>
+								<div class="major">{{person.major || '&nbsp;'}}</div>
+							</div>
+						</div>
+						<button class="btn" ng-click="sendInvite(person)">
+							<i class="icon plus"></i>{{40015|translate}}
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="change item" ng-show="persons.length">
+			<button class="btn" ng-click="searchMember()">{{40211|translate}}</button>
+		</div>
+	</div>
 </div>

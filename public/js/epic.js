@@ -99,6 +99,8 @@ angular
             40202: '天',
             40203: '月',
             40204: '年',
+            40205: '日',
+            40206: '北京时间',
             40210: '微信邀请朋友观赛',
             40211: '换一批',
             40404: '未登录',
@@ -609,11 +611,12 @@ angular
         $scope.$on('acceptApplySuccess', loadTeam);
         $scope.$on('createTeamSuccess', loadTeam);
         $scope.$on('removeMemberSuccess', loadTeam);
-        $scope.formatDate = function(date, onlyDate) {
+        $scope.formatDate = function(date, noPrefix, onlyDate) {
             if (!date) {
                 return;
             }
             date = new Date(date);
+            date.setTime(date.getTime() + $scope.timeOffset);
             date = [
                 date.getFullYear(),
                 date.getMonth() + 1,
@@ -626,10 +629,14 @@ angular
                     date[index] = '0' + val;
                 }
             });
-            var day = date[0] + '年' + date[1] + '月' + date[2] + '日 ';
-            return onlyDate ? day : (day + date[3] + ':' + date[4]);
+            var day = date[0] + $translate.instant(40204) + date[1] + $translate.instant(40203) + date[2] + $translate.instant(40205) + ' ';
+            return (noPrefix ? '' : $translate.instant(40206)) + ' ' + (onlyDate ? day : (day + date[3] + ':' + date[4]));
+        };
+        $scope.formatDateSimple = function(date, noPrefix) {
+            return $scope.formatDate(date, noPrefix, true);
         };
         var now = $scope.now = new Date;
+        var timeOffset = $scope.timeOffset = (now.getTimezoneOffset() + 480) * 60 * 1000;
         var hour = 3600 * 1000;
         var day = $scope.day = 24 * hour;
         $scope.getDeltaDays = function(to) {

@@ -1,0 +1,32 @@
+.gameroom {
+    background: #FFF;
+    margin-top: 1em;
+    label {
+        line-height: 3em;
+        font-size: 1.5em;
+        display: block;
+    }
+    .crown {
+        background-image: url('../img/icon/crown.png');
+        line-height: 2em;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    .rounds {
+        .round {
+            display: inline-block;
+            line-height: 1em;
+            padding: 0.2em .3em;
+            margin: 0 0.2em;
+            background: #C8C8C8;
+            font-size: 1.5em;
+            color: #FFF;
+            &.active {
+                cursor: pointer;
+                &.highlight {
+                    background: red;
+                }
+            }
+        }
+    }
+}

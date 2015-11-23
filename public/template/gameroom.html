@@ -1,0 +1,48 @@
+<div class="gameroom list" ng-controller="gameRoomCtrl">
+    <div class="search">
+        <label ng-bind="teamRoom.group_id"></label>
+        <div class="rounds">
+            <span class="round" ng-repeat="round in rounds" ng-class="{active: currentRound > round, highlight: selectedRound == round}" ng-click="toggleRank(round)" ng-bind="round+1"></span>
+            <span ng-bind="40120|translate"></span>
+        </div>
+    </div>
+    <div class="ui items">
+        <div ng-repeat="team in teamsInRoomView" class="ui items">
+            <div class="item ui grid" ng-class="{expanded:team.expanded}" ng-click="team.expanded=!team.expanded">
+                <div class="middle aligned content one wide column">
+					<div class="crown" ng-if="(selectedRound > -1) && ($index < 3)">&nbsp;</div>
+                </div>
+                <span class="name middle aligned content five wide column">
+					{{team.name}}
+				</span>
+                <div class="images ten wide column minor" ng-class="{invisible:team.expanded}">
+                    <div class="ui five column grid">
+                        <div class="img column" ng-repeat="member in team.members">
+                            <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item ui grid images-expanded" ng-show="team.expanded">
+                <div class="images expanded">
+                    <div class="ui five column grid">
+                        <div class="img column" ng-repeat="member in team.members">
+                            <div class="card">
+                                <div class="img">
+                                    <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
+                                </div>
+                                <div class="title">
+                                    {{member.show_name}}
+                                </div>
+                                <div class="description">
+                                    <div class="university">{{member.university || '&nbsp;'}}</div>
+                                    <div class="major">{{member.major || '&nbsp;'}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

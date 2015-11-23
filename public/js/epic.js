@@ -94,6 +94,7 @@ angular
             40113: "四川、云南、贵州、</br>西藏、重庆",
             40114: "宁夏、新疆、青海、</br>陕西、甘肃",
             40115: "香港、澳门、台湾",
+            40120: '各轮排名',
             40200: '分钟',
             40201: '小时',
             40202: '天',
@@ -258,6 +259,12 @@ angular
         return {
             restrict: "E",
             templateUrl: 'template/game-ranking-list.html'
+        };
+    })
+    .directive('gameroom', function() {
+        return {
+            restrict: "E",
+            templateUrl: 'template/gameroom.html'
         };
     })
     .directive('chinaMap', ['$filter', '$translate', function($filter, $translate) {
@@ -506,6 +513,11 @@ angular
                 member.avatar = unknown;
             } else {
                 if (member.avatar) {
+                    if (member.avatar.indexOf('http://') == 0) {
+                        member.avatar = member.avatar.slice('http:'.length);
+                    } else if (member.avatar.indexOf('https://') == 0) {
+                        member.avatar = member.avatar.slice('https:'.length);
+                    }
                     member.avatar += '-small';
                 } else {
                     if (member.gender == 'U') {
@@ -1048,9 +1060,7 @@ angular
         };
     }])
     .controller('seriesCtrl', ['$scope', '$http', function($scope, $http) {}])
-    .controller('experimentCtrl', ['$scope', '$http', function($scope, $http) {
-
-    }])
+    .controller('experimentCtrl', ['$scope', '$http', function($scope, $http) {}])
     .controller('nationalCtrl', ['$scope', '$http', function($scope, $http) {
         $scope.nationalEpics = [];
         $scope.$watch('ms_series.epics', function(val) {
@@ -1130,6 +1140,81 @@ angular
             $timeout(countdown, 1000);
         }
         $timeout(countdown, 1000);
+    }])
+    .controller('gameRoomCtrl', ['$scope', '$http', function($scope, $http) {
+        function loadTeam(team_id) {
+            if (!team_id || !$scope.ms_epic) {
+                return;
+            }
+            $http.post(cmpt + '/board/epic/team', {
+                epic_id: $scope.ms_epic.epic_id,
+                team_id: team_id,
+            }).success(function(json) {
+                if (json.isSuccess && json.result) {
+                    $scope.teamRoom = json.result;
+                }
+            });
+            $http.post(cmpt + '/board/teamBoard', {
+                epic_id: $scope.ms_epic.epic_id,
+                team_id: team_id,
+            }).success(function(json) {
+                for (var i = 0, j = json.result.length; i < j; i++) {
+                    if (json.result[i].score && json.result[i].score.rank) {
+                        $scope.currentRound = json.result[i].score.rank.length;
+                        break;
+                    }
+                }
+                if (json.isSuccess && json.result) {
+                    json.result.forEach($scope.fixTeam);
+                    $scope.teamsInRoom = json.result;
+                    $scope.teamsInRoomView = $scope.teamsInRoom;
+                }
+            });
+        }
+
+        function getRankByRound(round) {
+            var teams = $scope.teamsInRoom.map(function(item) {
+                return item;
+            });
+            teams.sort(function(a, b) {
+                if (!a.score) {
+                    return 1;
+                }
+                if (!b.score) {
+                    return -1;
+                }
+                if (!a.score.rank) {
+                    return 1;
+                }
+                if (!b.score.rank) {
+                    return -1;
+                }
+                if (a.score.rank.length <= round) {
+                    return 1;
+                }
+                if (b.score.rank.length <= round) {
+                    return -1;
+                }
+                return a.score.rank[round] - b.score.rank[round];
+            });
+            return teams;
+        }
+        $scope.teamsInRoom = [];
+        $scope.rounds = [0, 1, 2, 3];
+        $scope.$watch($scope.isSharePage ? 'share_team.team_id' : 'ms_team.team_id', loadTeam);
+        $scope.selectedRound = -1;
+        $scope.toggleRank = function(round) {
+            if (round == $scope.selectedRound) {
+                $scope.selectedRound = -1;
+                $scope.teamsInRoomView = $scope.teamsInRoom;
+                return;
+            }
+            if (round >= $scope.currentRound) {
+                return;
+            }
+            $scope.selectedRound = round;
+            $scope.teamsInRoomView = getRankByRound(round);
+        };
     }])
     .filter('trusted', ['$sce', function($sce) {
         return function(text) {

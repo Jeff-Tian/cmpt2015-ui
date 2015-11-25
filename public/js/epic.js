@@ -94,6 +94,7 @@ angular
             40113: "四川、云南、贵州、</br>西藏、重庆",
             40114: "宁夏、新疆、青海、</br>陕西、甘肃",
             40115: "香港、澳门、台湾",
+            40120: '各轮排名',
             40200: '分钟',
             40201: '小时',
             40202: '天',
@@ -103,6 +104,11 @@ angular
             40206: '北京时间',
             40210: '微信邀请朋友观赛',
             40211: '换一批',
+            40212: '比赛即将开始',
+            40213: '点此进行比赛',
+            40214: '请召集所有队员，准备比赛',
+            40215: '比赛进行中',
+            40216: '比赛结束',
             40404: '未登录',
             70006: '该用户无权限加入此队伍',
             70008: '该用户已经属于一个队伍，不能再被加入队伍'
@@ -264,6 +270,12 @@ angular
         return {
             restrict: "E",
             templateUrl: 'template/game-ranking-list.html'
+        };
+    })
+    .directive('gameroom', function() {
+        return {
+            restrict: "E",
+            templateUrl: 'template/gameroom.html'
         };
     })
     .directive('chinaMap', ['$filter', '$translate', function($filter, $translate) {
@@ -512,6 +524,11 @@ angular
                 member.avatar = unknown;
             } else {
                 if (member.avatar) {
+                    if (member.avatar.indexOf('http://') == 0) {
+                        member.avatar = member.avatar.slice('http:'.length);
+                    } else if (member.avatar.indexOf('https://') == 0) {
+                        member.avatar = member.avatar.slice('https:'.length);
+                    }
                     member.avatar += '-small';
                 } else {
                     if (member.gender == 'U') {
@@ -1054,9 +1071,7 @@ angular
         };
     }])
     .controller('seriesCtrl', ['$scope', '$http', function($scope, $http) {}])
-    .controller('experimentCtrl', ['$scope', '$http', function($scope, $http) {
-
-    }])
+    .controller('experimentCtrl', ['$scope', '$http', function($scope, $http) {}])
     .controller('nationalCtrl', ['$scope', '$http', function($scope, $http) {
         $scope.nationalEpics = [];
         $scope.$watch('ms_series.epics', function(val) {
@@ -1109,33 +1124,125 @@ angular
     }])
     .controller('countdownCtrl', ['$scope', '$timeout', function($scope, $timeout) {
         $scope.countdownMsg = '';
-        var now = $scope.ms_epic.epic_game_from;
+        $scope.showGameLink = false;
+        $scope.willStart = false;
+        $scope.inGaming = false;
+        $scope.gameEnded = false;
+        var gameFrom = $scope.ms_epic.epic_game_from;
+        var gameEnd = $scope.ms_epic.epic_game_end;
         var hours, minutes, seconds;
-        var timestamp;
+        var delta;
         var second = 1000;
         var minute = 60 * second;
         var hour = 60 * minute;
 
         function countdown() {
-            timestamp = now - Date.now();
-            if (timestamp < 0) {
-                $scope.showStart = true;
-                $scope.showInGaming = true;
+            var now = Date.now();
+            if (gameEnd <= now) {
+                $scope.gameEnded = true;
+                $scope.inGaming = false;
+                $scope.willStart = false;
+                $scope.showGameLink = false;
                 return;
             }
-            timestamp /= second;
-            timestamp |= 0;
-            seconds = timestamp % 60;
-            timestamp /= 60;
-            timestamp |= 0;
-            minutes = timestamp % 60;
-            timestamp /= 60;
-            timestamp |= 0;
-            hours = timestamp % 60;
+            if (gameEnd > now && now >= gameFrom) {
+                $scope.inGaming = true;
+                $scope.willStart = false;
+                $scope.showGameLink = true;
+                return;
+            }
+            delta = gameFrom - now;
+            if (!$scope.showGameLink && delta < hour) {
+                $scope.showGameLink = true;
+            }
+            delta /= second;
+            delta |= 0;
+            seconds = delta % 60;
+            delta /= 60;
+            delta |= 0;
+            minutes = delta % 60;
+            delta /= 60;
+            delta |= 0;
+            hours = delta % 60;
             $scope.countdownMsg = (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
             $timeout(countdown, 1000);
         }
         $timeout(countdown, 1000);
+    }])
+    .controller('gameRoomCtrl', ['$scope', '$http', function($scope, $http) {
+        function loadTeam(team_id) {
+            if (!team_id || !$scope.ms_epic) {
+                return;
+            }
+            $http.post(cmpt + '/board/epic/team', {
+                epic_id: $scope.ms_epic.epic_id,
+                team_id: team_id,
+            }).success(function(json) {
+                if (json.isSuccess && json.result) {
+                    $scope.teamRoom = json.result;
+                }
+            });
+            $http.post(cmpt + '/board/teamBoard', {
+                epic_id: $scope.ms_epic.epic_id,
+                team_id: team_id,
+            }).success(function(json) {
+                for (var i = 0, j = json.result.length; i < j; i++) {
+                    if (json.result[i].score && json.result[i].score.rank) {
+                        $scope.currentRound = json.result[i].score.rank.length;
+                        break;
+                    }
+                }
+                if (json.isSuccess && json.result) {
+                    json.result.forEach($scope.fixTeam);
+                    $scope.teamsInRoom = json.result;
+                    $scope.teamsInRoomView = $scope.teamsInRoom;
+                }
+            });
+        }
+
+        function getRankByRound(round) {
+            var teams = $scope.teamsInRoom.map(function(item) {
+                return item;
+            });
+            teams.sort(function(a, b) {
+                if (!a.score) {
+                    return 1;
+                }
+                if (!b.score) {
+                    return -1;
+                }
+                if (!a.score.rank) {
+                    return 1;
+                }
+                if (!b.score.rank) {
+                    return -1;
+                }
+                if (a.score.rank.length <= round) {
+                    return 1;
+                }
+                if (b.score.rank.length <= round) {
+                    return -1;
+                }
+                return a.score.rank[round] - b.score.rank[round];
+            });
+            return teams;
+        }
+        $scope.teamsInRoom = [];
+        $scope.rounds = [0, 1, 2, 3];
+        $scope.$watch($scope.isSharePage ? 'share_team.team_id' : 'ms_team.team_id', loadTeam);
+        $scope.selectedRound = -1;
+        $scope.toggleRank = function(round) {
+            if (round == $scope.selectedRound) {
+                $scope.selectedRound = -1;
+                $scope.teamsInRoomView = $scope.teamsInRoom;
+                return;
+            }
+            if (round >= $scope.currentRound) {
+                return;
+            }
+            $scope.selectedRound = round;
+            $scope.teamsInRoomView = getRankByRound(round);
+        };
     }])
     .filter('trusted', ['$sce', function($sce) {
         return function(text) {

@@ -1,19 +1,19 @@
-<div class="countdown" ng-if="((ms_epic.max_team_member_count|| 5) == ms_team.memberLength) && ms_epic.epic_game_from > (now + day)" ng-controller="countdownCtrl">
-	<div ng-if="!showStart">
-		<span class="timestamp">
+<div class="countdown" ng-if="((ms_epic.max_team_member_count|| 5) == ms_team.memberLength) && ms_epic.epic_sign_end < now" ng-controller="countdownCtrl">
+    <div ng-show="willStart">
+        <span class="timestamp">
 			{{countdownMsg}}
-		</span> 比赛即将开始
-	</div>
-	<div ng-show="showInGaming">
-		比赛进行中
-	</div>
-	<div ng-if="showStart">
-		<a href="/" class="btn">点此进行比赛</a>
-	</div>
-	<button class="btn invite-btn" ng-if="ms_epic.epic_id && ms_team.team_id" pop klass="qrpop" content="<div class='qrcode' qrcode src='QRCode(ms_epic.epic_id, ms_team.team_id)'></div>">
+		</span> {{40212|translate}}
+        <a target="_blank" ng-href="{{cmpt + '/marksimos?team_id=' + ms_team.team_id + '&partner=' + site + '&from=' + site}}" class="btn" ng-if="ms_team" ng-show="showGameLink" ng-bind="40213|translate"></a>
+        <div ng-bind="40214|translate"></div>
+    </div>
+    <div ng-show="inGaming">
+        <span class="period" ng-bind="40215|translate"></span>
+        <a target="_blank" ng-href="{{cmpt + '/marksimos?team_id=' + ms_team.team_id + '&partner=' + site + '&from=' + site}}" class="btn" ng-if="ms_team" ng-show="showGameLink" ng-bind="40213|translate"></a>
+    </div>
+    <div ng-show="gameEnded">
+        <span class="period" ng-bind="40216|translate"></span>
+    </div>
+    <!--<button class="btn invite-btn" ng-if="ms_epic.epic_id && ms_team.team_id" pop klass="qrpop" content="<div class='logo-mask'></div><div class='qrcode' qrcode src='QRCode(ms_epic.epic_id, ms_team.team_id)'></div>">
 		<i class="icon wechat"></i> {{40210|translate}}
-	</button>
-	<div>
-		请召集所有队员，准备比赛
-	</div>
+	</button>-->
 </div>

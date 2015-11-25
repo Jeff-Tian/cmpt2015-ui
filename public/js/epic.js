@@ -104,6 +104,11 @@ angular
             40206: '北京时间',
             40210: '微信邀请朋友观赛',
             40211: '换一批',
+            40212: '比赛即将开始',
+            40213: '点此进行比赛',
+            40214: '请召集所有队员，准备比赛',
+            40215: '比赛进行中',
+            40216: '比赛结束',
             40404: '未登录',
             70006: '该用户无权限加入此队伍',
             70008: '该用户已经属于一个队伍，不能再被加入队伍'
@@ -1113,29 +1118,46 @@ angular
     }])
     .controller('countdownCtrl', ['$scope', '$timeout', function($scope, $timeout) {
         $scope.countdownMsg = '';
-        var now = $scope.ms_epic.epic_game_from;
+        $scope.showGameLink = false;
+        $scope.willStart = false;
+        $scope.inGaming = false;
+        $scope.gameEnded = false;
+        var gameFrom = $scope.ms_epic.epic_game_from;
+        var gameEnd = $scope.ms_epic.epic_game_end;
         var hours, minutes, seconds;
-        var timestamp;
+        var delta;
         var second = 1000;
         var minute = 60 * second;
         var hour = 60 * minute;
 
         function countdown() {
-            timestamp = now - Date.now();
-            if (timestamp < 0) {
-                $scope.showStart = true;
-                $scope.showInGaming = true;
+            var now = Date.now();
+            if (gameEnd <= now) {
+                $scope.gameEnded = true;
+                $scope.inGaming = false;
+                $scope.willStart = false;
+                $scope.showGameLink = false;
                 return;
             }
-            timestamp /= second;
-            timestamp |= 0;
-            seconds = timestamp % 60;
-            timestamp /= 60;
-            timestamp |= 0;
-            minutes = timestamp % 60;
-            timestamp /= 60;
-            timestamp |= 0;
-            hours = timestamp % 60;
+            if (gameEnd > now && now >= gameFrom) {
+                $scope.inGaming = true;
+                $scope.willStart = false;
+                $scope.showGameLink = true;
+                return;
+            }
+            delta = gameFrom - now;
+            if (!$scope.showGameLink && delta < hour) {
+                $scope.showGameLink = true;
+            }
+            delta /= second;
+            delta |= 0;
+            seconds = delta % 60;
+            delta /= 60;
+            delta |= 0;
+            minutes = delta % 60;
+            delta /= 60;
+            delta |= 0;
+            hours = delta % 60;
             $scope.countdownMsg = (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
             $timeout(countdown, 1000);
         }

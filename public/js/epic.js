@@ -1231,6 +1231,7 @@ angular
         $scope.rounds = [0, 1, 2, 3];
         $scope.$watch($scope.isSharePage ? 'share_team.team_id' : 'ms_team.team_id', loadTeam);
         $scope.selectedRound = -1;
+        $scope.currentRound = -1;
         $scope.toggleRank = function(round) {
             if (round == $scope.selectedRound) {
                 $scope.selectedRound = -1;

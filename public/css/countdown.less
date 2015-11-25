@@ -22,10 +22,33 @@
         display: inline-block;
         text-decoration: none;
     }
-    .invite-btn {
+    .btns {
         position: absolute;
         top: 1em;
         right: 1em;
+        .create-meeting-btn {
+            span.icon {
+                background-image: url("../img/icon/metting-icon.png@{version}");
+                width: 1.5em;
+                height: 1.5em;
+                display: inline-block;
+                background-size: contain;
+                float: left;
+                margin-top: 0.2em;
+                margin-right: 0.5em;
+                background-repeat: no-repeat;
+            }
+            &:hover {
+                background: #9F9F9F;
+                color: #FFF;
+            }
+        }
+        .metting-btn {
+            .icon.circle.notched {
+                .transform-origin(bottom);
+                .animation(spin 500ms infinite);
+            }
+        }
     }
 }
 

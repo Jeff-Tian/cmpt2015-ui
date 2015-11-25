@@ -30,11 +30,18 @@
 .box-shadow(@shadow) {
     -webkit-box-shadow: @shadow;
     -moz-box-shadow: @shadow;
-    -mz-box-shadow: @shadow;
+    -ms-box-shadow: @shadow;
     box-shadow: @shadow;
 }
 
-@media only screen and (max-width: 980px){
+.animation(@animation) {
+    -webkit-animation: @animation;
+    -moz-animation: @animation;
+    -ms-animation: @animation;
+    animation: @animation;
+}
+
+@media only screen and (max-width: 980px) {
     .game-ui > .ui.container {
         min-width: 90%;
     }

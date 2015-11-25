@@ -1,4 +1,4 @@
-<div class="countdown" ng-if="((ms_epic.max_team_member_count|| 5) == ms_team.memberLength) && ms_epic.epic_sign_end < now" ng-controller="countdownCtrl">
+<div class="countdown" ng-if="ms_team && ms_member && (ms_epic.epic_sign_end < now)" ng-controller="countdownCtrl">
     <div ng-show="willStart">
         <span class="timestamp">
 			{{countdownMsg}}
@@ -13,7 +13,21 @@
     <div ng-show="gameEnded">
         <span class="period" ng-bind="40216|translate"></span>
     </div>
-    <!--<button class="btn invite-btn" ng-if="ms_epic.epic_id && ms_team.team_id" pop klass="qrpop" content="<div class='logo-mask'></div><div class='qrcode' qrcode src='QRCode(ms_epic.epic_id, ms_team.team_id)'></div>">
-		<i class="icon wechat"></i> {{40210|translate}}
-	</button>-->
+    <div class="btns">
+        <button class="btn metting-btn create-meeting-btn" ng-show="readyToCreateMettingRoom" ng-click="joinMeetingRoom()">
+            <span class="icon"></span> {{40220|translate}}
+        </button>
+        <button class="btn metting-btn" ng-show="creatingMettingRoom">
+            <i class="circle notched icon"></i> {{40221|translate}}
+        </button>
+        <button class="btn metting-btn" ng-show="createMettingRoomSuccess">
+            <i class="circle thin icon"></i> {{40222|translate}}
+        </button>
+        <a class="btn metting-btn" target="_blank" ng-href="{{linkOfMettingRoom}}" ng-show="showLinkOfMettingRoom">
+            <i class="home icon"></i> {{40223|translate}}
+        </a>
+        <button class="btn invite-btn" ng-if="ms_epic.epic_id && ms_team.team_id" pop klass="qrpop" content="<div class='logo-mask'></div><div class='qrcode' qrcode src='QRCode(ms_epic.epic_id, ms_team.team_id)'></div>">
+    		<i class="icon wechat"></i> {{40210|translate}}
+    	</button>
+    </div>
 </div>

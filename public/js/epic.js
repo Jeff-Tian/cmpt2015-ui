@@ -144,6 +144,12 @@ angular
             templateUrl: 'template/epicinfo.html'
         };
     })
+    .directive('gametraining', function() {
+        return {
+            restrict: "E",
+            templateUrl: 'template/game-training.html'
+        };
+    })
     .directive('teammember', function() {
         return {
             restrict: "E",

@@ -282,6 +282,12 @@ angular
             templateUrl: 'template/gameroom.html'
         };
     })
+    .directive('gameroomMobile', function() {
+        return {
+            restrict: "E",
+            templateUrl: 'template/gameroom-mobile.html'
+        };
+    })
     .directive('chinaMap', ['$filter', '$translate', function($filter, $translate) {
         return {
             restrict: 'AE',
@@ -1139,9 +1145,13 @@ angular
         var second = 1000;
         var minute = 60 * second;
         var hour = 60 * minute;
+        var day = 24 * hour;
 
         function countdown() {
             var now = Date.now();
+            if (gameFrom - now > day) {
+                return;
+            }
             if (gameEnd <= now) {
                 $scope.gameEnded = true;
                 $scope.inGaming = false;

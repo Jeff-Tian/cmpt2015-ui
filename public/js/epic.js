@@ -1157,8 +1157,9 @@ angular
             }
             $scope.willStart = true;
             delta = gameFrom - now;
-            if (!$scope.showGameLink && delta < hour) {
+            if (delta < hour) {
                 $scope.showGameLink = true;
+                $scope.readyToCreateMettingRoom = true;
             }
             delta /= second;
             delta |= 0;
@@ -1203,7 +1204,6 @@ angular
             });
         }
         $scope.joinMeetingRoom = joinMeetingRoom;
-        $scope.readyToCreateMettingRoom = true;
     }])
     .controller('gameRoomCtrl', ['$scope', '$http', function($scope, $http) {
         function loadTeam(team_id) {

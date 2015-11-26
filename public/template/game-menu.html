@@ -2,7 +2,7 @@
 	<a ng-href="/{{lang}}{{cmpt}}/" class="item" ng-class="{'active':page==='index'}">
 		<i class="b-home icon"></i> {{40025|translate}}
 	</a>
-	<a ng-repeat="series in all_series" ng-href="/{{lang}}{{cmpt}}/{{series.series_type}}?series_id={{series.series_id}}" class="item" ng-class="{'active':page===series.series_type}">
+	<a ng-repeat="series in all_series" ng-href="/{{lang}}{{cmpt}}/{{series.series_type}}?series_id={{series.series_id}}" class="item" ng-class="{'active':page===series.series_type && series_id === series.series_id}">
 		<i class="icon b-{{series.series_type}}"></i> {{series.title}}
 	</a>
 	<!--<a ng-if="ms_member" ng-href="/{{lang}}{{cmpt}}/record" class="item" ng-class="{'active':page==='record'}">

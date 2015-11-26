@@ -1157,6 +1157,7 @@ angular
                 $scope.inGaming = false;
                 $scope.willStart = false;
                 $scope.showGameLink = false;
+                $scope.showSignEnded = false;
                 return;
             }
             if (gameEnd > now && now >= gameFrom) {
@@ -1164,9 +1165,12 @@ angular
                 $scope.willStart = false;
                 $scope.showGameLink = true;
                 $scope.readyToCreateMettingRoom = true;
+                $scope.showSignEnded = false;
                 return;
             }
             $scope.willStart = true;
+            $scope.showSignEnded = false;
+
             delta = gameFrom - now;
             if (delta < hour) {
                 $scope.showGameLink = true;
@@ -1215,6 +1219,7 @@ angular
             });
         }
         $scope.joinMeetingRoom = joinMeetingRoom;
+        $scope.showSignEnded = true;
     }])
     .controller('gameRoomCtrl', ['$scope', '$http', function($scope, $http) {
         function loadTeam(team_id) {

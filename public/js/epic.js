@@ -745,6 +745,10 @@ angular
             }
         };
         //$scope.$on('updateTeamNameSuccess', loadTeam);
+        $scope.teamRoom = null;
+        $scope.updateTeamRoom = function(teamRoom) {
+            $scope.teamRoom = teamRoom;
+        };
     }])
     .controller('gameteamCtrl', ['$scope', '$http', function($scope, $http) {
         $scope.updateTeamName = function() {
@@ -1231,7 +1235,7 @@ angular
                 team_id: team_id,
             }).success(function(json) {
                 if (json.isSuccess && json.result) {
-                    $scope.teamRoom = json.result;
+                    $scope.updateTeamRoom(json.result);
                 }
             });
             $http.post(cmpt + '/board/teamBoard', {

@@ -1,6 +1,6 @@
 <div class="gameroom list" ng-controller="gameRoomCtrl" ng-show="teamsInRoom.length">
     <div class="search">
-        <label ng-bind="teamRoom.group_id"></label>
+        <label ng-bind="teamRoom.group_id + '-' + teamRoom.room_id"></label>
         <div class="rounds">
             <span class="round" ng-repeat="round in rounds" ng-class="{active: currentRound > round, highlight: selectedRound == round}" ng-click="toggleRank(round)" ng-bind="round+1"></span>
             <span ng-bind="40120|translate"></span>

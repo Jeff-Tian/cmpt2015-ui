@@ -1303,6 +1303,13 @@ angular
             $scope.selectedRound = round;
             $scope.teamsInRoomView = getRankByRound(round);
         };
+        $scope.selectedMember = null;
+        $scope.toggleImage = function(member) {
+            if ($scope.selectedMember === member) {
+                return $scope.selectedMember = null;
+            }
+            $scope.selectedMember = member;
+        };
     }])
     .filter('trusted', ['$sce', function($sce) {
         return function(text) {

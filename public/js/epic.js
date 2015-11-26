@@ -1163,6 +1163,7 @@ angular
                 $scope.inGaming = true;
                 $scope.willStart = false;
                 $scope.showGameLink = true;
+                $scope.readyToCreateMettingRoom = true;
                 return;
             }
             $scope.willStart = true;
@@ -1232,6 +1233,9 @@ angular
                 epic_id: $scope.ms_epic.epic_id,
                 team_id: team_id,
             }).success(function(json) {
+                if (!json.isSuccess || !json.result) {
+                    return;
+                }
                 for (var i = 0, j = json.result.length; i < j; i++) {
                     if (json.result[i].score && json.result[i].score.rank) {
                         $scope.currentRound = json.result[i].score.rank.length;

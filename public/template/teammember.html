@@ -20,7 +20,7 @@
 			{{40022|translate}}
 			<label ng-show="!edit">{{(isSharePage? share_team : ms_team)['name']}}</label>
 			<input type="text" maxlength="20" ng-model="(isSharePage? share_team : ms_team)['name']" ng-show="edit">
-			<i class="icon write" ng-show="!isSharePage && isLeader && !edit" ng-click="edit=true"></i>
+			<i class="icon write" ng-show="!isSharePage && isLeader && !edit && ms_epic.epic_sign_end > now" ng-click="edit=true"></i>
 			<i class="icon checkmark" ng-show="!isSharePage && isLeader && edit" ng-click="updateTeamName()"></i>
 		</div>
 		<div class="ui items">

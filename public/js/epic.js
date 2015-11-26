@@ -109,6 +109,10 @@ angular
             40214: '请召集所有队员，准备比赛',
             40215: '比赛进行中',
             40216: '比赛结束',
+            40220: '瞩目在线教室',
+            40221: '创建教室中...',
+            40222: '创建教室成功！',
+            40223: '进入教室',
             40404: '未登录',
             70006: '该用户无权限加入此队伍',
             70008: '该用户已经属于一个队伍，不能再被加入队伍'
@@ -276,6 +280,12 @@ angular
         return {
             restrict: "E",
             templateUrl: 'template/gameroom.html'
+        };
+    })
+    .directive('gameroomMobile', function() {
+        return {
+            restrict: "E",
+            templateUrl: 'template/gameroom-mobile.html'
         };
     })
     .directive('chinaMap', ['$filter', '$translate', function($filter, $translate) {
@@ -1122,7 +1132,7 @@ angular
             temp = null;
         });
     }])
-    .controller('countdownCtrl', ['$scope', '$timeout', function($scope, $timeout) {
+    .controller('countdownCtrl', ['$scope', '$timeout', '$http', function($scope, $timeout, $http) {
         $scope.countdownMsg = '';
         $scope.showGameLink = false;
         $scope.willStart = false;
@@ -1135,25 +1145,36 @@ angular
         var second = 1000;
         var minute = 60 * second;
         var hour = 60 * minute;
+        var day = 24 * hour;
 
         function countdown() {
             var now = Date.now();
+            if (gameFrom - now > day) {
+                return;
+            }
             if (gameEnd <= now) {
                 $scope.gameEnded = true;
                 $scope.inGaming = false;
                 $scope.willStart = false;
                 $scope.showGameLink = false;
+                $scope.showSignEnded = false;
                 return;
             }
             if (gameEnd > now && now >= gameFrom) {
                 $scope.inGaming = true;
                 $scope.willStart = false;
                 $scope.showGameLink = true;
+                $scope.readyToCreateMettingRoom = true;
+                $scope.showSignEnded = false;
                 return;
             }
+            $scope.willStart = true;
+            $scope.showSignEnded = false;
+
             delta = gameFrom - now;
-            if (!$scope.showGameLink && delta < hour) {
+            if (delta < hour) {
                 $scope.showGameLink = true;
+                $scope.readyToCreateMettingRoom = true;
             }
             delta /= second;
             delta |= 0;
@@ -1168,6 +1189,37 @@ angular
             $timeout(countdown, 1000);
         }
         $timeout(countdown, 1000);
+
+        function showMettingLink() {
+            $scope.readyToCreateMettingRoom = false;
+            $scope.creatingMettingRoom = false;
+            $scope.createMettingRoomSuccess = false;
+            $scope.showLinkOfMettingRoom = true;
+        }
+
+        function joinMeetingRoom() {
+            $scope.readyToCreateMettingRoom = false;
+            $scope.creatingMettingRoom = true;
+            $scope.createMettingRoomSuccess = false;
+            $scope.showLinkOfMettingRoom = false;
+            $http.post(cmpt + '/metting/join', {
+                campaignId: $scope.ms_epic.epic_id,
+                teamId: $scope.ms_team.team_id,
+                memberName: $scope.ms_member.show_name
+            }).success(function(json) {
+                if (json.isSuccess && json.result) {
+                    $scope.readyToCreateMettingRoom = false;
+                    $scope.creatingMettingRoom = false;
+                    $scope.createMettingRoomSuccess = true;
+                    $scope.linkOfMettingRoom = json.result;
+                    $timeout(showMettingLink, 3000);
+                    return;
+                }
+                $timeout($scope.joinMeetingRoom, 3000);
+            });
+        }
+        $scope.joinMeetingRoom = joinMeetingRoom;
+        $scope.showSignEnded = true;
     }])
     .controller('gameRoomCtrl', ['$scope', '$http', function($scope, $http) {
         function loadTeam(team_id) {
@@ -1186,6 +1238,9 @@ angular
                 epic_id: $scope.ms_epic.epic_id,
                 team_id: team_id,
             }).success(function(json) {
+                if (!json.isSuccess || !json.result) {
+                    return;
+                }
                 for (var i = 0, j = json.result.length; i < j; i++) {
                     if (json.result[i].score && json.result[i].score.rank) {
                         $scope.currentRound = json.result[i].score.rank.length;

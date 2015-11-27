@@ -1,4 +1,4 @@
-<div class="gameroom list" ng-controller="gameRoomCtrl" ng-show="teamsInRoom.length">
+<div class="gameroom list" ng-controller="gameRoomCtrl" ng-if="ms_epic" ng-show="teamsInRoom.length">
     <div class="search">
         <label ng-bind="teamRoom.group_id + '-' + teamRoom.room_id"></label>
         <div class="rounds">

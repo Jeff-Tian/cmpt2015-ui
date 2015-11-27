@@ -1209,7 +1209,8 @@ angular
             $http.post(cmpt + '/metting/join', {
                 campaignId: $scope.ms_epic.epic_id,
                 teamId: $scope.ms_team.team_id,
-                memberName: $scope.ms_member.show_name
+                memberName: $scope.ms_member.show_name,
+                memberId: $scope.ms_member.member_id
             }).success(function(json) {
                 if (json.isSuccess && json.result) {
                     $scope.readyToCreateMettingRoom = false;

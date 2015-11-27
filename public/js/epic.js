@@ -773,7 +773,7 @@ angular
             });
         };
         $scope.select = function(member) {
-            if ($scope.isSharePage || !$scope.isLeader || !member.member_id || (member.member_id == $scope.ms_member.member_id)) {
+            if ($scope.isSharePage || !$scope.isLeader || !member.member_id || (member.member_id == $scope.ms_member.member_id) || ($scope.ms_epic && $scope.ms_epic.epic_sign_end < $scope.now)) {
                 return;
             }
             $scope.selected = $scope.selected === member ? null : member;

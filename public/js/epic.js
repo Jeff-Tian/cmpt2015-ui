@@ -1164,18 +1164,21 @@ angular
             if (gameFrom - now > day) {
                 return;
             }
+            if (gameFrom < (now + hour) && (now - day * 2) < gameEnd) {
+                $scope.showGameLink = true;
+            } else {
+                $scope.showGameLink = false;
+            }
             if (gameEnd <= now) {
                 $scope.gameEnded = true;
                 $scope.inGaming = false;
                 $scope.willStart = false;
-                $scope.showGameLink = false;
                 $scope.showSignEnded = false;
                 return;
             }
             if (gameEnd > now && now >= gameFrom) {
                 $scope.inGaming = true;
                 $scope.willStart = false;
-                $scope.showGameLink = true;
                 showMettingRoomBtn();
                 $scope.showSignEnded = false;
                 return;
@@ -1185,7 +1188,6 @@ angular
 
             delta = gameFrom - now;
             if (delta < hour) {
-                $scope.showGameLink = true;
                 showMettingRoomBtn();
             }
             delta /= second;

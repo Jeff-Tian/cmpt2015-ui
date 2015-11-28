@@ -13,24 +13,24 @@
                     {{team.name}}
                 </div>
                 <div class="images minor mobile-team-images">
-                    <div class="img column" ng-repeat="member in team.members" ng-click="toggleImage(member)">
+                    <div class="img column" ng-repeat="member in team.members" ng-click="toggleImage(team, member)">
                         <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
                     </div>
                 </div>
             </div>
-            <div class="list" ng-show="selectedMember">
+            <div class="list" ng-if="team.selectedMember">
                 <div class="item mobile-team-member">
                     <div class="card">
                         <div class="img">
-                            <img class="gender-{{selectedMember.gender.toLowerCase()}}" ng-src="{{selectedMember.avatar}}">
+                            <img class="gender-{{team.selectedMember.gender.toLowerCase()}}" ng-src="{{team.selectedMember.avatar}}">
                         </div>
                         <div class="title">
-                            {{selectedMember.show_name}}
+                            {{team.selectedMember.show_name}}
                         </div>
                         <div class="description">
-                            <div class="university">{{selectedMember.university || '&nbsp;'}}</div>
-                            <div class="major">{{selectedMember.major || '&nbsp;'}}</div>
-                            <div class="mobile-num">{{selectedMember.mobile || '&nbsp;'}}</div>
+                            <div class="university">{{team.selectedMember.university || '&nbsp;'}}</div>
+                            <div class="major">{{team.selectedMember.major || '&nbsp;'}}</div>
+                            <div class="mobile-num">{{team.selectedMember.mobile || '&nbsp;'}}</div>
                         </div>
                     </div>
                 </div>

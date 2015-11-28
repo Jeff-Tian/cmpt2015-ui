@@ -1151,6 +1151,14 @@ angular
         var hour = 60 * minute;
         var day = 24 * hour;
 
+        function showMettingRoomBtn() {
+            if (!$scope.createMettingRoomSuccess &&
+                !$scope.creatingMettingRoom &&
+                !$scope.showLinkOfMettingRoom) {
+                $scope.readyToCreateMettingRoom = true;
+            }
+        }
+
         function countdown() {
             var now = Date.now();
             if (gameFrom - now > day) {
@@ -1168,7 +1176,7 @@ angular
                 $scope.inGaming = true;
                 $scope.willStart = false;
                 $scope.showGameLink = true;
-                $scope.readyToCreateMettingRoom = true;
+                showMettingRoomBtn();
                 $scope.showSignEnded = false;
                 return;
             }
@@ -1178,7 +1186,7 @@ angular
             delta = gameFrom - now;
             if (delta < hour) {
                 $scope.showGameLink = true;
-                $scope.readyToCreateMettingRoom = true;
+                showMettingRoomBtn();
             }
             delta /= second;
             delta |= 0;
@@ -1305,11 +1313,11 @@ angular
             $scope.teamsInRoomView = getRankByRound(round);
         };
         $scope.selectedMember = null;
-        $scope.toggleImage = function(member) {
-            if ($scope.selectedMember === member) {
-                return $scope.selectedMember = null;
+        $scope.toggleImage = function(team, member) {
+            if (team.selectedMember === member) {
+                return team.selectedMember = null;
             }
-            $scope.selectedMember = member;
+            team.selectedMember = member;
         };
     }])
     .filter('trusted', ['$sce', function($sce) {

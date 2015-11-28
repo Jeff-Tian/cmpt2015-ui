@@ -154,6 +154,12 @@ angular
             templateUrl: 'template/game-training.html'
         };
     })
+    .directive('upsell', function() {
+        return {
+            restrict: "E",
+            templateUrl: 'template/upsell.html'
+        };
+    })
     .directive('teammember', function() {
         return {
             restrict: "E",

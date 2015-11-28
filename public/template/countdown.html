@@ -15,6 +15,7 @@
     </div>
     <div ng-show="gameEnded">
         <span class="period" ng-bind="40216|translate"></span>
+        <a target="_blank" ng-href="{{cmpt + '/marksimos?team_id=' + ms_team.team_id + '&partner=' + site + '&from=' + site}}" class="btn" ng-if="ms_team" ng-show="showGameLink" ng-bind="40213|translate"></a>
     </div>
     <div class="btns">
         <button class="btn metting-btn create-meeting-btn" ng-show="readyToCreateMettingRoom" ng-click="joinMeetingRoom()">

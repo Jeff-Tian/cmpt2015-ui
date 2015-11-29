@@ -622,6 +622,23 @@ angular
             $http.get(cmpt + '/game/series/load/' + val).success(function(json) {
                 if (json.isSuccess) {
                     $scope.ms_series = $scope.fixSeries(json.result);
+                    if ($scope.ms_series && $scope.ms_series.epics) {
+                        $scope.ms_series.epics.sort(function(a, b) {
+                            return a.epic_game_end - b.epic_game_end;
+                        });
+                        var index = -1;
+                        $scope.ms_series.epics.forEach(function(epic, i) {
+                            if (epic.epic_game_end < $scope.now) {
+                                index = i;
+                            }
+                        });
+                        if (index > -1) {
+                            $scope.ms_series.epics = $scope.ms_series.epics.slice(index + 1, $scope.ms_series.epics.length)
+                                .concat($scope.ms_series.epics.slice(0, index + 1).sort(function() {
+                                    return 1;
+                                }));
+                        }
+                    }
                 }
             });
         });

@@ -3,4 +3,3 @@ public/libs
 *.DS_Store
 *.orig
 .idea
-public/dist

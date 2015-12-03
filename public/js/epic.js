@@ -362,6 +362,7 @@ angular
                         myChart.on(require('echarts/config').EVENT.MAP_SELECTED, function(param) {
                             //console.log(translations[param.target]);
                             $scope.$emit('area/choose', translations[param.target]);
+                            $(document).trigger('mapClick', [param, translations[param.target]]);
                             //ngModel.$setViewValue(translations[param.target]);
                         });
                     });

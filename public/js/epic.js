@@ -279,9 +279,10 @@ angular
     .directive('gameRankingList', function() {
         return {
             restrict: "E",
-            templateUrl: 'template/game-ranking-list.html'
+            templateUrl: 'template/game-ranking.html'
         };
     })
+    .controller('rankingCtrl', angular.cmpt.rankingCtrl)
     .directive('gameroom', function() {
         return {
             restrict: "E",

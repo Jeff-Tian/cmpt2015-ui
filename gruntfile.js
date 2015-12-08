@@ -26,7 +26,7 @@ module.exports = function(grunt) {
         concat: {
             options: {},
             dist: {
-                src: ['public/js/epic.js', 'public/js/popup.js', 'public/dist/main.js'],
+                src: ['public/js/rankingCtrl.js', 'public/js/epic.js', 'public/js/popup.js', 'public/dist/main.js'],
                 dest: 'public/dist/main.js'
             }
         },

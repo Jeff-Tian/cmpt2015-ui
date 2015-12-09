@@ -37,6 +37,8 @@
     var DETAILS_OPTIONS = [RANK_AVERAGE_RANK, RANK_AVERAGE_SCORE, RANK_TOTAL_SCORE];
     var OPTION_INIT = 0;
 
+    var TITLE_OPTIONS = [["平均名次", "排行榜"], ["平均得分", "排行榜"], ["晋级队伍数", "排行榜"]];
+
     var createSingleDetailObject = function(sourceAry) {
         return {"rank": sourceAry[0], "name": sourceAry[1], "score": sourceAry[2]};
     };
@@ -55,6 +57,7 @@
     exports.rankingCtrl = function ($scope, service) {
         $scope.option = OPTION_INIT;
         $scope.details = refreshDetails($scope.option);
+        $scope.titleOptions = TITLE_OPTIONS;
         $scope.rankChange = function(option) {
             $scope.option = option;
             $scope.details = refreshDetails(option);

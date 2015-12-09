@@ -1,15 +1,7 @@
 <div ng-controller="rankingCtrl" style="padding-top:0px">
     <div class="ui equal width center aligned padded grid">
         <div class="row ranking-row">
-            <div ng-class="{'ranking-active':option===0}" class="column ranking-options ranking-cell" ng-click="rankChange(0)">
-                平均名次排行榜
-            </div>
-            <div ng-class="{'ranking-active':option===1}" class="column ranking-options ranking-cell" ng-click="rankChange(1)">
-                平均得分排行榜
-            </div>
-            <div ng-class="{'ranking-active':option===2}" class="column ranking-options ranking-cell" ng-click="rankChange(2)">
-                晋级队伍数排行榜
-            </div>
+            <div ng-class="{'ranking-active':option===$index}" class="column ranking-options b-ranking-cell" ng-click="rankChange($index)" ng-repeat="titleOption in titleOptions" ng-bind-template="{{titleOption}}"> </div>
         </div>
         <div class="row ranking-row ranking-detail" ng-repeat="detail in details">
             <div class="two wide column ranking-rank ranking-cell" ng-bind-template="{{detail.rank}}">

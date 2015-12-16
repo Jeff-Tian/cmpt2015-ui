@@ -9,8 +9,9 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "install": "bower install",
-    "postinstall": "grunt release"
+    "postinstall": "npm run build && npm run grunt",
+    "build": "bower install",
+    "grunt": "grunt release"
   },
   "dependencies": {
     "bower": "^1.3.1",

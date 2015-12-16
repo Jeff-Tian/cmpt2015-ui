@@ -1,6 +1,7 @@
 node_modules
 public/libs
-public/dist
+public/dist/*.css
+public/dist/*.js
 *.DS_Store
 *.orig
 .idea

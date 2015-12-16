@@ -12,6 +12,7 @@
     "test",
     "tests",
     "public/libs",
+    "public/dist",
     "node_modules"
   ],
   "dependencies": {

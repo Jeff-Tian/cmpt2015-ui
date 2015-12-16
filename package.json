@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "publish": "npm run build && npm run grunt",
+    "publish": "npm run grunt && npm run build",
     "build": "bower install",
     "grunt": "grunt release"
   },

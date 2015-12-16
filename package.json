@@ -6,8 +6,8 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "publish": "bower install",
-    "prepublish": "grunt"
+    "postinstall": "grunt release",
+    "publish": "bower install"
   },
   "dependencies": {
     "bower": "^1.3.1",

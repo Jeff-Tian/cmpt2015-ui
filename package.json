@@ -3,15 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "",
   "license": "ISC",
   "scripts": {
-    "publish": "npm run grunt && npm run build",
-    "build": "bower install",
-    "grunt": "grunt release"
+    "publish": "bower install",
+    "install": "grunt"
   },
   "dependencies": {
     "bower": "^1.3.1",

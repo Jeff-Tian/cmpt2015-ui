@@ -6,11 +6,9 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "publish": "grunt release"
+    "install": "grunt && bower install"
   },
   "dependencies": {
-    "bower": "^1.3.1",
-    "grunt": "^0.4.5",
     "grunt-angular-templates": "^0.5.7",
     "grunt-contrib-concat": "~0.5.0",
     "grunt-contrib-cssmin": "0.9.0",
@@ -18,5 +16,7 @@
     "grunt-contrib-uglify": "0.2.7"
   },
   "devDependencies": {
+    "bower": "^1.3.1",
+    "grunt": "^0.4.5"
   }
 }

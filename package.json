@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "install": "bower install"
+    "install": "bower install",
+    "postinstall": "grunt"
   },
   "dependencies": {
   },

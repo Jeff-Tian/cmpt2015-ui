@@ -440,6 +440,12 @@ angular
             templateUrl: 'template/countdown.html'
         };
     })
+    .directive('epicvalidate', function() {
+        return {
+            restrict: "E",
+            templateUrl: 'template/epic_validate.html'
+        };
+    })
     .directive('inputEnter', ['$parse', function($parse) {
         return {
             restrict: "A",
@@ -569,6 +575,7 @@ angular
             epic.epic_game_from = new Date(epic.epic_game_from || epic.game_from);
             epic.epic_sign_end = new Date(epic.epic_sign_end || epic.sign_end);
             epic.epic_sign_from = new Date(epic.epic_sign_from || epic.sign_from);
+            epic.need_security = true;
             return epic;
         };
         $scope.fixSeries = function(series) {
@@ -773,6 +780,31 @@ angular
         $scope.teamRoom = null;
         $scope.updateTeamRoom = function(teamRoom) {
             $scope.teamRoom = teamRoom;
+        };
+
+        function getFromCookie(cookie, regex) {
+            cookie = cookie && cookie.match(regex);
+            cookie = cookie ? cookie[1] : null;
+            return cookie;
+        }
+        var epic_validation_regex = /(?:^|;) *epic_valid=([^;]*)/;
+        var epic_valid = (getFromCookie(document.cookie, epic_validation_regex) || '').split('|');
+        $scope.validateEpic = function(epic_id, security_key) {
+            $http.post(cmpt + '/game/epic/validation', {
+                epic_id: epic_id,
+                security_key: security_key
+            }).success(function(json) {
+                if (json.isSuccess && json.result) {
+                    epic_valid.push(epic_id);
+                    document.cookie = 'epic_valid=' + epic_valid.join('|') + ';path=/';
+                }
+            });
+        };
+        $scope.epicIsValid = function(epic) {
+            if (!epic.need_security) {
+                return true;
+            }
+            return epic_valid.indexOf(epic.epic_id) > -1;
         };
     }])
     .controller('gameteamCtrl', ['$scope', '$http', function($scope, $http) {

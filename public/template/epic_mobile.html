@@ -1,5 +1,10 @@
-<header-mobile></header-mobile>
-<teammember-mobile></teammember-mobile>
-<gameroom-mobile></gameroom-mobile>
-<a ng-href="{{gameLink}}" class="game-link" ng-bind="40080|translate"></a>
-<footer-mobile></footer-mobile>
+<div ng-if="ms_epic && !epicIsValid(ms_epic)">
+	<epicvalidate></epicvalidate>
+</div>
+<div ng-if="ms_epic && epicIsValid(ms_epic)">
+	<header-mobile></header-mobile>
+	<teammember-mobile></teammember-mobile>
+	<gameroom-mobile></gameroom-mobile>
+	<a ng-href="{{gameLink}}" class="game-link" ng-bind="40080|translate"></a>
+	<footer-mobile></footer-mobile>
+</div>

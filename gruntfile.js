@@ -22,7 +22,7 @@ module.exports = function(grunt) {
         return [version.year, version.month, version.date, version.hour, version.minute].join('');
     })();
     grunt.config.init({
-        //pkg: grunt.file.readJSON('package.json'),
+        pkg: grunt.file.readJSON('package.json'),
         concat: {
             options: {},
             dist: {
@@ -67,6 +67,7 @@ module.exports = function(grunt) {
             }
         }
     });
+    console.log('grunt running');
     grunt.loadNpmTasks('grunt-angular-templates');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');

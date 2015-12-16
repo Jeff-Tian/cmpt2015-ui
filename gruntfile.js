@@ -67,7 +67,6 @@ module.exports = function(grunt) {
             }
         }
     });
-    console.log('grunt running');
     grunt.loadNpmTasks('grunt-angular-templates');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');

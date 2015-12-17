@@ -16,6 +16,6 @@
   ],
   "dependencies": {
     "echarts": "~2.2.7",
-    "jquery-qrcode": "*"
+    "jquery-qrcode": "git@bitbucket.org:hcdlearning/jquery-qrcode.git"
   }
 }

@@ -1,0 +1,19 @@
+<div class="epic-validate">
+    <div class="epic-validate-title cloak">{{40250|translate}}</div>
+    <form novalidate name="epicValidateForm" ng-submit="submit(epicValidateForm.$valid)" class="ui form form-epic-validate" ng-controller="epicValidateCtrl">
+        <div class="error-msg" ng-class="{'show': submitted && showError}">
+            <div ng-show="epicValidateForm.security_key.$invalid">{{40254|translate}}</div>
+            <div ng-show="error">{{40251|translate}}</div>
+            <i class="remove icon" ng-click="showError=false"></i>
+        </div>
+        <div ng-class="{'error': submitted && epicValidateForm.security_key.$invalid}" class="field">
+            <div class="ui left icon input">
+                <i class="lock icon"></i>
+                <input name="security_key" ng-model="security_key" type="text" placeholder="{{40252|translate}}" required>
+            </div>
+        </div>
+        <div class="field">
+            <button ng-disabled="epicValidateForm.security_key.$invalid" class="action ui fluid large red submit button">{{40253|translate}}</button>
+        </div>
+    </form>
+</div>

@@ -113,6 +113,11 @@ angular
             40221: '创建教室中...',
             40222: '创建教室成功！',
             40223: '进入教室',
+            40250: '该赛场设有密码',
+            40251: '密码错误',
+            40252: '请输入赛场密码',
+            40253: '确定',
+            40254: '密码不能为空',
             40404: '未登录',
             70006: '该用户无权限加入此队伍',
             70008: '该用户已经属于一个队伍，不能再被加入队伍'
@@ -438,6 +443,12 @@ angular
         return {
             restrict: "E",
             templateUrl: 'template/countdown.html'
+        };
+    })
+    .directive('epicvalidate', function() {
+        return {
+            restrict: "E",
+            templateUrl: 'template/epic_validate.html'
         };
     })
     .directive('inputEnter', ['$parse', function($parse) {
@@ -773,6 +784,32 @@ angular
         $scope.teamRoom = null;
         $scope.updateTeamRoom = function(teamRoom) {
             $scope.teamRoom = teamRoom;
+        };
+
+        function getFromCookie(cookie, regex) {
+            cookie = cookie && cookie.match(regex);
+            cookie = cookie ? cookie[1] : null;
+            return cookie;
+        }
+        var epic_validation_regex = /(?:^|;) *epic_valid=([^;]*)/;
+        var epic_valid = (getFromCookie(document.cookie, epic_validation_regex) || '').split('|');
+        $scope.validateEpic = function(epic_id, security_key, callback) {
+            $http.post(cmpt + '/game/epic/validation', {
+                epic_id: epic_id,
+                security_key: security_key
+            }).success(function(json) {
+                if (json.isSuccess && json.result) {
+                    epic_valid.push(epic_id);
+                    document.cookie = 'epic_valid=' + epic_valid.join('|') + ';path=/';
+                }
+                callback(json.result);
+            });
+        };
+        $scope.epicIsValid = function(epic) {
+            if (!epic.need_security) {
+                return true;
+            }
+            return epic_valid.indexOf(epic.epic_id) > -1;
         };
     }])
     .controller('gameteamCtrl', ['$scope', '$http', function($scope, $http) {
@@ -1346,6 +1383,25 @@ angular
             }
             team.selectedMember = member;
         };
+    }])
+    .controller('epicValidateCtrl', ['$scope', '$http', function($scope, $http) {
+        $scope.showError = false;
+        $scope.error = null;
+        $scope.submit = function(valid) {
+            this.submitted = true;
+            if (!valid) {
+                return;
+            }
+            this.validateEpic(this.ms_epic.epic_id, this.security_key, function(json) {
+                var valid = json.isSuccess && json.result;
+                $scope.showError = !valid;
+                $scope.error = !valid;
+            });
+        };
+        $scope.$watch('epicValidateForm.$valid', function(valid) {
+            $scope.showError = !valid;
+            $scope.error = null;
+        });
     }])
     .filter('trusted', ['$sce', function($sce) {
         return function(text) {

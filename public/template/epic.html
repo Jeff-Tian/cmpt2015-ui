@@ -1,8 +1,13 @@
-<epicinfo></epicinfo>
-<gametraining></gametraining>
-<teammember></teammember>
-<upsell></upsell>
-<teamjoin></teamjoin>
-<additional></additional>
-<countdown></countdown>
-<gameroom></gameroom>
+<div ng-if="ms_epic && !epicIsValid(ms_epic)">
+	<epicvalidate></epicvalidate>
+</div>
+<div ng-if="ms_epic && epicIsValid(ms_epic)">
+	<epicinfo></epicinfo>
+	<gametraining></gametraining>
+	<teammember></teammember>
+	<upsell></upsell>
+	<teamjoin></teamjoin>
+	<additional></additional>
+	<countdown></countdown>
+	<gameroom></gameroom>
+</div>

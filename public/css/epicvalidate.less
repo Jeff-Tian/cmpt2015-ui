@@ -1,0 +1,56 @@
+.epic-validate {
+    width: 300px;
+    margin: 0 auto;
+    padding-top: 30px;
+    .epic-validate-title {
+        color: #FF0A35;
+        font-size: 1.6em;
+        text-align: center;
+        border-bottom: 1px solid #FF0A35;
+        line-height: 2em;
+    }
+    .form {
+        .field {
+            margin-bottom: 1.5em;
+            i.icon.lock {
+                font-size: 1.6em;
+                width: 1.6em;
+            }
+        }
+        .error-msg {
+            position: relative;
+            height: 28px;
+            overflow: hidden;
+            margin: 5px auto;
+            padding-left: 10px;
+            line-height: 28px;
+            font-size: 13px;
+            background-color: #CF0000;
+            color: #FFF;
+            opacity: 0;
+            .border-radius(3px);
+            .transition(all 300ms ease-out);
+            &.show {
+                opacity: 1;
+            }
+            i.remove.icon {
+                position: absolute;
+                top: 6px;
+                right: 6px;
+                color: #BF2C1E;
+                background-color: #FFF;
+                width: 18px;
+                height: 18px;
+                line-height: 18px;
+                .border-radius(50%);
+                text-align: center;
+                cursor: pointer;
+                padding: 0;
+                margin: 0;
+                &:hover {
+                    background-color: #db8880;
+                }
+            }
+        }
+    }
+}

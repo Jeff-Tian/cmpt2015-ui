@@ -1,50 +1,61 @@
 .row.ranking-row {
     padding: 0px!important;
 }
+
 .ranking-cell {
     height: 47px;
     padding-top: 14px;
     padding-bottom: 14px;
     border: solid 1px #dbdcdc;
 }
+
 .ranking-options {
     background-color: #2e363d;
     color: white;
     cursor: pointer;
 }
+
 .ranking-options.ranking-active {
     background-color: #ff3c42!important;
 }
+
 .ranking-options:hover {
     background-color: #cc181e;
 }
+
 .ranking-rank {
     background-color: #ff3c42;
     color: white;
 }
+
 .ranking-name,
 .ranking-score {
     color: #2e363d;
     background-color: white;
 }
+
 .ranking-name {
     text-align: left!important;
     padding-left: 10em!important;
 }
+
 .ranking-detail:nth-child(2) .ranking-name {
     text-align: center!important;
     padding-left: 1em!important;
 }
+
 .ranking-detail:nth-child(2) .ranking-name,
 .ranking-detail:nth-child(2) .ranking-score {
     color: white;
     background-color: #2e363d;
 }
+
 .ranking-detail:nth-child(5) .ranking-name,
 .ranking-detail:nth-child(4) .ranking-name,
 .ranking-detail:nth-child(3) .ranking-name {
     padding-left: 7em!important;
 }
+
 .ranking-detail:nth-child(5) .ranking-name:before,
 .ranking-detail:nth-child(4) .ranking-name:before,
 .ranking-detail:nth-child(3) .ranking-name:before {
@@ -54,12 +65,23 @@
     vertical-align: middle;
     padding-right: 1em;
 }
+
 .ranking-detail:nth-child(3) .ranking-name:before {
     background-image: url("../img/ranking/r1.png@{version}");
 }
+
 .ranking-detail:nth-child(4) .ranking-name:before {
     background-image: url("../img/ranking/r2.png@{version}");
 }
+
 .ranking-detail:nth-child(5) .ranking-name:before {
     background-image: url("../img/ranking/r3.png@{version}");
+}
+
+.hcd {
+    .ranking-options.ranking-active,
+    .ranking-rank,
+    .ranking-options:hover {
+        background-color: #845497!important;
+    }
 }

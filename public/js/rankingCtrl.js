@@ -65,7 +65,7 @@
         return retArray;
     };
 
-    exports.rankingCtrl = function($scope, service) {
+    exports.rankingCtrl = function($scope) {
         $scope.option = OPTION_INIT;
         $scope.details = refreshDetails($scope.option);
         $scope.rankChange = function(option) {
@@ -73,5 +73,5 @@
             $scope.details = refreshDetails(option);
         };
     };
-    exports.rankingCtrl.$inject = ['$scope', 'service'];
+    exports.rankingCtrl.$inject = ['$scope'];
 })(angular.cmpt = angular.cmpt || {});

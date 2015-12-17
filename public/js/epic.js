@@ -351,7 +351,7 @@ angular
                                         }
                                     },
                                     emphasis: {
-                                        color: '#ff3c42',
+                                        color: $scope.site == 'hcd' ? '#6e3d82' : '#ff3c42',
                                         label: {
                                             show: true,
                                             textStyle: {
@@ -384,7 +384,7 @@ angular
                 klass: '@'
             },
             link: function(scope, element, attrs) {
-                var $pop = $('<div class="pop"></div>').addClass(scope.klass).appendTo('body');
+                var $pop = $('<div class="pop ' + scope.$parent.site + '"></div>').addClass(scope.klass).appendTo('body');
                 var dom = $(scope.content);
                 dom.each(function(i, dom) {
                     $compile(dom)(scope.$parent);
@@ -522,7 +522,7 @@ angular
             if ($scope.site == 'bplus') {
                 return '/zh/youth';
             }
-            return '/zh/competion';
+            return '/cn/competion';
         })();
         $scope.wechatName = $scope.site == 'bplus' ? 40040 : 40041;
         $scope.portalLink = $scope.site == 'bplus' ? 40042 : 40043;

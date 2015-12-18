@@ -3,9 +3,9 @@
 </div>
 <div ng-if="ms_epic && epicIsValid(ms_epic)">
 	<epicinfo></epicinfo>
-	<gametraining></gametraining>
+	<gametraining ng-if="site!='hcd'"></gametraining>
 	<teammember></teammember>
-	<upsell></upsell>
+	<upsell ng-if="site!='hcd'"></upsell>
 	<teamjoin></teamjoin>
 	<additional></additional>
 	<countdown></countdown>

@@ -2,7 +2,7 @@
 	<div ng-repeat="series in all_series">
 		<div class="series_banner">
 			<a ng-href="/{{lang}}{{cmpt}}/{{series.series_type}}?series_id={{series.series_id}}">
-				<img ng-src="{{cmpt}}/img/banner_{{series.series_type}}_{{series.series_id}}.png" />
+				<img ng-src="{{series.logo || (cmpt + '/img/banner_' + series.series_type + '_' + site +'.png')}}" />
 			</a>
 		</div>
 		<div class="available-lists">

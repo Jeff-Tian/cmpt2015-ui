@@ -30,6 +30,10 @@
                                     color: @color-white;
                                 }
                             }
+                            .dimmer .content p {
+                                max-height: 1.5em;
+                                margin-bottom: 0;
+                            }
                         }
                         .season-card:last-child,
                         .season-card:first-child {
@@ -111,7 +115,7 @@
     }
 }
 
-.hcdlearning {
+.hcd {
     .game-ui {
         .season-content {
             .season-card {
@@ -123,13 +127,11 @@
                 }
             }
             .available {
-                .season-card.season-card.available {
-                    .season-name {
-                        background-color: @color-hcdlearning;
-                    }
-                    .dimmer {
-                        background-color: @color-hcdlearning-dimmer;
-                    }
+                .season-name {
+                    background-color: @color-hcd;
+                }
+                .dimmer {
+                    background-color: @color-hcd-dimmer;
                 }
             }
         }

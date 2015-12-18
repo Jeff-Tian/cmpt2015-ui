@@ -1,7 +1,8 @@
 <div ng-controller="gameteamCtrl" class="teammember cloak" ng-show="share_team">
 	<div class="body list">
 		<div class="instruction" ng-if="share_team && ms_epic">
-			{{40078|translate}}<b>{{share_team.name}}</b>，{{40079|translate}}<b>{{(ms_epic.description||40081)|translate}}</b>
+			{{40078|translate}}<b>{{share_team.name}}</b>，{{40079|translate}}
+			<b><span ng-bind-html="ms_epic.description|trusted"></span></b>
 		</div>
 		<div class="name">
 			<label>{{share_team.name}}</label>

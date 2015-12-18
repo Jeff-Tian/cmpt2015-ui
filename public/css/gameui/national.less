@@ -27,9 +27,6 @@
                         font-size: 1.3em;
                     }
                 }
-                i.icon {
-                    color: #ff3c42;
-                }
             }
             .card:last-child,
             .card:first-child {
@@ -50,6 +47,9 @@
                     .dimmer {
                         background-color: @color-grey-dimmer;
                     }
+                    i.icon {
+                        color: @color-grey-dimmer;
+                    }
                     &.available {
                         .national-name {
                             background-color: @color-brand;
@@ -57,6 +57,9 @@
                         .dimmer {
                             background-color: @color-brand-dimmer;
                         }
+                    i.icon {
+                        color: #ff3c42;
+                    }
                     }
                 }
             }
@@ -64,7 +67,7 @@
     }
 }
 
-.hcdlearning {
+.hcd {
     .game-ui {
         .national-content {
             .national-cards {
@@ -75,12 +78,18 @@
                     .dimmer {
                         background-color: @color-grey-dimmer;
                     }
+                    i.icon {
+                        color: @color-grey-dimmer;
+                    }
                     &.available {
                         .national-name {
-                            background-color: @color-hcdlearning;
+                            background-color: @color-hcd;
                         }
                         .dimmer {
-                            background-color: @color-hcdlearning-dimmer;
+                            background-color: @color-hcd-dimmer;
+                        }
+                        i.icon {
+                            color: @color-hcd;
                         }
                     }
                 }

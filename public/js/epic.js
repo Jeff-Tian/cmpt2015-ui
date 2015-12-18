@@ -1360,7 +1360,18 @@ angular
             return teams;
         }
         $scope.teamsInRoom = [];
-        $scope.rounds = [0, 1, 2, 3];
+        $scope.rounds = [];
+        $scope.$watch('ms_epic.round', function(round) {
+            if (!round) {
+                $scope.rounds = [0, 1, 2, 3];
+                return;
+            }
+            var rounds = [];
+            for (var i = 0; i < round; i++) {
+                rounds.push(i);
+            }
+            $scope.rounds = rounds;
+        });
         $scope.$watch($scope.isSharePage ? 'share_team.team_id' : 'ms_team.team_id', loadTeam);
         $scope.selectedRound = -1;
         $scope.currentRound = -1;

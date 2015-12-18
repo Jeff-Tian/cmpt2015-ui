@@ -1,12 +1,16 @@
 <div ng-controller="rankingCtrl" style="padding-top:0px">
     <div class="ui equal width center aligned padded grid">
-        <div class="row ranking-row">
-            <div ng-class="{'ranking-active':option===$index}" class="column ranking-options b-ranking-cell" ng-click="rankChange($index)" ng-repeat="titleOption in titleOptions" ng-bind-template="{{titleOption}}"> </div>
-        </div>
-        <div class="row ranking-row ranking-detail" ng-repeat="detail in details">
-            <div class="two wide column ranking-rank ranking-cell" ng-bind-template="{{detail.rank}}">
+        <div class="row ranking-row ranking-title-container">
+            <div ng-class="{'ranking-active':option===$index}" class="column ranking-options ranking-cell" ng-click="rankChange($index)" ng-repeat="titleOption in titleOptions">{{titleOption[0]}} - {{subTitleOptions[subOption[$index]]}}
+                <div ng-show="option===$index" class="ranking-subtitle-container">
+                    <div ng-class="{'ranking-suboption-active':subOption[option]===$index}" class="ranking-subtitle-item" ng-click="subTileChange($index)" ng-repeat="subTitleOption in subTitleOptions" ng-bind-template="{{subTitleOption}}"></div>
+                </div>
             </div>
-            <div class="nine wide column ranking-name ranking-cell" ng-bind-template="{{detail.name}}">
+        </div>
+        <div ng-class="'ranking-detail'+$index" class="row ranking-row" ng-repeat="detail in details">
+            <div class="four wide column ranking-rank ranking-cell" ng-bind-template="{{detail.rank}}">
+            </div>
+            <div class="seven wide column ranking-name ranking-cell" ng-bind-template="{{detail.name}}">
             </div>
             <div class="five wide column ranking-score ranking-cell" ng-bind-template="{{detail.score}}">
             </div>

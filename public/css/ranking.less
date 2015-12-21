@@ -1,6 +1,7 @@
 .ranking-title-container {
     z-index: 4;
 }
+
 .ranking-subtitle-container {
     position: absolute;
     width: 100%;
@@ -9,6 +10,7 @@
     background-color: #2e363d;
     display: none;
 }
+
 .row.ranking-row {
     padding: 0px!important;
 }
@@ -27,6 +29,7 @@
     text-align: left!important;
     padding-left: 40px!important;
 }
+
 .ranking-options:before {
     content: "\00a0\00a0\00a0\00a0";
     position: absolute;
@@ -36,16 +39,22 @@
     height: 12px;
     top: 18px;
     background-repeat: no-repeat;
-    background-image: url("/img/ranking/extend.png");
-    transform:rotate(180deg);
-    -ms-transform:rotate(180deg); /* IE 9 */
-    -moz-transform:rotate(180deg); /* Firefox */
-    -webkit-transform:rotate(180deg); /* Safari and Chrome */
-    -o-transform:rotate(180deg); /* Opera */
+    background-image: url("../img/ranking/extend.png@{version}");
+    transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    /* IE 9 */
+    -moz-transform: rotate(180deg);
+    /* Firefox */
+    -webkit-transform: rotate(180deg);
+    /* Safari and Chrome */
+    -o-transform: rotate(180deg);
+    /* Opera */
 }
+
 .ranking-active {
     background-color: #ff3c42!important;
 }
+
 .ranking-subtitle-item {
     height: 47px;
     padding-top: 14px;
@@ -54,9 +63,11 @@
     padding-left: 40px!important;
     position: relative;
 }
+
 .ranking-subtitle-item:hover {
     background-color: #cc181e!important;
 }
+
 .ranking-suboption-active:before {
     content: "\00a0\00a0\00a0\00a0";
     position: absolute;
@@ -66,19 +77,22 @@
     height: 12px;
     top: 18px;
     background-repeat: no-repeat;
-    background-image: url("/img/ranking/check.png");
+    background-image: url("../img/ranking/check.png@{version}");
 }
+
 .ranking-options:hover {
     background-color: #cc181e;
     .ranking-subtitle-container {
         display: block;
     }
 }
+
 .ranking-score,
 .ranking-rank {
     background-color: #fafafa;
     color: #2e363d;
 }
+
 .ranking-name {
     color: #2e363d;
     background-color: white;
@@ -88,16 +102,19 @@
     text-align: left!important;
     padding-left: 7em!important;
 }
+
 .ranking-detail0 .ranking-name {
     text-align: center!important;
     padding-left: 1em!important;
 }
+
 .ranking-detail0 .ranking-rank,
 .ranking-detail0 .ranking-name,
 .ranking-detail0 .ranking-score {
     color: white;
     background-color: #ff3c42;
 }
+
 .ranking-detail1 .ranking-rank:before,
 .ranking-detail2 .ranking-rank:before,
 .ranking-detail3 .ranking-rank:before {
@@ -108,20 +125,27 @@
     position: absolute;
     left: 40px;
 }
+
 .ranking-detail1 .ranking-rank:before {
-    background-image: url("/img/ranking/r1.png");
+    background-image: url("../img/ranking/r1.png@{version}");
 }
+
 .ranking-detail2 .ranking-rank:before {
-    background-image: url("/img/ranking/r2.png");
+    background-image: url("../img/ranking/r2.png@{version}");
 }
+
 .ranking-detail3 .ranking-rank:before {
-    background-image: url("/img/ranking/r3.png");
+    background-image: url("../img/ranking/r3.png@{version}");
 }
 
 .hcd {
     .ranking-options.ranking-active,
-    .ranking-rank,
-    .ranking-options:hover {
+    .ranking-options:hover,
+    .ranking-subtitle-item:hover,
+    .ranking-detail0 .ranking-rank,
+    .ranking-detail0 .ranking-name,
+    .ranking-detail0 .ranking-score {
         background-color: #845497!important;
+        color: #FFF;
     }
 }

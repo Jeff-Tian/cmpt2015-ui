@@ -647,9 +647,7 @@ angular
                         });
                         if (index > -1) {
                             $scope.ms_series.epics = $scope.ms_series.epics.slice(index + 1, $scope.ms_series.epics.length)
-                                .concat($scope.ms_series.epics.slice(0, index + 1).sort(function() {
-                                    return 1;
-                                }));
+                                .concat($scope.ms_series.epics.slice(0, index + 1).reverse());
                         }
                     }
                 }

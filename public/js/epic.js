@@ -1420,6 +1420,9 @@ angular
         $scope.epics = {};
         $http.get(cmpt + '/rank/my/').success(function(json) {
             if (json.isSuccess) {
+                if (!json.result) {
+                    json.result = [];
+                }
                 json.result.forEach(function(series) {
                     if (series.team) {
                         $scope.fixTeam(series.team);
@@ -1431,7 +1434,7 @@ angular
                         });
                     }
                 });
-                $scope.records = json.result || [];
+                $scope.records = json.result;
             }
         });
     }])

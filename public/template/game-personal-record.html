@@ -2,7 +2,7 @@
     <div ng-if="records.length==0" class="message">
         {{40259|translate}}
     </div>
-    <div class="ui grid" ng-repeat="series in records" ng-if="series.epics.length > 0">
+    <div ng-repeat="series in records" ng-if="series.epics.length > 0">
         <div class="ui card record-card">
             <div class="content record-name">
                 <div class="epic_header">

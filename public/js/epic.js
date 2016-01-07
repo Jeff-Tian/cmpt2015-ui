@@ -32,7 +32,7 @@ angular
             40022: '队伍名称：',
             40023: '比赛时间：',
             40024: '报名时间：',
-            40025: '我的参赛信息',
+            40025: '我的游戏首页',
             40026: '我的比赛记录',
             40027: '我的比赛排名',
             40030: '比赛已结束，结束时间',
@@ -118,6 +118,11 @@ angular
             40252: '请输入赛场密码',
             40253: '确定',
             40254: '密码不能为空',
+            40255: '结果详细信息',
+            40256: '获取参赛报告',
+            40257: '获取获奖证书',
+            40258: '获取参赛证书',
+            40259: '您还没有完成任何比赛',
             40404: '未登录',
             70006: '该用户无权限加入此队伍',
             70008: '该用户已经属于一个队伍，不能再被加入队伍'
@@ -287,7 +292,6 @@ angular
             templateUrl: 'template/game-ranking.html'
         };
     })
-    .controller('rankingCtrl', angular.cmpt.rankingCtrl)
     .directive('gameroom', function() {
         return {
             restrict: "E",
@@ -1412,6 +1416,29 @@ angular
             $scope.error = null;
         });
     }])
+    .controller('personalRecordCtrl', ['$scope', '$http', function($scope, $http) {
+        $scope.epics = {};
+        $http.get(cmpt + '/rank/my/').success(function(json) {
+            if (json.isSuccess) {
+                if (!json.result) {
+                    json.result = [];
+                }
+                json.result.forEach(function(series) {
+                    if (series.team) {
+                        $scope.fixTeam(series.team);
+                    }
+                    if (series.epics) {
+                        series.epics.forEach(function(epic) {
+                            $scope.fixEpic(epic);
+                            $scope.fixTeam(epic.team);
+                        });
+                    }
+                });
+                $scope.records = json.result;
+            }
+        });
+    }])
+    .controller('rankingCtrl', angular.cmpt.rankingCtrl)
     .filter('trusted', ['$sce', function($sce) {
         return function(text) {
             return $sce.trustAsHtml(text);

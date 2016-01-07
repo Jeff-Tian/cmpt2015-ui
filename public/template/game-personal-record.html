@@ -3,54 +3,6 @@
         {{40259|translate}}
     </div>
     <div ng-repeat="series in records" ng-if="series.epics.length > 0">
-        <div class="ui card record-card">
-            <div class="content record-name">
-                <div class="epic_header">
-                    <img ng-src="/img/icon/{{series.type}}.png">
-                    <a target="_blank" class="title" ng-href="/{{lang}}{{cmpt}}/{{series.type}}?series_id={{series.series_id}}">{{series.title}}</a>
-                    <!--<a class="ui button" ng-bind="40257|translate" ng-if="series.prize"></a>-->
-                </div>
-            </div>
-            <div class="info-content ui grid" ng-if="series.prize" ng-click="series.team.expanded=!series.team.expanded">
-                <div class="three wide column">
-                    <h2 ng-if="series.prize">第{{series.prize.rank}}名 <!--{{series.prize.title}}--></h2>
-                </div>
-                <div class="five wide column">
-                    <h5>{{series.team.name}}</h5>
-                </div>
-                <div class="eight wide column avatars" ng-class="{invisible:series.team.expanded}">
-                    <div class="ui five column grid list">
-                        <div class="img column" ng-repeat="member in series.team.members">
-                            <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="list" ng-if="series.prize" ng-show="series.team.expanded">
-                <div class="ui items">
-                    <div class="item ui grid images-expanded">
-                        <div class="images expanded">
-                            <div class="ui five column grid item">
-                                <div class="img column" ng-repeat="member in series.team.members">
-                                    <div class="card">
-                                        <div class="img">
-                                            <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
-                                        </div>
-                                        <div class="title">
-                                            {{member.show_name}}
-                                        </div>
-                                        <div class="description">
-                                            <div class="university">{{member.university || '&nbsp;'}}</div>
-                                            <div class="major">{{member.major || '&nbsp;'}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="ui card record-card" ng-repeat="epic in series.epics">
             <div class="content record-name">
                 <div class="epic_header">

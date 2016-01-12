@@ -2,65 +2,42 @@
     if (window.ModuleTrack) {
         var moduleTrack = new window.ModuleTrack('ranking');
     }
+
     var DETAILS_RANKING_TITLE = [
         ["名次", "", "总得分"],
         ["名次", "", "平均排名"],
         ["名次", "", "平均得分"]
     ];
-    var RANK_AVERAGE_RANK = [
-        ["1st", "浙江财经大学", "2.25"],
-        ["2nd", "中山大学", "2.50"],
-        ["3rd", "东北财经大学", "2.81"],
-        ["4th", "西南财经大学", "2.90"],
-        ["5th", "复旦大学", "2.93"],
-        ["6th", "山东财经大学", "3.13"],
-        ["7th", "广东财经大学", "3.15"],
-        ["8th", "同济大学", "3.32"],
-        ["9th", "吉林大学", "3.41"],
-        ["10th", "对外经济贸易大学", "3.41"]
-    ];
-    var RANK_AVERAGE_SCORE = [
-        ["1st", "西南财经大学", "56.59"],
-        ["2nd", "复旦大学", "51.40"],
-        ["3rd", "中山大学", "48.89"],
-        ["4th", "东北财经大学", "47.45"],
-        ["5th", "对外经济贸易大学", "44.42"],
-        ["6th", "长春理工大学", "42.10"],
-        ["7th", "吉林大学", "41.64"],
-        ["8th", "同济大学", "39.96"],
-        ["9th", "山东财经大学", "39.37"],
-        ["10th", "浙江财经大学", "36.70"]
-    ];
-    var RANK_TOTAL_SCORE = [
-        ["1st", "佟文钊（中国人民大学）", "171.41"],
-        ["1st", "李朋浩（中国人民大学）", "171.41"],
-        ["1st", "林鹤仪（中国人民大学）", "171.41"],
-        ["1st", "道日那（中国人民大学）", "171.41"],
-        ["1st", "王梓麒（中国人民大学）", "171.41"],
-        ["6th", "徐子云（复旦大学）", "145.43"],
-        ["6th", "项昊天（复旦大学）", "145.43"],
-        ["6th", "林子傑（复旦大学）", "145.43"],
-        ["6th", "张文萱（复旦大学）", "145.43"],
-        ["6th", "金旭磊（复旦大学）", "145.43"]
-    ];
-    var SCHOOL_OPTIONS = [RANK_AVERAGE_RANK, RANK_AVERAGE_SCORE, RANK_TOTAL_SCORE];
-    var PERSONAL_OPTIONS = [RANK_AVERAGE_SCORE, RANK_AVERAGE_SCORE, RANK_AVERAGE_SCORE];
-    var TEAM_OPTIONS = [RANK_TOTAL_SCORE, RANK_TOTAL_SCORE, RANK_TOTAL_SCORE];
-    var DETAILS_OPTIONS = [SCHOOL_OPTIONS, TEAM_OPTIONS, PERSONAL_OPTIONS];
+    var DETAILS_OPTIONS = [[], [], []];
+
     var OPTION_INIT = 0;
     var SUB_OPTION_INIT = [0, 0, 0];
+    var NUMBER_SUFFIX = ["st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th"];
 
     var TITLE_OPTIONS = [
         ["学校", "排行榜"],
         ["战队", "排行榜"],
         ["个人", "排行榜"]
     ];
-    var SUB_TITLE_OPTIONS = ["总得分榜", "排名榜", "平均得分榜"];
+    var SUB_TITLE_OPTIONS = [
+        "总得分榜",
+        "平均排名榜",
+        "平均得分榜"
+    ];
 
-    var createRankingTitleArray = function(option) {
-        var title = DETAILS_RANKING_TITLE[option];
+    var TYPE_AVERAGE_RANK = "average-rank";
+    var TYPE_AVERAGE_SCORE = "average-score";
+    var TYPE_TOTAL_SCORE = "total-score";
+    var TYPE_ORDER = [TYPE_TOTAL_SCORE, TYPE_AVERAGE_RANK, TYPE_AVERAGE_SCORE];
+    var TARGET_SCHOOL = "school";
+    var TARGET_TEAM = "team";
+    var TARGET_PERSON = "user";
+    var TARGET_ORDER = [TARGET_SCHOOL, TARGET_TEAM, TARGET_PERSON];
+
+    var createRankingTitleArray = function(option, suboption) {
+        var title = DETAILS_RANKING_TITLE[suboption];
         return [title[0], TITLE_OPTIONS[option][0], title[2]];
-    }
+    };
 
     var createSingleDetailObject = function(sourceAry) {
         return {
@@ -72,7 +49,7 @@
 
     var refreshDetails = function(option, subOption) {
         var retArray = [];
-        retArray.push(createSingleDetailObject(createRankingTitleArray(option)));
+        retArray.push(createSingleDetailObject(createRankingTitleArray(option, subOption)));
         var resultList = DETAILS_OPTIONS[option][subOption];
         resultList.forEach(function(value) {
             retArray.push(createSingleDetailObject(value));
@@ -81,12 +58,75 @@
         return retArray;
     };
 
-    exports.rankingCtrl = function($scope) {
-        $scope.option = OPTION_INIT;
-        $scope.subOption = SUB_OPTION_INIT;
-        $scope.details = refreshDetails($scope.option, $scope.subOption[$scope.option]);
-        $scope.titleOptions = TITLE_OPTIONS;
-        $scope.subTitleOptions = SUB_TITLE_OPTIONS;
+    exports.rankingCtrl = function($scope, $http, $q) {
+        var urls = [
+            "service-proxy/info/ranking/total-score/school/10",
+            "service-proxy/info/ranking/average-score/school/10",
+            "service-proxy/info/ranking/average-rank/school/10",
+            "service-proxy/info/ranking/total-score/team/10",
+            "service-proxy/info/ranking/average-score/team/10",
+            "service-proxy/info/ranking/average-rank/team/10",
+            "service-proxy/info/ranking/total-score/user/10",
+            "service-proxy/info/ranking/average-score/user/10",
+            "service-proxy/info/ranking/average-rank/user/10"
+        ];
+        var mappingNameRules = function(value, mappingObject) {
+            var retValue = "";
+            switch (value) {
+                case TARGET_SCHOOL:
+                    retValue = mappingObject.name;
+                    break;
+                case TARGET_TEAM:
+                    retValue = mappingObject.name_s;
+                    break;
+                case TARGET_PERSON:
+                    retValue = mappingObject.real_name_s;
+                    break;
+            }
+            return retValue;
+        };
+        var mappingScoreRules = function(value, mappingObject) {
+            var retValue = "";
+            switch (value) {
+                case TYPE_AVERAGE_RANK:
+                    retValue = mappingObject.average;
+                    break;
+                case TYPE_AVERAGE_SCORE:
+                    retValue = mappingObject.average;
+                    break;
+                case TYPE_TOTAL_SCORE:
+                    retValue = mappingObject.total;
+                    break;
+            }
+            return parseFloat(retValue).toFixed(2);
+        };
+        var urlPromises = urls.map(function(value, index) {
+            var dfd = $q.defer();
+            $http.get(value).success(function(data) {
+                var dataArray = data.data;
+                if (dataArray && dataArray.length > 0) {
+                    dataArray = dataArray.map(function(value, index) {
+                        return [
+                            (index + 1) + NUMBER_SUFFIX[index],
+                            mappingNameRules(data.target, value), 
+                            mappingScoreRules(data.type, value)
+                        ];
+                    })
+                }
+                DETAILS_OPTIONS[TARGET_ORDER.indexOf(data.target)][TYPE_ORDER.indexOf(data.type)] = dataArray;
+                dfd.resolve(dataArray);
+            });
+            return dfd.promise;
+        });
+        $q.all(urlPromises).then(function() {
+            $scope.option = OPTION_INIT;
+            $scope.subOption = SUB_OPTION_INIT;
+            $scope.details = refreshDetails($scope.option, $scope.subOption[$scope.option]);
+            $scope.titleOptions = TITLE_OPTIONS;
+            $scope.subTitleOptions = SUB_TITLE_OPTIONS;
+        }, function (reason) {
+            dfd.reject(reason);
+        });
         $scope.rankChange = function(option) {
             $scope.option = option;
             $scope.details = refreshDetails($scope.option, $scope.subOption[option]);
@@ -96,5 +136,5 @@
             $scope.details = refreshDetails($scope.option, option);
         };
     };
-    exports.rankingCtrl.$inject = ['$scope'];
+    exports.rankingCtrl.$inject = ['$scope', '$http', '$q'];
 })(angular.cmpt = angular.cmpt || {});

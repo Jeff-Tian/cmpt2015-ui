@@ -60,15 +60,15 @@
 
     exports.rankingCtrl = function($scope, $http, $q) {
         var urls = [
-            "service-proxy/info/ranking/total-score/school/10",
-            "service-proxy/info/ranking/average-score/school/10",
-            "service-proxy/info/ranking/average-rank/school/10",
-            "service-proxy/info/ranking/total-score/team/10",
-            "service-proxy/info/ranking/average-score/team/10",
-            "service-proxy/info/ranking/average-rank/team/10",
-            "service-proxy/info/ranking/total-score/user/10",
-            "service-proxy/info/ranking/average-score/user/10",
-            "service-proxy/info/ranking/average-rank/user/10"
+            "/service-proxy/info/ranking/total-score/school/10",
+            "/service-proxy/info/ranking/average-score/school/10",
+            "/service-proxy/info/ranking/average-rank/school/10",
+            "/service-proxy/info/ranking/total-score/team/10",
+            "/service-proxy/info/ranking/average-score/team/10",
+            "/service-proxy/info/ranking/average-rank/team/10",
+            "/service-proxy/info/ranking/total-score/user/10",
+            "/service-proxy/info/ranking/average-score/user/10",
+            "/service-proxy/info/ranking/average-rank/user/10"
         ];
         var mappingNameRules = function(value, mappingObject) {
             var retValue = "";

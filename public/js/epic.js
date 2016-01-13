@@ -1551,6 +1551,7 @@ angular
     }])
     .controller('personalRecordCtrl', ['$scope', '$http', function($scope, $http) {
         $scope.epics = {};
+        var records = [];
         $http.get(cmpt + '/rank/my/').success(function(json) {
             if (json.isSuccess) {
                 if (!json.result) {
@@ -1564,10 +1565,15 @@ angular
                         series.epics.forEach(function(epic) {
                             $scope.fixEpic(epic);
                             $scope.fixTeam(epic.team);
+                            epic.seriesType = series.type;
+                            records.push(epic);
                         });
                     }
                 });
-                $scope.records = json.result;
+                records.sort(function(a, b) {
+                    return b.epic_game_from - a.epic_game_from;
+                });
+                $scope.records = records;
             }
         });
     }])

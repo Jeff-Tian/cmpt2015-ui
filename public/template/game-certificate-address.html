@@ -1,0 +1,68 @@
+<div class="certification certification-address" ng-controller="gameCertAddressCtrl">
+    <div class="panel">
+        <div class="title">证书寄送地址</div>
+        <form name="form" novalidate ng-submit="apply(form.$valid)" class="ui form form-forgetpass">
+            <div class="field"></div>
+            <div class="required field" ng-class="{error:form.name.$invalid}">
+                <label>收件人</label>
+                <input type="text" name="name" ng-model="address.name" required>
+            </div>
+            <div class="required field" ng-class="{error:form.address.$invalid}">
+                <label>地址</label>
+                <input type="text" name="address" ng-model="address.address" required>
+            </div>
+            <div class="required field" ng-class="{error:form.phone.$invalid}">
+                <label>电话</label>
+                <input type="text" name="phone" ng-model="address.phone" required>
+            </div>
+            <div class="field" ng-class="{error:form.note.$invalid}">
+                <label>备注</label>
+                <textarea rows="3" name="note" ng-model="address.note"></textarea>
+            </div>
+            <div class="field">
+                <label>证书种类确认</label>
+            </div>
+            <div class="field" ng-class="{error: !info.english && !info.chinese}">
+                <div class="ui checkbox" checkbox model="info.chinese">
+                    <input type="checkbox" ng-disabled="!rights.chinese.count" class="hidden">
+                    <label>中文版证书 (
+                        <span ng-if="!rights.chinese.count">尚未购买</span>
+                        <span ng-if="rights.chinese.count">还剩{{rights.chinese.count}}次寄送机会</span> )
+                    </label>
+                </div>
+            </div>
+            <div class="field" ng-class="{error: !info.english && !info.chinese}">
+                <div class="ui checkbox" checkbox model="info.english">
+                    <input type="checkbox" ng-disabled="!rights.english.count" class="hidden">
+                    <label>英文版证书 (
+                        <span ng-if="!rights.english.count">尚未购买</span>
+                        <span ng-if="rights.english.count">还剩{{rights.english.count}}次寄送机会</span> )
+                    </label>
+                </div>
+            </div>
+            <div class="actions right">
+                <button class="ui button" ng-disabled="form.$invalid || (!info.english && !info.chinese)" ng-click="submit()">确认申请</button>
+                <div class="tip">点击确认您将使用一次纸质证书寄送机会</div>
+            </div>
+        </form>
+        <modal model="modal.noRight">
+            <div class="content">
+                <i class="remove icon" ng-click="closeModal()"></i>
+                <div class="message">抱歉, 您尚未购买纸质证书邮寄服务</div>
+                <div class="actions">
+                    <div class="label">权威认证, 助你求职升学</div>
+                    <button class="ui button">立即购买</button>
+                </div>
+            </div>
+        </modal>
+        <modal model="modal.applied">
+            <div class="content">
+                <i class="remove icon" ng-click="closeModal()"></i>
+                <div class="message"><i class="icon success"></i>申请成功</div>
+                <div class="actions">
+                    <div class="label">分析报告将会于7个工作日产出。若长时间未收到，您可以拨打客服电话4009200153查询。</div>
+                </div>
+            </div>
+        </modal>
+    </div>
+</div>

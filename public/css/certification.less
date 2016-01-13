@@ -1,0 +1,151 @@
+.certification {
+    .banner {
+        width: 100%;
+        margin-bottom: 2em;
+    }
+    .panel {
+        position: relative;
+        .title {
+            line-height: 50px;
+            padding-left: 80px;
+            background-image: url("../img/icon/icon-certification.png@{version}");
+            background-repeat: no-repeat;
+            background-position: 25px center;
+            background-color: #FFF;
+            font-size: 1.1em;
+            font-family: "Microsoft Yahei";
+            .box-shadow(0 1px 2px 0 rgba(34, 36, 38, .15));
+        }
+        .preview {
+            background-color: #DAD9D5;
+            padding: 5% 8% 4%;
+            .img {
+                display: block;
+                width: 100%;
+            }
+        }
+        .form {
+            background: #DBDBD6;
+            padding: 2em;
+            .box-shadow(0 1px 2px 0 rgba(34, 36, 38, .15));
+        }
+        .left {
+            text-align: left;
+        }
+        .right {
+            text-align: right;
+        }
+    }
+    .actions {
+        margin-top: 5%;
+        text-align: center;
+        .button {
+            background-color: #D56A6F;
+            color: #FFF;
+            display: inline-block;
+            text-align: center;
+            line-height: 40px;
+            padding: 0 2em;
+            font-family: "Microsoft Yahei";
+            font-size: 1.2em;
+            margin: 0 0.5em;
+            &.disabled {
+                background-color: #1b1c1d;
+            }
+        }
+        .tip {
+            font-size: 11px;
+            line-height: 30px;
+            margin-top: 1em;
+            color: #000;
+            font-family: 'Microsoft Yahei';
+        }
+    }
+    .modal {
+        position: absolute;
+        font-family: "Microsoft Yahei";
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0);
+        opacity: 0;
+        display: none;
+        .transition(~"background-color 1000ms ease-out, opacity 1000ms ease-out");
+        &.show {
+            display: block;
+        }
+        &.fade {
+            opacity: 1;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .remove {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 26px;
+            height: 26px;
+            line-height: 26px;
+            text-align: center;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        i.icon.success {
+            background-image: url("../img/icon/icon-success.png@{version}");
+            width: 30px;
+            height: 28px;
+            display: inline-block;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        .content {
+            width: 90%;
+            height: 220px;
+            position: absolute;
+            top: 50%;
+            left: 5%;
+            margin-top: -110px;
+            text-align: center;
+            background: #FFF;
+            .box-shadow(0 1px 2px 0 rgba(34,
+            36,
+            38,
+            .15));
+            .border-radius(5px);
+            .message {
+                font-size: 2em;
+                line-height: 1;
+                margin: 2em 0 1em;
+                font-weight: bold;
+            }
+            .actions {
+                .label {
+                    color: #707170;
+                    line-height: 40px;
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+    &.certification-address {
+        .panel {
+            .title {
+                background-image: url("../img/icon/icon-certification-address.png@{version}");
+            }
+        }
+    }
+    &.certification-report {
+        .panel {
+            .title {
+                background-image: url("../img/icon/icon-certification-report.png@{version}");
+            }
+        }
+    }
+    &.certification-proof {
+        .panel {
+            .title {
+                background-image: url("../img/icon/icon-certification-proof.png@{version}");
+            }
+        }
+    }
+}

@@ -1,0 +1,41 @@
+<div class="certification certification-report" ng-controller="gameCertReportCtrl">
+    <img ng-src="{{cmpt}}/img/certification_report_banner.png?{{cdnVersion}}" class="banner">
+    <div class="panel">
+        <div class="title">分析报告</div>
+        <div class="preview">
+            <div class="ui active inline centered loader" ng-hide="certification"></div>
+            <div ng-if="certification">
+                <img class="img" ng-src="{{cmpt}}/img/certification_report.jpg?{{cdnVersion}}" class="banner">
+                <div class="actions">
+                    <button ng-click="sendApply()" class="ui button" ng-show="certification.status == 'neverBuy'">申请报告制作</button>
+                    <button class="ui button disabled" ng-show="certification.status == 'request'">已申请报告制作</button>
+                    <a target="_blank" ng-href="{{certification.url}}" class="ui button" ng-show="certification.status == 'ready'">下载分析报告</a>
+                    <div class="tip left" ng-if="certification.status == 'request'">报告正在制作中，制作完成后将在此页面开放下载。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <modal model="modal.noRight">
+        <div class="content">
+            <i class="remove icon" ng-click="closeModal()"></i>
+            <div class="message">抱歉, 您尚未购买商战结果报告</div>
+            <div class="actions">
+                <div class="label">商战结果报告, 专业分析点评</div>
+                <button class="ui button">立即购买</button>
+            </div>
+        </div>
+    </modal>
+    <modal model="modal.applied">
+        <div class="content">
+            <i class="remove icon" ng-click="closeModal()"></i>
+            <div class="message">
+                <i class="icon success"></i>申请成功
+            </div>
+            <div class="actions">
+                <div class="label">
+                    分析报告将会于7个工作日产出。若长时间未收到，您可以拨打客服电话4009200153查询
+                </div>
+            </div>
+        </div>
+    </modal>
+</div>

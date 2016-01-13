@@ -1,0 +1,27 @@
+<div class="certification certification-proof" ng-controller="gameCertificateCtrl">
+    <img ng-src="{{cdn}}{{cmpt}}/img/certification_banner.png?{{cdnVersion}}" class="banner">
+    <div class="panel">
+        <div class="title">参赛证明</div>
+        <div class="preview">
+            <div class="ui active inline centered loader" ng-hide="certification"></div>
+            <div ng-if="certification">
+                <img class="img" ng-src="{{certification.preview[0]}}" class="banner">
+                <div class="actions">
+                    <a class="ui button" target="_blank" ng-href="{{certification.url}}">下载电子版文件</a>
+                    <button class="ui button" ng-click="apply()">申请证书寄送</button>
+                </div>
+            </div>
+        </div>
+        <modal model="rights.noRight">
+            <div class="content">
+                <i class="remove icon" ng-click="closeModal()"></i>
+                <div class="message">抱歉, 您尚未购买纸质证书邮寄服务</div>
+                <div class="actions">
+                    <div class="label">权威认证, 助你求职升学</div>
+                    <a class="ui button" ng-href="{{offerUrl(rights.chinese)}}">立即购买(中文)</a>
+                    <a class="ui button" ng-href="{{offerUrl(rights.english)}}">立即购买(英文)</a>
+                </div>
+            </div>
+        </modal>
+    </div>
+</div>

@@ -121,7 +121,7 @@ angular
             40255: '结果详细信息',
             40256: '获取参赛报告',
             40257: '获取获奖证书',
-            40258: '获取参赛证书',
+            40258: '获取参赛证明',
             40259: '您还没有完成任何比赛',
             40404: '未登录',
             70006: '该用户无权限加入此队伍',
@@ -304,6 +304,54 @@ angular
             templateUrl: 'template/gameroom-mobile.html'
         };
     })
+    .directive('gameCertificatePrize', function() {
+        return {
+            restrict: "E",
+            scope: true,
+            templateUrl: 'template/game-certificate-prize.html',
+            compile: function(element, attributes) {
+                return {
+                    pre: function(scope, element, attributes) {
+                        scope.type = 'prize';
+                    }
+                };
+            }
+        };
+    })
+    .directive('gameCertificateReport', function() {
+        return {
+            restrict: "E",
+            scope: true,
+            templateUrl: 'template/game-certificate-report.html',
+            compile: function(element, attributes) {
+                return {
+                    pre: function(scope, element, attributes) {
+                        scope.type = 'report';
+                    }
+                };
+            }
+        };
+    })
+    .directive('gameCertificateProof', function() {
+        return {
+            restrict: "E",
+            templateUrl: 'template/game-certificate-proof.html',
+            compile: function(element, attributes) {
+                return {
+                    pre: function(scope, element, attributes) {
+                        scope.type = 'join';
+                    }
+                };
+            }
+        };
+    })
+    .directive('gameCertificateAddress', function() {
+        return {
+            restrict: "E",
+            scope: true,
+            templateUrl: 'template/game-certificate-address.html'
+        };
+    })
     .directive('chinaMap', ['$filter', '$translate', function($filter, $translate) {
         return {
             restrict: 'AE',
@@ -437,6 +485,33 @@ angular
             }
         }
     })
+    .directive('checkbox', function() {
+        return {
+            restrict: 'A',
+            scope: {
+                model: '='
+            },
+            link: function($scope, $element, attr) {
+                $element.on('click', function(e) {
+                    var me = $(this);
+                    var input = me.children('input');
+                    if (input.is(':disabled')) {
+                        return;
+                    }
+                    var isChecked = me.hasClass('checked');
+                    me.toggleClass('checked');
+                    if (isChecked) {
+                        input[0].removeAttribute('checked');
+                    } else {
+                        input[0].setAttribute('checked', true);
+                    }
+                    $scope.$parent.$apply(function() {
+                        $scope.model = !isChecked;
+                    });
+                });
+            }
+        }
+    })
     .directive('additional', function() {
         return {
             restrict: "E",
@@ -455,6 +530,46 @@ angular
             templateUrl: 'template/epic_validate.html'
         };
     })
+    .directive('modal', ['$timeout', '$compile', '$parse', function($timeout, $compile, $parse) {
+        return {
+            restrict: "E",
+            scope: true,
+            link: function($scope, $element, $attrs) {
+                var template = $attrs.template;
+                if (template) {
+                    $element.html('<' + template + '></' + template + '</>');
+                    $compile($element.contents())($scope);
+                }
+
+                function show() {
+                    $element.addClass('fade');
+                }
+
+                function hide() {
+                    $element.removeClass('show');
+                }
+                $element.addClass('modal');
+
+                var modelKey = $attrs['model'];
+                var model = $parse(modelKey);
+                $scope.closeModal = function() {
+                    model.assign($scope, null);
+                };
+                $scope.$watch(modelKey, function(model) {
+                    if (model === undefined) {
+                        return;
+                    }
+                    if (model) {
+                        $element.addClass('show');
+                        $timeout(show, 20);
+                    } else {
+                        $element.removeClass('fade');
+                        $timeout(hide, 1000);
+                    }
+                });
+            }
+        };
+    }])
     .directive('inputEnter', ['$parse', function($parse) {
         return {
             restrict: "A",
@@ -498,7 +613,7 @@ angular
         }
 
         var search = location.search.slice(1);
-        var version = (function() {
+        var version = $scope.cdnVersion = (function() {
             if (typeof buildDate !== 'undefined') {
                 return buildDate;
             }
@@ -507,7 +622,7 @@ angular
             }
             return '';
         })();
-        var cdn = (function() {
+        var cdn = $scope.cdn = (function() {
             if (typeof cdn !== 'undefined') {
                 return cdn;
             }
@@ -812,6 +927,24 @@ angular
                 return true;
             }
             return epic_valid.indexOf(epic.epic_id) > -1;
+        };
+
+        $scope.offerUrl = function(offerId) {
+            return '/store/offers#/confirm/' + offerId + '/';
+        };
+        $scope.offers = {
+            chinese_cert: {
+                offerId: 'dcb33391-baad-4dd0-9c05-aa2e4f05c940',
+                productTypeId: '7a25f186-d31d-4c88-8070-87776480d853'
+            },
+            english_cert: {
+                offerId: 'fede0083-1c78-4081-90f4-2ecd534d2977',
+                productTypeId: '5b258c78-a7fa-41d6-9ea9-04132e9de428'
+            },
+            report: {
+                offerId: '2c3671fe-90df-45c5-bea4-25cedc5e5431',
+                productTypeId: '35388cd9-9a7e-4955-b72f-3104bf8da90d'
+            }
         };
     }])
     .controller('gameteamCtrl', ['$scope', '$http', function($scope, $http) {
@@ -1438,9 +1571,132 @@ angular
             }
         });
     }])
+    .controller('gameCertificateCtrl', ['$scope', '$http', function($scope, $http) {
+        $scope.rights = {
+            'chinese': $scope.offers.chinese_cert.offerId,
+            'english': $scope.offers.english_cert.offerId
+        };
+
+        function loadCerfification() {
+            $http.post(cmpt + '/certification/fetch/', {
+                epic_id: $scope.epic_id,
+                certificate_type: $scope.type
+            }).success(function(json) {
+                if (json.isSuccess) {
+                    if (!json.result) {
+                        return setTimeout(loadCerfification, 1500);
+                    }
+                    $scope.certification = json.result;
+                }
+            });
+        }
+        loadCerfification();
+        $scope.apply = function() {
+            $http.get(cmpt + '/certification/products/').success(function(json) {
+                if (json.isSuccess) {
+                    $scope.rights.noRight = json.result.filter(function(item) {
+                        return item.count > 0;
+                    }).length == 0;
+                }
+            });
+        };
+    }])
+    .controller('gameCertAddressCtrl', ['$scope', '$http', function($scope, $http) {
+        $scope.info = {};
+        $scope.address = {};
+        $scope.modal = {};
+        $scope.rights = {
+            'chinese': {
+                id: $scope.offers.chinese_cert.productTypeId,
+                offerId: $scope.offers.chinese_cert.offerId,
+                count: 0
+            },
+            'english': {
+                id: $scope.offers.english_cert.productTypeId,
+                offerId: $scope.offers.english_cert.offerId,
+                count: 0
+            }
+        };
+        $http.get(cmpt + '/certification/products/').success(function(json) {
+            if (json.isSuccess) {
+                var count = 0;
+                json.result.forEach(function(item) {
+                    if (item.id == $scope.rights.chinese.id) {
+                        count += item.count;
+                        $scope.rights.chinese.count = item.count;
+                        return;
+                    }
+                    if (item.id == $scope.rights.english.id) {
+                        count += item.count;
+                        $scope.rights.english.count = item.count;
+                        return;
+                    }
+                });
+                if (!count) {
+                    $scope.modal.noRight = true;
+                }
+            }
+        });
+        $scope.submit = function() {
+            var products = [];
+            if ($scope.info.english) {
+                products.push($scope.rights.english.id);
+            }
+            if ($scope.info.chinese) {
+                products.push($scope.rights.chinese.id);
+            }
+            $http.post(cmpt + '/certification/buyCertificate', {
+                products: products,
+                address: JSON.stringify($scope.address)
+            }).success(function(json) {
+                if (json.isSuccess) {
+                    $scope.modal.applied = true;
+                } else {
+                    $scope.modal.noRight = true;
+                }
+            });
+        };
+    }])
+    .controller('gameCertReportCtrl', ['$scope', '$http', function($scope, $http) {
+        function load() {
+            $http.post(cmpt + '/certification/fetchreport/', {
+                epic_id: $scope.epic_id,
+                certificate_type: $scope.type
+            }).success(function(json) {
+                if (json.isSuccess) {
+                    $scope.certification = json.result;
+                }
+            });
+        }
+        $scope.modal = {};
+        $scope.rights = {
+            report: {
+                id: $scope.offers.report.productTypeId,
+                offerId: $scope.offers.report.offerId
+            }
+        };
+        $scope.sendApply = function() {
+            $http.post(cmpt + '/certification/buyReport', {
+                epic_id: $scope.epic_id,
+                products: [$scope.rights.report.id]
+            }).success(function(json) {
+                if (!json.isSuccess) {
+                    if (json.code == 70011) {
+                        return load();
+                    } else {
+                        $scope.modal.noRight = true;
+                    }
+                } else {
+                    $scope.modal.applied = true;
+                    load();
+                }
+            });
+        };
+        load();
+    }])
     .controller('rankingCtrl', angular.cmpt.rankingCtrl)
     .filter('trusted', ['$sce', function($sce) {
         return function(text) {
             return $sce.trustAsHtml(text);
-        }
+        };
     }]);

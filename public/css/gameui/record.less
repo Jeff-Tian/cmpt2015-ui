@@ -55,79 +55,76 @@
             line-height: 40px;
             background: #FFF;
         }
-        .ui.grid {
-            margin-top: 2rem;
-            .record-card {
-                border-radius: 0;
-                box-shadow: 0px 2px 0px 0px #d4d4d5;
-                width: 100%;
-                .ui.grid {
-                    margin-top: 0;
-                }
-                .record-name {
-                    border-radius: 0 !important;
-                    background-image: url("../img/card-header.png@{version}");
-                    background-repeat: no-repeat;
-                    background-position: left top;
-                    background-size: 70px 70px;
-                    width: 100%;
-                    background-color: #a8a8a8;
-                    padding: 1em 1em 0.5em 1em;
-                    img {
-                        margin-right: 0.5em;
-                    }
-                    .epic_header {
-                        color: @color-white;
-                        font-size: 2em !important;
-                        line-height: 1.5;
-                        a.title {
-                            text-decoration: none;
-                            color: #FFF;
-                        }
-                        .ui.button {
-                            float: right;
-                        }
-                    }
-                    .meta {
-                        color: @color-white;
-                    }
-                }
-                .sesson-content {
-                    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-                    h2 {
-                        padding: 3px 0;
-                        float: left;
-                        width: 20%;
-                        margin-bottom: 0;
-                    }
-                    .button {
-                        float: right;
-                    }
-                }
-                .info-content {
-                    padding: 0 1em;
-                    h2 {
-                        padding: 10px 0;
-                        margin-bottom: 0;
-                    }
-                    h5 {
-                        padding: 1em 0;
-                        margin-bottom: 0;
-                    }
-                    .button {
-                        float: right;
-                    }
-                    .avatars {
-                        padding: 0 1em 0 0;
-                        &.invisible {
-                            opacity: 0;
-                        }
-                    }
-                }
-            }
-            &:first-child {
+        .record-card {
+            border-radius: 0;
+            box-shadow: 0px 2px 0px 0px #d4d4d5;
+            width: 100%;
+            .ui.grid {
                 margin-top: 0;
             }
+            .record-name {
+                border-radius: 0 !important;
+                background-image: url("../img/card-header.png@{version}");
+                background-repeat: no-repeat;
+                background-position: left top;
+                background-size: 70px 70px;
+                width: 100%;
+                background-color: #a8a8a8;
+                padding: 1em 1em 0.5em 1em;
+                img {
+                    margin-right: 0.5em;
+                }
+                .epic_header {
+                    color: @color-white;
+                    font-size: 2em !important;
+                    line-height: 1.5;
+                    a.title {
+                        text-decoration: none;
+                        color: #FFF;
+                    }
+                    .ui.button {
+                        float: right;
+                    }
+                }
+                .meta {
+                    color: @color-white;
+                }
+            }
+            .sesson-content {
+                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+                h2 {
+                    padding: 3px 0;
+                    float: left;
+                    width: 20%;
+                    margin-bottom: 0;
+                }
+                .button {
+                    float: right;
+                }
+            }
+            .info-content {
+                padding: 0 1em;
+                h2 {
+                    padding: 10px 0;
+                    margin-bottom: 0;
+                }
+                h5 {
+                    padding: 1em 0;
+                    margin-bottom: 0;
+                }
+                .button {
+                    float: right;
+                }
+                .avatars {
+                    padding: 0 1em 0 0;
+                    &.invisible {
+                        opacity: 0;
+                    }
+                }
+            }
+        }
+        &:first-child {
+            margin-top: 0;
         }
     }
 }

@@ -307,24 +307,28 @@ angular
     .directive('gameCertificatePrize', function() {
         return {
             restrict: "E",
+            scope: true,
             templateUrl: 'template/game-certificate-prize.html',
-            link: function(scope, elem, attrs) {
-                scope.type = 'prize';
+            compile: function(element, attributes) {
+                return {
+                    pre: function preLink(scope, element, attributes) {
+                        scope.type = 'prize';
+                    }
+                };
             }
-        };
-    })
-    .directive('gameCertificateAddress', function() {
-        return {
-            restrict: "E",
-            templateUrl: 'template/game-certificate-address.html'
         };
     })
     .directive('gameCertificateReport', function() {
         return {
             restrict: "E",
+            scope: true,
             templateUrl: 'template/game-certificate-report.html',
-            link: function(scope, elem, attrs) {
-                scope.type = 'report';
+            compile: function(element, attributes) {
+                return {
+                    pre: function preLink(scope, element, attributes) {
+                        scope.type = 'report';
+                    }
+                };
             }
         };
     })
@@ -332,9 +336,20 @@ angular
         return {
             restrict: "E",
             templateUrl: 'template/game-certificate-proof.html',
-            link: function(scope, elem, attrs) {
-                scope.type = 'join';
+            compile: function(element, attributes) {
+                return {
+                    pre: function preLink(scope, element, attributes) {
+                        scope.type = 'join';
+                    }
+                };
             }
+        };
+    })
+    .directive('gameCertificateAddress', function() {
+        return {
+            restrict: "E",
+            scope: true,
+            templateUrl: 'template/game-certificate-address.html'
         };
     })
     .directive('chinaMap', ['$filter', '$translate', function($filter, $translate) {
@@ -912,6 +927,24 @@ angular
                 return true;
             }
             return epic_valid.indexOf(epic.epic_id) > -1;
+        };
+
+        $scope.offerUrl = function(offerId) {
+            return '/store/offers#/confirm/' + offerId + '/';
+        };
+        $scope.offers = {
+            chinese_cert: {
+                offerId: 'dcb33391-baad-4dd0-9c05-aa2e4f05c940',
+                productTypeId: '7a25f186-d31d-4c88-8070-87776480d853'
+            },
+            english_cert: {
+                offerId: 'dcb33391-baad-4dd0-9c05-aa2e4f05c940',
+                productTypeId: '5b258c78-a7fa-41d6-9ea9-04132e9de428'
+            },
+            report: {
+                offerId: '35388cd9-9a7e-4955-b72f-3104bf8da90d',
+                productTypeId: ''
+            }
         };
     }])
     .controller('gameteamCtrl', ['$scope', '$http', function($scope, $http) {
@@ -1539,7 +1572,10 @@ angular
         });
     }])
     .controller('gameCertificateCtrl', ['$scope', '$http', function($scope, $http) {
-        $scope.rights = {};
+        $scope.rights = {
+            'chinese': $scope.offers.chinese_cert.offerId,
+            'english': $scope.offers.english_cert.offerId
+        };
 
         function loadCerfification() {
             $http.post(cmpt + '/certification/fetch/', {
@@ -1571,11 +1607,13 @@ angular
         $scope.modal = {};
         $scope.rights = {
             'chinese': {
-                id: '7a25f186-d31d-4c88-8070-87776480d853',
+                id: $scope.offers.chinese_cert.productTypeId,
+                offerId: $scope.offers.chinese_cert.offerId,
                 count: 0
             },
             'english': {
-                id: '5b258c78-a7fa-41d6-9ea9-04132e9de428',
+                id: $scope.offers.english_cert.productTypeId,
+                offerId: $scope.offers.english_cert.offerId,
                 count: 0
             }
         };
@@ -1620,8 +1658,6 @@ angular
         };
     }])
     .controller('gameCertReportCtrl', ['$scope', '$http', function($scope, $http) {
-        $scope.modal = {};
-
         function load() {
             $http.post(cmpt + '/certification/fetchreport/', {
                 epic_id: $scope.epic_id,
@@ -1631,11 +1667,18 @@ angular
                     $scope.certification = json.result;
                 }
             });
+        }
+        $scope.modal = {};
+        $scope.rights = {
+            report: {
+                id: $scope.offers.report.productTypeId,
+                offerId: $scope.offers.report.offerId
+            }
         };
         $scope.sendApply = function() {
             $http.post(cmpt + '/certification/buyReport', {
                 epic_id: $scope.epic_id,
-                products: ['35388cd9-9a7e-4955-b72f-3104bf8da90d']
+                products: [$scope.rights.report.id]
             }).success(function(json) {
                 if (!json.isSuccess) {
                     if (json.code == 70011) {

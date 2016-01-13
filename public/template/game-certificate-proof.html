@@ -18,7 +18,8 @@
                 <div class="message">抱歉, 您尚未购买纸质证书邮寄服务</div>
                 <div class="actions">
                     <div class="label">权威认证, 助你求职升学</div>
-                    <button class="ui button">立即购买</button>
+                    <a class="ui button" ng-href="{{offerUrl(rights.chinese)}}">立即购买(中文)</a>
+                    <a class="ui button" ng-href="{{offerUrl(rights.english)}}">立即购买(英文)</a>
                 </div>
             </div>
         </modal>

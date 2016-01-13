@@ -23,8 +23,8 @@
                 <label>证书种类确认</label>
             </div>
             <div class="field" ng-class="{error: !info.english && !info.chinese}">
-                <div class="ui checkbox" checkbox model="info.chinese">
-                    <input type="checkbox" ng-disabled="!rights.chinese.count" class="hidden">
+                <div class="ui radio checkbox" checkbox model="info.chinese">
+                    <input type="radio" name="type" ng-disabled="!rights.chinese.count" class="hidden">
                     <label>中文版证书 (
                         <span ng-if="!rights.chinese.count">尚未购买</span>
                         <span ng-if="rights.chinese.count">还剩{{rights.chinese.count}}次寄送机会</span> )
@@ -32,8 +32,8 @@
                 </div>
             </div>
             <div class="field" ng-class="{error: !info.english && !info.chinese}">
-                <div class="ui checkbox" checkbox model="info.english">
-                    <input type="checkbox" ng-disabled="!rights.english.count" class="hidden">
+                <div class="ui radio checkbox" checkbox model="info.english">
+                    <input type="radio" name="type" ng-disabled="!rights.english.count" class="hidden">
                     <label>英文版证书 (
                         <span ng-if="!rights.english.count">尚未购买</span>
                         <span ng-if="rights.english.count">还剩{{rights.english.count}}次寄送机会</span> )
@@ -48,10 +48,11 @@
         <modal model="modal.noRight">
             <div class="content">
                 <i class="remove icon" ng-click="closeModal()"></i>
-                <div class="message">抱歉, 您尚未购买纸质证书邮寄服务</div>
+                <div class="message">抱歉, 您尚未购买{{info.english?'英文':'中文'}}纸质证书邮寄服务</div>
                 <div class="actions">
                     <div class="label">权威认证, 助你求职升学</div>
-                    <button class="ui button">立即购买</button>
+                    <a class="ui button" ng-if="info.chinese || (!info.chinese && !info.english)" ng-href="{{offerUrl(rights.chinese.offerId)}}">立即购买</a>
+                    <a class="ui button" ng-if="info.english" ng-href="{{offerUrl(rights.english.offerId)}}">立即购买</a>
                 </div>
             </div>
         </modal>

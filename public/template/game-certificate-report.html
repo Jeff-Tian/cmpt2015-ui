@@ -14,28 +14,28 @@
                 </div>
             </div>
         </div>
-    </div>
-    <modal model="modal.noRight">
-        <div class="content">
-            <i class="remove icon" ng-click="closeModal()"></i>
-            <div class="message">抱歉, 您尚未购买商战结果报告</div>
-            <div class="actions">
-                <div class="label">商战结果报告, 专业分析点评</div>
-                <button class="ui button">立即购买</button>
-            </div>
-        </div>
-    </modal>
-    <modal model="modal.applied">
-        <div class="content">
-            <i class="remove icon" ng-click="closeModal()"></i>
-            <div class="message">
-                <i class="icon success"></i>申请成功
-            </div>
-            <div class="actions">
-                <div class="label">
-                    分析报告将会于7个工作日产出。若长时间未收到，您可以拨打客服电话4009200153查询
+        <modal model="modal.noRight">
+            <div class="content">
+                <i class="remove icon" ng-click="closeModal()"></i>
+                <div class="message">抱歉, 您尚未购买商战结果报告</div>
+                <div class="actions">
+                    <div class="label">商战结果报告, 专业分析点评</div>
+                    <a class="ui button" ng-href="offerUrl(rights.report.offerId)">立即购买</a>
                 </div>
             </div>
-        </div>
-    </modal>
+        </modal>
+        <modal model="modal.applied">
+            <div class="content">
+                <i class="remove icon" ng-click="closeModal()"></i>
+                <div class="message">
+                    <i class="icon success"></i>申请成功
+                </div>
+                <div class="actions">
+                    <div class="label">
+                        分析报告将会于7个工作日产出。若长时间未收到，您可以拨打客服电话4009200153查询
+                    </div>
+                </div>
+            </div>
+        </modal>
+    </div>
 </div>

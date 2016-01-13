@@ -311,7 +311,7 @@ angular
             templateUrl: 'template/game-certificate-prize.html',
             compile: function(element, attributes) {
                 return {
-                    pre: function preLink(scope, element, attributes) {
+                    pre: function(scope, element, attributes) {
                         scope.type = 'prize';
                     }
                 };
@@ -325,7 +325,7 @@ angular
             templateUrl: 'template/game-certificate-report.html',
             compile: function(element, attributes) {
                 return {
-                    pre: function preLink(scope, element, attributes) {
+                    pre: function(scope, element, attributes) {
                         scope.type = 'report';
                     }
                 };
@@ -338,7 +338,7 @@ angular
             templateUrl: 'template/game-certificate-proof.html',
             compile: function(element, attributes) {
                 return {
-                    pre: function preLink(scope, element, attributes) {
+                    pre: function(scope, element, attributes) {
                         scope.type = 'join';
                     }
                 };
@@ -622,7 +622,7 @@ angular
             }
             return '';
         })();
-        var cdn = (function() {
+        var cdn = $scope.cdn = (function() {
             if (typeof cdn !== 'undefined') {
                 return cdn;
             }
@@ -938,12 +938,12 @@ angular
                 productTypeId: '7a25f186-d31d-4c88-8070-87776480d853'
             },
             english_cert: {
-                offerId: 'dcb33391-baad-4dd0-9c05-aa2e4f05c940',
+                offerId: 'fede0083-1c78-4081-90f4-2ecd534d2977',
                 productTypeId: '5b258c78-a7fa-41d6-9ea9-04132e9de428'
             },
             report: {
-                offerId: '35388cd9-9a7e-4955-b72f-3104bf8da90d',
-                productTypeId: ''
+                offerId: '2c3671fe-90df-45c5-bea4-25cedc5e5431',
+                productTypeId: '35388cd9-9a7e-4955-b72f-3104bf8da90d'
             }
         };
     }])
@@ -1688,6 +1688,7 @@ angular
                     }
                 } else {
                     $scope.modal.applied = true;
+                    load();
                 }
             });
         };

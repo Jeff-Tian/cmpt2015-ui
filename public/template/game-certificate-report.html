@@ -1,11 +1,11 @@
 <div class="certification certification-report" ng-controller="gameCertReportCtrl">
-    <img ng-src="{{cmpt}}/img/certification_report_banner.png?{{cdnVersion}}" class="banner">
+    <img ng-src="{{cdn}}{{cmpt}}/img/certification_report_banner.png?{{cdnVersion}}" class="banner">
     <div class="panel">
         <div class="title">分析报告</div>
         <div class="preview">
             <div class="ui active inline centered loader" ng-hide="certification"></div>
             <div ng-if="certification">
-                <img class="img" ng-src="{{cmpt}}/img/certification_report.jpg?{{cdnVersion}}" class="banner">
+                <img class="img" ng-src="{{cdn}}{{cmpt}}/img/certification_report.jpg?{{cdnVersion}}" class="banner">
                 <div class="actions">
                     <button ng-click="sendApply()" class="ui button" ng-show="certification.status == 'neverBuy'">申请报告制作</button>
                     <button class="ui button disabled" ng-show="certification.status == 'request'">已申请报告制作</button>

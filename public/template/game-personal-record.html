@@ -6,7 +6,7 @@
         <div class="ui card record-card" ng-repeat="epic in series.epics">
             <div class="content record-name">
                 <div class="epic_header">
-                    <img ng-src="/img/icon/{{series.type}}.png">
+                    <img ng-src="{{cdn}}{{cmpt}}/img/icon/{{series.type}}.png">
                     <a target="_blank" class="title" ng-href="/{{lang}}{{cmpt}}/epic?epic_id={{epic.epic_id}}">{{epic.title}}</a>
                 </div>
                 <div class="meta">

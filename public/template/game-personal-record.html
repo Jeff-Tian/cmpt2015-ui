@@ -2,64 +2,113 @@
     <div ng-if="records.length==0" class="message">
         {{40259|translate}}
     </div>
-    <div class="ui card record-card" ng-repeat="epic in records">
-        <div class="content record-name">
-            <div class="epic_header">
-                <img ng-src="{{cdn}}{{cmpt}}/img/icon/{{epic.seriesType}}.png">
-                <a target="_blank" class="title" ng-href="/{{lang}}{{cmpt}}/epic?epic_id={{epic.epic_id}}">{{epic.title}}</a>
+    <div ng-repeat="series in records" ng-if="series.epics.length > 0">
+        <div class="ui card record-card">
+            <div class="content record-name">
+                <div class="epic_header">
+                    <img ng-src="{{cdn}}{{cmpt}}/img/icon/{{series.type}}.png">
+                    <a target="_blank" class="title" ng-href="/{{lang}}{{cmpt}}/{{series.type}}?series_id={{series.series_id}}">{{series.title}}</a>
+                    <a class="ui button" ng-bind="40257|translate" ng-if="series.prize"></a>
+                </div>
             </div>
-            <div class="meta">
-                <div class="ui horizontal list">
-                    <div class="item">
-                        <i class="calendar icon"></i> {{formatDateSimple(epic.epic_game_from, true, true)}}
+            <div class="info-content ui grid" ng-if="series.prize" ng-click="series.team.expanded=!series.team.expanded">
+                <div class="three wide column">
+                    <h2 ng-if="series.prize">第{{series.prize.rank}}名</h2>
+                </div>
+                <div class="five wide column">
+                    <h5>{{series.team.name}}</h5>
+                </div>
+                <div class="eight wide column avatars" ng-class="{invisible:series.team.expanded}">
+                    <div class="ui five column grid list">
+                        <div class="img column" ng-repeat="member in series.team.members">
+                            <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
+                        </div>
                     </div>
-                    <div class="item">
-                        共有{{epic.statistics.memberCount}}人参赛
-                    </div>
-                    <div class="item">
-                        分为{{epic.statistics.teamCount}}支队伍
+                </div>
+            </div>
+            <div class="list" ng-if="series.prize" ng-show="series.team.expanded">
+                <div class="ui items">
+                    <div class="item ui grid images-expanded">
+                        <div class="images expanded">
+                            <div class="ui five column grid item">
+                                <div class="img column" ng-repeat="member in series.team.members">
+                                    <div class="card">
+                                        <div class="img">
+                                            <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
+                                        </div>
+                                        <div class="title">
+                                            {{member.show_name}}
+                                        </div>
+                                        <div class="description">
+                                            <div class="university">{{member.university || '&nbsp;'}}</div>
+                                            <div class="major">{{member.major || '&nbsp;'}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="content extra sesson-content">
-            <h2>{{epic.group_id}}-{{epic.room_id}}</h2>
-            <a class="ui button" ng-bind="40257|translate" ng-href="/{{lang}}{{cmpt}}/certification_prize?epic_id={{epic.epic_id}}&team_id={{epic.team.team_id}}" ng-if="epic.prize"></a>
-            <a class="ui button" ng-href="/{{lang}}{{cmpt}}/certification_proof?epic_id={{epic.epic_id}}&team_id={{epic.team.team_id}}" ng-bind="40258|translate"></a>
-            <a class="ui button" ng-href="/{{lang}}{{cmpt}}/certification_report?epic_id={{epic.epic_id}}&team_id={{epic.team.team_id}}" ng-bind="40256|translate"></a>
-        </div>
-        <div class="info-content ui grid" ng-click="epic.team.expanded=!epic.team.expanded">
-            <div class="three wide column">
-                <h2 ng-if="epic.prize">第{{epic.prize.rank}}名</h2>
-                <h2 ng-if="!epic.prize && epic.last_period_rank">第{{epic.last_period_rank}}名</h2>
-            </div>
-            <div class="five wide column">
-                <h5>{{epic.team.name}}</h5>
-            </div>
-            <div class="eight wide column avatars" ng-class="{invisible:epic.team.expanded}">
-                <div class="ui five column grid list">
-                    <div class="img column" ng-repeat="member in epic.team.members">
-                        <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
+        <div class="ui card record-card" ng-repeat="epic in series.epics">
+            <div class="content record-name">
+                <div class="epic_header">
+                    <img ng-src="{{cdn}}{{cmpt}}/img/icon/{{series.type}}.png">
+                    <a target="_blank" class="title" ng-href="/{{lang}}{{cmpt}}/epic?epic_id={{epic.epic_id}}">{{epic.title}}</a>
+                </div>
+                <div class="meta">
+                    <div class="ui horizontal list">
+                        <div class="item">
+                            <i class="calendar icon"></i> {{formatDateSimple(epic.epic_game_from, true, true)}}
+                        </div>
+                        <div class="item">
+                            共有{{epic.statistics.memberCount}}人参赛
+                        </div>
+                        <div class="item">
+                            分为{{epic.statistics.teamCount}}支队伍
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="list" ng-show="epic.team.expanded">
-            <div class="ui items">
-                <div class="item ui grid images-expanded">
-                    <div class="images expanded">
-                        <div class="ui five column grid item">
-                            <div class="img column" ng-repeat="member in epic.team.members">
-                                <div class="card">
-                                    <div class="img">
-                                        <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
-                                    </div>
-                                    <div class="title">
-                                        {{member.show_name}}
-                                    </div>
-                                    <div class="description">
-                                        <div class="university">{{member.university || '&nbsp;'}}</div>
-                                        <div class="major">{{member.major || '&nbsp;'}}</div>
+            <div class="content extra sesson-content">
+                <h2>{{epic.group_id}}-{{epic.room_id}}</h2>
+                <!--<a class="ui button" ng-href="/{{lang}}{{cmpt}}/certification_proof?epic_id={{epic.epic_id}}&team_id={{epic.team.team_id}}" ng-bind="40258|translate"></a>-->
+                <a class="ui button" ng-href="/{{lang}}{{cmpt}}/certification_report?epic_id={{epic.epic_id}}&team_id={{epic.team.team_id}}" ng-bind="40256|translate"></a>
+            </div>
+            <div class="info-content ui grid" ng-click="epic.team.expanded=!epic.team.expanded">
+                <div class="three wide column">
+                    <h2 ng-if="epic.prize">第{{epic.prize.rank}}名</h2>
+                    <h2 ng-if="!epic.prize && epic.last_period_rank">第{{epic.last_period_rank}}名</h2>
+                </div>
+                <div class="five wide column">
+                    <h5>{{epic.team.name}}</h5>
+                </div>
+                <div class="eight wide column avatars" ng-class="{invisible:epic.team.expanded}">
+                    <div class="ui five column grid list">
+                        <div class="img column" ng-repeat="member in epic.team.members">
+                            <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="list" ng-show="epic.team.expanded">
+                <div class="ui items">
+                    <div class="item ui grid images-expanded">
+                        <div class="images expanded">
+                            <div class="ui five column grid item">
+                                <div class="img column" ng-repeat="member in epic.team.members">
+                                    <div class="card">
+                                        <div class="img">
+                                            <img class="gender-{{member.gender.toLowerCase()}}" ng-src="{{member.avatar}}">
+                                        </div>
+                                        <div class="title">
+                                            {{member.show_name}}
+                                        </div>
+                                        <div class="description">
+                                            <div class="university">{{member.university || '&nbsp;'}}</div>
+                                            <div class="major">{{member.major || '&nbsp;'}}</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -8,7 +8,7 @@
                 <div class="epic_header">
                     <img ng-src="{{cdn}}{{cmpt}}/img/icon/{{series.type}}.png">
                     <a target="_blank" class="title" ng-href="/{{lang}}{{cmpt}}/{{series.type}}?series_id={{series.series_id}}">{{series.title}}</a>
-                    <a class="ui button" ng-bind="40257|translate" ng-if="series.prize"></a>
+                    <a ng-href="/{{lang}}{{cmpt}}/certification_prize?epic_id={{series.series_id}}&team_id={{series.team.team_id}}" class="ui button" ng-bind="40257|translate" ng-if="series.prize"></a>
                 </div>
             </div>
             <div class="info-content ui grid" ng-if="series.prize" ng-click="series.team.expanded=!series.team.expanded">

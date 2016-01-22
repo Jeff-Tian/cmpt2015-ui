@@ -1600,6 +1600,10 @@ angular
                     $scope.rights.noRight = json.result.filter(function(item) {
                         return item.count > 0;
                     }).length == 0;
+
+                    if (!$scope.rights.noRight) {
+                        location.href = './certification_address?epic_id=' + $scope.epic_id + '&team_id=' + $scope.team_id;
+                    }
                 }
             });
         };

@@ -677,7 +677,9 @@ angular
                     } else if (member.avatar.indexOf('https://') == 0) {
                         member.avatar = member.avatar.slice('https:'.length);
                     }
-                    member.avatar += '-small';
+                    if (member.avatar.indexOf('wx.qlogo.cn/') != 0) {
+                        member.avatar += '-small';
+                    }
                 } else {
                     if (member.gender == 'U') {
                         member.avatar = unknown;

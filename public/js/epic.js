@@ -2,10 +2,10 @@ angular
     .module('cmpt', [
         'pascalprecht.translate'
     ])
-    .config(['$httpProvider', function($httpProvider) {
+    .config(['$httpProvider', function ($httpProvider) {
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
     }])
-    .config(['$translateProvider', function($translate) {
+    .config(['$translateProvider', function ($translate) {
         $translate.useSanitizeValueStrategy(null);
         var translation = {
             40001: '加入战队',
@@ -34,7 +34,7 @@ angular
             40024: '报名时间：',
             40025: '我的游戏首页',
             40026: '我的比赛记录',
-            40027: '我的比赛排名',
+            40027: '我的排行榜',
             40030: '比赛已结束，结束时间',
             40031: '已开始比赛，比赛结束时间',
             40032: '已结束报名，比赛开始时间',
@@ -132,80 +132,80 @@ angular
             .translations('cn', translation)
             .translations('zh', translation);
     }])
-    .directive('cloak', function() {
+    .directive('cloak', function () {
         return {
             restrict: "C",
-            link: function($scope, $element, $attrs, ngModel) {
+            link: function ($scope, $element, $attrs, ngModel) {
                 $element.css('opacity', 1);
             }
         };
     })
-    .directive('epic', function() {
+    .directive('epic', function () {
         return {
             restrict: "E",
             templateUrl: 'template/epic.html'
         };
     })
-    .directive('epicMobile', function() {
+    .directive('epicMobile', function () {
         return {
             restrict: "E",
             templateUrl: 'template/epic_mobile.html'
         };
     })
-    .directive('epicinfo', function() {
+    .directive('epicinfo', function () {
         return {
             restrict: "E",
             templateUrl: 'template/epicinfo.html'
         };
     })
-    .directive('gametraining', function() {
+    .directive('gametraining', function () {
         return {
             restrict: "E",
             templateUrl: 'template/game-training.html'
         };
     })
-    .directive('upsell', function() {
+    .directive('upsell', function () {
         return {
             restrict: "E",
             templateUrl: 'template/upsell.html'
         };
     })
-    .directive('teammember', function() {
+    .directive('teammember', function () {
         return {
             restrict: "E",
             templateUrl: 'template/teammember.html'
         };
     })
-    .directive('teammemberMobile', function() {
+    .directive('teammemberMobile', function () {
         return {
             restrict: "E",
             templateUrl: 'template/teammember_mobile.html'
         };
     })
-    .directive('teamjoin', function() {
+    .directive('teamjoin', function () {
         return {
             restrict: "E",
             templateUrl: 'template/teamjoin.html'
         };
     })
-    .directive('headerMobile', function() {
+    .directive('headerMobile', function () {
         return {
             restrict: "E",
             templateUrl: 'template/header_mobile.html'
         };
     })
-    .directive('footerMobile', function() {
+    .directive('footerMobile', function () {
         return {
             restrict: "E",
             templateUrl: 'template/footer_mobile.html'
         };
     })
-    .directive('ngDynamicDirective', ['$compile', '$parse', function($compile, $parse) {
+    .directive('ngDynamicDirective', ['$compile', '$parse', function ($compile, $parse) {
         return {
             restrict: 'A',
-            link: function(scope, elem, attrs) {
-                scope.$watch(elem.attr('ng-dynamic-directive'), function(val) {
-                    elem.attr(val.replace(/([A-Z])/g, function(item) {
+            link: function (scope, elem, attrs) {
+                scope.$watch(elem.attr('ng-dynamic-directive'), function (val) {
+                    elem.attr(val.replace(/([A-Z])/g, function (item) {
                         return '-' + item.toString().toLowerCase();
                     }), val);
                     elem.removeAttr('ng-dynamic-directive');
@@ -214,150 +214,150 @@ angular
             }
         };
     }])
-    .directive('teamsCanJoin', function() {
+    .directive('teamsCanJoin', function () {
         return {
             restrict: "A",
             templateUrl: 'template/teams_can_join.html'
         };
     })
-    .directive('teamsApplySent', function() {
+    .directive('teamsApplySent', function () {
         return {
             restrict: "A",
             templateUrl: 'template/teams_apply_sent.html'
         };
     })
-    .directive('teamsBeingInvited', function() {
+    .directive('teamsBeingInvited', function () {
         return {
             restrict: "A",
             templateUrl: 'template/teams_being_invited.html'
         };
     })
-    .directive('peopleCanJoin', function() {
+    .directive('peopleCanJoin', function () {
         return {
             restrict: "A",
             templateUrl: 'template/people_can_join.html'
         };
     })
-    .directive('peopleWantToJoin', function() {
+    .directive('peopleWantToJoin', function () {
         return {
             restrict: "A",
             templateUrl: 'template/people_want_to_join.html'
         };
     })
-    .directive('peopleInvited', function() {
+    .directive('peopleInvited', function () {
         return {
             restrict: "A",
             templateUrl: 'template/people_invited.html'
         };
     })
-    .directive('seriesList', function() {
+    .directive('seriesList', function () {
         return {
             restrict: "E",
             templateUrl: 'template/series-list.html'
         };
     })
-    .directive('experimentList', function() {
+    .directive('experimentList', function () {
         return {
             restrict: "E",
             templateUrl: 'template/experiment-list.html'
         };
     })
-    .directive('nationalList', function() {
+    .directive('nationalList', function () {
         return {
             restrict: "E",
             templateUrl: 'template/national-list.html'
         };
     })
-    .directive('seasonList', function() {
+    .directive('seasonList', function () {
         return {
             restrict: "E",
             templateUrl: 'template/season-list.html'
         };
     })
-    .directive('gameMenu', function() {
+    .directive('gameMenu', function () {
         return {
             restrict: "E",
             templateUrl: 'template/game-menu.html'
         };
     })
-    .directive('gamePersonalRecord', function() {
+    .directive('gamePersonalRecord', function () {
         return {
             restrict: "E",
             templateUrl: 'template/game-personal-record.html'
         };
     })
-    .directive('gameRankingList', function() {
+    .directive('gameRankingList', function () {
         return {
             restrict: "E",
             templateUrl: 'template/game-ranking.html'
         };
     })
-    .directive('gameroom', function() {
+    .directive('gameroom', function () {
         return {
             restrict: "E",
             templateUrl: 'template/gameroom.html'
         };
     })
-    .directive('gameroomMobile', function() {
+    .directive('gameroomMobile', function () {
         return {
             restrict: "E",
             templateUrl: 'template/gameroom-mobile.html'
         };
     })
-    .directive('gameCertificatePrize', function() {
+    .directive('gameCertificatePrize', function () {
         return {
             restrict: "E",
             scope: true,
             templateUrl: 'template/game-certificate-prize.html',
-            compile: function(element, attributes) {
+            compile: function (element, attributes) {
                 return {
-                    pre: function(scope, element, attributes) {
+                    pre: function (scope, element, attributes) {
                         scope.type = 'prize';
                     }
                 };
             }
         };
     })
-    .directive('gameCertificateReport', function() {
+    .directive('gameCertificateReport', function () {
         return {
             restrict: "E",
             scope: true,
             templateUrl: 'template/game-certificate-report.html',
-            compile: function(element, attributes) {
+            compile: function (element, attributes) {
                 return {
-                    pre: function(scope, element, attributes) {
+                    pre: function (scope, element, attributes) {
                         scope.type = 'report';
                     }
                 };
             }
         };
     })
-    .directive('gameCertificateProof', function() {
+    .directive('gameCertificateProof', function () {
         return {
             restrict: "E",
             templateUrl: 'template/game-certificate-proof.html',
-            compile: function(element, attributes) {
+            compile: function (element, attributes) {
                 return {
-                    pre: function(scope, element, attributes) {
+                    pre: function (scope, element, attributes) {
                         scope.type = 'join';
                     }
                 };
             }
         };
     })
-    .directive('gameCertificateAddress', function() {
+    .directive('gameCertificateAddress', function () {
         return {
             restrict: "E",
             scope: true,
             templateUrl: 'template/game-certificate-address.html'
         };
     })
-    .directive('chinaMap', ['$filter', '$translate', function($filter, $translate) {
+    .directive('chinaMap', ['$filter', '$translate', function ($filter, $translate) {
         return {
             restrict: 'AE',
             template: '<div id="china-map" style="height:400px">',
             link: {
-                post: function($scope, element, attrs, ngModel) {
+                post: function ($scope, element, attrs, ngModel) {
                     require.config({
                         paths: {
                             echarts: cmpt + '/libs/echarts/build/dist'
@@ -366,13 +366,13 @@ angular
                     require([
                         'echarts',
                         'echarts/chart/map',
-                    ], function(ec) {
+                    ], function (ec) {
                         var translations = {};
                         var jsonPath = cmpt + '/json/area.json';
                         require('echarts/util/mapData/params').params.area = {
-                            getGeoJson: function(callback) {
-                                $.getJSON(jsonPath, function(json) {
-                                    json.features.forEach(function(feature) {
+                            getGeoJson: function (callback) {
+                                $.getJSON(jsonPath, function (json) {
+                                    json.features.forEach(function (feature) {
                                         var text = $translate.instant(feature.properties.id);
                                         feature.properties.name = text;
                                         translations[text] = feature.properties.id;
@@ -386,7 +386,7 @@ angular
                         myChart.setOption({
                             tooltip: {
                                 trigger: 'item',
-                                formatter: function(params, ticket, callback) {
+                                formatter: function (params, ticket, callback) {
                                     return $translate.instant((translations[params[1]] | 0) + 8);
                                 }
                             },
@@ -417,7 +417,7 @@ angular
                         });
                         window.onresize = myChart.resize;
 
-                        myChart.on(require('echarts/config').EVENT.MAP_SELECTED, function(param) {
+                        myChart.on(require('echarts/config').EVENT.MAP_SELECTED, function (param) {
                             //console.log(translations[param.target]);
                             $scope.$emit('area/choose', translations[param.target]);
                             $(document).trigger('mapClick', [param, translations[param.target]]);
@@ -428,23 +428,23 @@ angular
             }
         };
     }])
-    .directive('pop', ['$compile', function($compile) {
+    .directive('pop', ['$compile', function ($compile) {
         return {
             restrict: "A",
             scope: {
                 content: '@',
                 klass: '@'
             },
-            link: function(scope, element, attrs) {
+            link: function (scope, element, attrs) {
                 var $pop = $('<div class="pop ' + scope.$parent.site + '"></div>').addClass(scope.klass).appendTo('body');
                 var dom = $(scope.content);
-                dom.each(function(i, dom) {
+                dom.each(function (i, dom) {
                     $compile(dom)(scope.$parent);
                 });
                 $pop.append(dom);
                 var timeout;
                 $(element)
-                    .on('mouseenter', function() {
+                    .on('mouseenter', function () {
                         var offset = $(element).offset(),
                             width = $(this).width(),
                             height = $(this).height();
@@ -453,27 +453,27 @@ angular
                             'top': offset.top + height / 2,
                             'left': offset.left
                         }).addClass('show');
-                        timeout = setTimeout(function() {
+                        timeout = setTimeout(function () {
                             $pop.addClass('animate');
                         }, 100);
                     })
-                    .on('mouseleave', function() {
+                    .on('mouseleave', function () {
                         clearTimeout(timeout);
                         $pop.removeClass('animate');
-                        timeout = setTimeout(function() {
+                        timeout = setTimeout(function () {
                             $pop.removeClass('show');
                         }, 500);
                     });
             }
         }
     }])
-    .directive('qrcode', function() {
+    .directive('qrcode', function () {
         return {
             restrict: "A",
             scope: {
                 src: '='
             },
-            link: function($scope, element, attrs) {
+            link: function ($scope, element, attrs) {
                 if (!$scope.src) {
                     return;
                 }
@@ -485,14 +485,14 @@ angular
             }
         }
     })
-    .directive('checkbox', function() {
+    .directive('checkbox', function () {
         return {
             restrict: 'A',
             scope: {
                 model: '='
             },
-            link: function($scope, $element, attr) {
-                $element.on('click', function(e) {
+            link: function ($scope, $element, attr) {
+                $element.on('click', function (e) {
                     var me = $(this);
                     var input = me.children('input');
                     if (input.is(':disabled')) {
@@ -505,36 +505,36 @@ angular
                     } else {
                         input[0].setAttribute('checked', true);
                     }
-                    $scope.$parent.$apply(function() {
+                    $scope.$parent.$apply(function () {
                         $scope.model = !isChecked;
                     });
                 });
             }
         }
     })
-    .directive('additional', function() {
+    .directive('additional', function () {
         return {
             restrict: "E",
             templateUrl: 'template/additional.html'
         };
     })
-    .directive('countdown', function() {
+    .directive('countdown', function () {
         return {
             restrict: "E",
             templateUrl: 'template/countdown.html'
         };
     })
-    .directive('epicvalidate', function() {
+    .directive('epicvalidate', function () {
         return {
             restrict: "E",
             templateUrl: 'template/epic_validate.html'
         };
     })
-    .directive('modal', ['$timeout', '$compile', '$parse', function($timeout, $compile, $parse) {
+    .directive('modal', ['$timeout', '$compile', '$parse', function ($timeout, $compile, $parse) {
         return {
             restrict: "E",
             scope: true,
-            link: function($scope, $element, $attrs) {
+            link: function ($scope, $element, $attrs) {
                 var template = $attrs.template;
                 if (template) {
                     $element.html('<' + template + '></' + template + '</>');
@@ -548,14 +548,15 @@ angular
                 function hide() {
                     $element.removeClass('show');
                 }
+
                 $element.addClass('modal');
 
                 var modelKey = $attrs['model'];
                 var model = $parse(modelKey);
-                $scope.closeModal = function() {
+                $scope.closeModal = function () {
                     model.assign($scope, null);
                 };
-                $scope.$watch(modelKey, function(model) {
+                $scope.$watch(modelKey, function (model) {
                     if (model === undefined) {
                         return;
                     }
@@ -570,15 +571,15 @@ angular
             }
         };
     }])
-    .directive('inputEnter', ['$parse', function($parse) {
+    .directive('inputEnter', ['$parse', function ($parse) {
         return {
             restrict: "A",
-            compile: function($element, attr) {
+            compile: function ($element, attr) {
                 var fn = $parse(attr['inputEnter']);
-                return function(scope, element) {
-                    element.bind('keypress', function(event) {
+                return function (scope, element) {
+                    element.bind('keypress', function (event) {
                         if (event.keyCode == 13) {
-                            scope.$apply(function() {
+                            scope.$apply(function () {
                                 fn(scope, {
                                     $event: event
                                 });
@@ -589,7 +590,7 @@ angular
             }
         };
     }])
-    .controller('epicBaseCtrl', ['$scope', '$http', '$translate', function($scope, $http, $translate) {
+    .controller('epicBaseCtrl', ['$scope', '$http', '$translate', function ($scope, $http, $translate) {
         function updateLeader() {
             if ($scope.ms_member && $scope.ms_team) {
                 $scope.isLeader = $scope.ms_team.leader == $scope.ms_member.member_id;
@@ -602,7 +603,7 @@ angular
             }
             $http.post(cmpt + '/team/memberteam', {
                 epic_id: $scope.epic_id
-            }).success(function(json) {
+            }).success(function (json) {
                 if (json.isSuccess) {
                     $scope.ms_team = json.result;
                     if ($scope.ms_team) {
@@ -613,7 +614,7 @@ angular
         }
 
         var search = location.search.slice(1);
-        var version = $scope.cdnVersion = (function() {
+        var version = $scope.cdnVersion = (function () {
             if (typeof buildDate !== 'undefined') {
                 return buildDate;
             }
@@ -622,7 +623,7 @@ angular
             }
             return '';
         })();
-        var cdn = $scope.cdn = (function() {
+        var cdn = $scope.cdn = (function () {
             if (typeof cdn !== 'undefined') {
                 return cdn;
             }
@@ -637,7 +638,7 @@ angular
         $scope.empty = [{}, {}, {}, {}, {}];
         $scope.isLeader = false;
         $scope.cmpt = cmpt;
-        $scope.gameLink = (function() {
+        $scope.gameLink = (function () {
             if ($scope.site == 'bplus') {
                 return '/zh/youth';
             }
@@ -648,20 +649,20 @@ angular
         if (!$translate.preferredLanguage()) {
             $translate.use($scope.lang || 'cn');
         }
-        $scope.fixTeams = function(teams) {
+        $scope.fixTeams = function (teams) {
             teams.forEach($scope.fixTeam);
         };
-        $scope.fixTeam = function(team) {
+        $scope.fixTeam = function (team) {
             team.memberLength = team.members.length;
             if (team.memberLength < 5) {
                 team.members = team.members.concat($scope.empty.slice(team.memberLength));
             }
             $scope.fixMembers(team.members);
         };
-        $scope.fixMembers = function(members) {
+        $scope.fixMembers = function (members) {
             members.forEach($scope.fixMember);
         };
-        $scope.fixMember = function(member) {
+        $scope.fixMember = function (member) {
             member.gender = member.gender || 'U';
             member.show_name = member.real_name || member.nick_name || member.wechat;
             if (member.education) {
@@ -693,7 +694,7 @@ angular
                 }
             }
         };
-        $scope.fixEpic = function(epic) {
+        $scope.fixEpic = function (epic) {
             if (!epic) {
                 return epic;
             }
@@ -703,7 +704,7 @@ angular
             epic.epic_sign_from = new Date(epic.epic_sign_from || epic.sign_from);
             return epic;
         };
-        $scope.fixSeries = function(series) {
+        $scope.fixSeries = function (series) {
             if (!series || !series.epics) {
                 return series;
             }
@@ -712,7 +713,7 @@ angular
         };
         var protocol = location.protocol;
         var host = location.host;
-        $scope.QRCode = function(epic_id, team_id) {
+        $scope.QRCode = function (epic_id, team_id) {
             if (!(epic_id && team_id)) {
                 return;
             }
@@ -720,48 +721,48 @@ angular
         };
         if (search) {
             search = search.split('&');
-            search.forEach(function(query) {
+            search.forEach(function (query) {
                 query = query.split('=');
                 if (query && query.length == 2) {
                     $scope[query[0]] = query[1];
                 }
             });
         }
-        $scope.$watch('epic_id', function(val) {
+        $scope.$watch('epic_id', function (val) {
             if (!val) {
                 return;
             }
-            $http.get(cmpt + '/game/epic/load/' + val).success(function(epic) {
+            $http.get(cmpt + '/game/epic/load/' + val).success(function (epic) {
                 if (epic.isSuccess) {
                     $scope.ms_epic = $scope.fixEpic(epic.result);
                 }
             });
         });
-        $scope.$watch('team_id', function(val) {
+        $scope.$watch('team_id', function (val) {
             $scope.isSharePage = !!val;
             if (!val) {
                 return;
             }
-            $http.get(cmpt + '/team/load/' + val).success(function(team) {
+            $http.get(cmpt + '/team/load/' + val).success(function (team) {
                 if (team.isSuccess && team.result) {
                     $scope.share_team = team.result;
                     $scope.fixTeam($scope.share_team);
                 }
             });
         });
-        $scope.$watch('series_id', function(val) {
+        $scope.$watch('series_id', function (val) {
             if (!val) {
                 return;
             }
-            $http.get(cmpt + '/game/series/load/' + val).success(function(json) {
+            $http.get(cmpt + '/game/series/load/' + val).success(function (json) {
                 if (json.isSuccess) {
                     $scope.ms_series = $scope.fixSeries(json.result);
                     if ($scope.ms_series && $scope.ms_series.epics) {
-                        $scope.ms_series.epics.sort(function(a, b) {
+                        $scope.ms_series.epics.sort(function (a, b) {
                             return a.epic_game_end - b.epic_game_end;
                         });
                         var index = -1;
-                        $scope.ms_series.epics.forEach(function(epic, i) {
+                        $scope.ms_series.epics.forEach(function (epic, i) {
                             if (epic.epic_game_end < $scope.now) {
                                 index = i;
                             }
@@ -774,22 +775,22 @@ angular
                 }
             });
         });
-        $http.get(cmpt + '/member').success(function(member) {
+        $http.get(cmpt + '/member').success(function (member) {
             if (member.isSuccess) {
                 $scope.ms_member = member.result;
                 $scope.fixMember($scope.ms_member);
             }
         });
-        $http.get(cmpt + '/game/series/my/').success(function(json) {
+        $http.get(cmpt + '/game/series/my/').success(function (json) {
             if (json && json.isSuccess) {
                 json.result.forEach($scope.fixSeries);
                 $scope.all_series = json.result;
             }
         });
-        $scope.$watch('ms_team', function(ms_team) {
+        $scope.$watch('ms_team', function (ms_team) {
             updateLeader();
         });
-        $scope.$watch('ms_member', function(val) {
+        $scope.$watch('ms_member', function (val) {
             updateLeader();
             if (val) {
                 loadTeam();
@@ -799,7 +800,7 @@ angular
         $scope.$on('acceptApplySuccess', loadTeam);
         $scope.$on('createTeamSuccess', loadTeam);
         $scope.$on('removeMemberSuccess', loadTeam);
-        $scope.formatDate = function(date, noPrefix, onlyDate) {
+        $scope.formatDate = function (date, noPrefix, onlyDate) {
             if (!date) {
                 return;
             }
@@ -812,7 +813,7 @@ angular
                 date.getHours(),
                 date.getMinutes()
             ];
-            date.forEach(function(val, index) {
+            date.forEach(function (val, index) {
                 if (val < 10) {
                     date[index] = '0' + val;
                 }
@@ -820,18 +821,18 @@ angular
             var day = date[0] + $translate.instant(40204) + date[1] + $translate.instant(40203) + date[2] + $translate.instant(40205) + ' ';
             return (noPrefix ? '' : $translate.instant(40206)) + ' ' + (onlyDate ? day : (day + date[3] + ':' + date[4]));
         };
-        $scope.formatDateSimple = function(date, noPrefix) {
+        $scope.formatDateSimple = function (date, noPrefix) {
             return $scope.formatDate(date, noPrefix, true);
         };
         var now = $scope.now = new Date;
         var timeOffset = $scope.timeOffset = (now.getTimezoneOffset() + 480) * 60 * 1000;
         var hour = 3600 * 1000;
         var day = $scope.day = 24 * hour;
-        $scope.getDeltaDays = function(to) {
+        $scope.getDeltaDays = function (to) {
             var delta = new Date(to) - now;
             return Math.ceil(delta / day);
         };
-        $scope.getTime = function(epic) {
+        $scope.getTime = function (epic) {
             if (epic.epic_game_end < now) {
                 return $translate.instant(40030) + $scope.formatDate(epic.epic_game_end);
             }
@@ -846,7 +847,7 @@ angular
             }
             return $translate.instant(40034) + $scope.formatDate(epic.epic_sign_from);
         };
-        $scope.getTeamTime = function(epic, delta) {
+        $scope.getTeamTime = function (epic, delta) {
             var full = delta >= 0;
             if (epic.epic_game_end < now) {
                 return $translate.instant(full ? 40070 : 40071);
@@ -862,20 +863,20 @@ angular
             }
             return $translate.instant(40034) + $scope.formatDate(epic.epic_sign_from);
         };
-        $scope.showMessage = function(message, $scope) {
+        $scope.showMessage = function (message, $scope) {
             $scope.message.text = message;
             $scope.message.error = null;
             $scope.message.show = true;
         };
-        $scope.showError = function(error, $scope) {
+        $scope.showError = function (error, $scope) {
             $scope.message.text = null;
             $scope.message.error = error;
             $scope.message.show = true;
         };
-        $scope.hideMessage = function($scope) {
+        $scope.hideMessage = function ($scope) {
             $scope.message.show = false;
         };
-        $scope.translateRegion = function(region) {
+        $scope.translateRegion = function (region) {
             switch (region) {
                 case 'china':
                     return 40060;
@@ -901,7 +902,7 @@ angular
         };
         //$scope.$on('updateTeamNameSuccess', loadTeam);
         $scope.teamRoom = null;
-        $scope.updateTeamRoom = function(teamRoom) {
+        $scope.updateTeamRoom = function (teamRoom) {
             $scope.teamRoom = teamRoom;
         };
 
@@ -910,13 +911,14 @@ angular
             cookie = cookie ? cookie[1] : null;
             return cookie;
         }
+
         var epic_validation_regex = /(?:^|;) *epic_valid=([^;]*)/;
         var epic_valid = (getFromCookie(document.cookie, epic_validation_regex) || '').split('|');
-        $scope.validateEpic = function(epic_id, security_key, callback) {
+        $scope.validateEpic = function (epic_id, security_key, callback) {
             $http.post(cmpt + '/game/epic/validation', {
                 epic_id: epic_id,
                 security_key: security_key
-            }).success(function(json) {
+            }).success(function (json) {
                 if (json.isSuccess && json.result) {
                     epic_valid.push(epic_id);
                     document.cookie = 'epic_valid=' + epic_valid.join('|') + ';path=/';
@@ -924,14 +926,14 @@ angular
                 callback(json.result);
             });
         };
-        $scope.epicIsValid = function(epic) {
+        $scope.epicIsValid = function (epic) {
             if (!epic.need_security) {
                 return true;
             }
             return epic_valid.indexOf(epic.epic_id) > -1;
         };
 
-        $scope.offerUrl = function(offerId) {
+        $scope.offerUrl = function (offerId) {
             return '/store/offers#/confirm/' + offerId + '/';
         };
         $scope.offers = {
@@ -949,36 +951,36 @@ angular
             }
         };
     }])
-    .controller('gameteamCtrl', ['$scope', '$http', function($scope, $http) {
-        $scope.updateTeamName = function() {
+    .controller('gameteamCtrl', ['$scope', '$http', function ($scope, $http) {
+        $scope.updateTeamName = function () {
             $http.post(cmpt + '/team/update', {
                 name: $scope.ms_team.name,
                 team_id: $scope.ms_team.team_id
-            }).success(function(json) {
+            }).success(function (json) {
                 if (json.isSuccess) {
                     $scope.$emit('updateTeamNameSuccess');
                     $scope.edit = false;
                 }
             });
         };
-        $scope.removeMember = function(member) {
+        $scope.removeMember = function (member) {
             $http.post(cmpt + '/team/left', {
                 target_id: member.member_id,
                 team_id: $scope.ms_team.team_id
-            }).success(function(json) {
+            }).success(function (json) {
                 if (json.isSuccess) {
                     $scope.$emit('removeMemberSuccess');
                 }
             });
         };
-        $scope.select = function(member) {
+        $scope.select = function (member) {
             if ($scope.isSharePage || !$scope.isLeader || !member.member_id || (member.member_id == $scope.ms_member.member_id) || ($scope.ms_epic && $scope.ms_epic.epic_sign_end < $scope.now)) {
                 return;
             }
             $scope.selected = $scope.selected === member ? null : member;
         };
     }])
-    .controller('teamjoinCtrl', ['$scope', '$http', function($scope, $http) {
+    .controller('teamjoinCtrl', ['$scope', '$http', function ($scope, $http) {
         $scope.number = {
             teamsApplySent: 0,
             teamsBeingInvited: 0,
@@ -1014,35 +1016,35 @@ angular
                 label: 40010
             }]
         }];
-        $scope.tabs.forEach(function(tab) {
-            $scope.$watch(tab.filter, function(val) {
+        $scope.tabs.forEach(function (tab) {
+            $scope.$watch(tab.filter, function (val) {
                 tab.show = val;
             });
         });
-        $scope.$watch('selected', function(selected) {
+        $scope.$watch('selected', function (selected) {
             if (selected && !selected.tab) {
                 $scope.selectedTab = selected.children[0];
             }
         });
-        $scope.toggle = function(tab) {
+        $scope.toggle = function (tab) {
             $scope.selected = tab;
         };
-        $scope.selectTab = function(tab) {
+        $scope.selectTab = function (tab) {
             $scope.selectedTab = tab;
         };
-        $scope.$watch('selectedTab', function(tab) {
+        $scope.$watch('selectedTab', function (tab) {
             if (!tab) {
                 return;
             }
             $scope.$broadcast(tab.name);
         });
-        $scope.showTabHeader = function(tab) {
+        $scope.showTabHeader = function (tab) {
             if (tab.name == 'join' && tab.show) {
                 return true;
             }
             return tab.show;
         };
-        $scope.showTabContent = function(tab) {
+        $scope.showTabContent = function (tab) {
             if (tab.show === undefined) {
                 return;
             }
@@ -1052,14 +1054,14 @@ angular
             return $scope.selected === tab || $scope.ms_team;
         };
     }])
-    .controller('createTeamCtrl', ['$scope', '$http', function($scope, $http) {
+    .controller('createTeamCtrl', ['$scope', '$http', function ($scope, $http) {
         $scope.message = {};
-        $scope.createTeam = function() {
+        $scope.createTeam = function () {
             if ($scope.name) {
                 $http.post(cmpt + '/team/create', {
                     name: $scope.name,
                     epic_id: $scope.ms_epic.epic_id
-                }).success(function(json) {
+                }).success(function (json) {
                     if (json.isSuccess) {
                         $scope.$emit('createTeamSuccess');
                         $scope.hideMessage($scope);
@@ -1070,7 +1072,7 @@ angular
             }
         };
     }])
-    .controller('teamsCanJoinCtrl', ['$scope', '$http', function($scope, $http) {
+    .controller('teamsCanJoinCtrl', ['$scope', '$http', function ($scope, $http) {
         var timeout;
         $scope.message = {};
 
@@ -1081,14 +1083,14 @@ angular
 
         function searchTeams() {
             if ($scope.teams) {
-                $scope.teams.forEach(function(team) {
+                $scope.teams.forEach(function (team) {
                     team.expanded = false;
                 });
             }
             $http.post(cmpt + '/team/search/', {
                 epic_id: $scope.ms_epic.epic_id,
                 name: $scope.teamName
-            }).success(function(json) {
+            }).success(function (json) {
                 if (json.isSuccess) {
                     $scope.teams = (json.result && json.result.teams) ? json.result.teams : [];
                     $scope.fixTeams($scope.teams);
@@ -1100,10 +1102,11 @@ angular
                 }
             });
         }
-        $scope.sendApply = function(team) {
+
+        $scope.sendApply = function (team) {
             $http.post(cmpt + '/team/apply', {
                 team_id: team.team_id
-            }).success(function(json) {
+            }).success(function (json) {
                 if (json.isSuccess) {
                     $scope.teams.splice($scope.teams.indexOf(team), 1);
                     $scope.showMessage(40050, $scope);
@@ -1112,7 +1115,7 @@ angular
                 }
             });
         };
-        $scope.$watch('teamName', function(val) {
+        $scope.$watch('teamName', function (val) {
             if (val === undefined) {
                 return;
             }
@@ -1121,18 +1124,18 @@ angular
         $scope.$on('teamsCanJoin', searchTeams);
         $scope.searchTeam = searchTeams;
     }])
-    .controller('teamsApplySentCtrl', ['$scope', '$http', function($scope, $http) {
+    .controller('teamsApplySentCtrl', ['$scope', '$http', function ($scope, $http) {
         $scope.message = {};
-        $scope.$on('teamsApplySent', function() {
+        $scope.$on('teamsApplySent', function () {
             if ($scope.teams) {
-                $scope.teams.forEach(function(team) {
+                $scope.teams.forEach(function (team) {
                     team.expanded = false;
                 });
             }
             $http.get(cmpt + '/team/myapply/' + $scope.ms_member.member_id)
-                .success(function(teams) {
+                .success(function (teams) {
                     if (teams.isSuccess) {
-                        $scope.teams = teams.result ? Object.keys(teams.result).map(function(tid) {
+                        $scope.teams = teams.result ? Object.keys(teams.result).map(function (tid) {
                             return teams.result[tid];
                         }) : [];
                         $scope.fixTeams($scope.teams);
@@ -1145,18 +1148,18 @@ angular
                 });
         });
     }])
-    .controller('teamsBeingInvitedCtrl', ['$scope', '$http', function($scope, $http) {
+    .controller('teamsBeingInvitedCtrl', ['$scope', '$http', function ($scope, $http) {
         $scope.message = {};
-        $scope.$on('teamsBeingInvited', function() {
+        $scope.$on('teamsBeingInvited', function () {
             if ($scope.teams) {
-                $scope.teams.forEach(function(team) {
+                $scope.teams.forEach(function (team) {
                     team.expanded = false;
                 });
             }
             $http.get(cmpt + '/team/myinvition/' + $scope.ms_member.member_id)
-                .success(function(teams) {
+                .success(function (teams) {
                     if (teams.isSuccess) {
-                        $scope.teams = teams.result ? Object.keys(teams.result).map(function(tid) {
+                        $scope.teams = teams.result ? Object.keys(teams.result).map(function (tid) {
                             return teams.result[tid];
                         }) : [];
                         $scope.fixTeams($scope.teams);
@@ -1168,10 +1171,10 @@ angular
                     }
                 });
         });
-        $scope.acceptInvite = function(team) {
+        $scope.acceptInvite = function (team) {
             $http.post(cmpt + '/team/acceptInvite', {
                 team_id: team.team_id
-            }).success(function(json) {
+            }).success(function (json) {
                 if (json.isSuccess) {
                     $scope.showMessage(40053, $scope);
                 } else {
@@ -1184,7 +1187,7 @@ angular
             });
         };
     }])
-    .controller('peopleCanJoinCtrl', ['$scope', '$http', function($scope, $http) {
+    .controller('peopleCanJoinCtrl', ['$scope', '$http', function ($scope, $http) {
         var timeout;
         $scope.message = {};
 
@@ -1198,7 +1201,7 @@ angular
                 name: $scope.memberName,
                 university: $scope.memberName,
                 epic_id: $scope.ms_epic.epic_id
-            }).success(function(json) {
+            }).success(function (json) {
                 if (json.isSuccess) {
                     $scope.persons = json.result || [];
                     $scope.fixMembers($scope.persons);
@@ -1210,7 +1213,8 @@ angular
                 }
             });
         }
-        $scope.$watch('memberName', function(val) {
+
+        $scope.$watch('memberName', function (val) {
             if (val === undefined) {
                 return;
             }
@@ -1218,11 +1222,11 @@ angular
         });
         $scope.searchMember = searchMember;
         $scope.$on('peopleCanJoin', searchMember);
-        $scope.sendInvite = function(person) {
+        $scope.sendInvite = function (person) {
             $http.post(cmpt + '/team/invite', {
                 be_invited_id: person.member_id,
                 team_id: $scope.ms_team.team_id
-            }).success(function(json) {
+            }).success(function (json) {
                 if (json.isSuccess) {
                     $scope.showMessage(40055, $scope);
                     $scope.persons.splice($scope.persons.indexOf(person), 1);
@@ -1232,13 +1236,13 @@ angular
             });
         };
     }])
-    .controller('peopleInvitedCtrl', ['$scope', '$http', function($scope, $http) {
+    .controller('peopleInvitedCtrl', ['$scope', '$http', function ($scope, $http) {
         $scope.message = {};
-        $scope.$on('peopleInvited', function() {
+        $scope.$on('peopleInvited', function () {
             $http.get(cmpt + '/team/invitefor/' + $scope.ms_member.member_id)
-                .success(function(persons) {
+                .success(function (persons) {
                     if (persons.isSuccess) {
-                        $scope.persons = persons.result ? persons.result.map(function(person) {
+                        $scope.persons = persons.result ? persons.result.map(function (person) {
                             return person.member;
                         }) : [];
                         $scope.fixMembers($scope.persons);
@@ -1251,11 +1255,11 @@ angular
                 });
         });
     }])
-    .controller('peopleWantToJoinCtrl', ['$scope', '$http', function($scope, $http) {
+    .controller('peopleWantToJoinCtrl', ['$scope', '$http', function ($scope, $http) {
         $scope.message = {};
-        $scope.$on('peopleWantToJoin', function() {
+        $scope.$on('peopleWantToJoin', function () {
             $http.get(cmpt + '/team/applierByTeam/' + $scope.ms_team.team_id)
-                .success(function(members) {
+                .success(function (members) {
                     if (members.isSuccess) {
                         $scope.members = members.result || [];
                         $scope.fixMembers($scope.members);
@@ -1268,11 +1272,11 @@ angular
                 });
         });
 
-        $scope.acceptApply = function(member) {
+        $scope.acceptApply = function (member) {
             $http.post(cmpt + '/team/acceptApply', {
                 applier_id: member.member_id,
                 team_id: $scope.ms_team.team_id,
-            }).success(function(json) {
+            }).success(function (json) {
                 $scope.$emit('acceptApplySuccess');
                 if (json.isSuccess) {
                     $scope.showMessage(40058, $scope);
@@ -1283,15 +1287,17 @@ angular
             });
         };
     }])
-    .controller('seriesCtrl', ['$scope', '$http', function($scope, $http) {}])
-    .controller('experimentCtrl', ['$scope', '$http', function($scope, $http) {}])
-    .controller('nationalCtrl', ['$scope', '$http', function($scope, $http) {
+    .controller('seriesCtrl', ['$scope', '$http', function ($scope, $http) {
+    }])
+    .controller('experimentCtrl', ['$scope', '$http', function ($scope, $http) {
+    }])
+    .controller('nationalCtrl', ['$scope', '$http', function ($scope, $http) {
         $scope.nationalEpics = [];
-        $scope.$watch('ms_series.epics', function(val) {
+        $scope.$watch('ms_series.epics', function (val) {
             if (!val) {
                 return;
             }
-            val.forEach(function(epic) {
+            val.forEach(function (epic) {
                 if (epic.region) {
                     epic.regionCode = $scope.translateRegion(epic.region);
                 }
@@ -1302,40 +1308,40 @@ angular
             $scope.filterEpics = [].concat($scope.nationalEpics);
         });
         $scope.filterEpics = [];
-        $scope.$on('area/choose', function(e, areaCode) {
-            $scope.$apply(function() {
-                $scope.filterEpics = $scope.ms_series.epics.filter(function(epic) {
+        $scope.$on('area/choose', function (e, areaCode) {
+            $scope.$apply(function () {
+                $scope.filterEpics = $scope.ms_series.epics.filter(function (epic) {
                     return epic.regionCode == areaCode;
                 }).concat($scope.nationalEpics);
             });
         });
     }])
-    .controller('seasonCtrl', ['$scope', '$http', function($scope, $http) {
-        $scope.$watch('ms_series', function(series) {
+    .controller('seasonCtrl', ['$scope', '$http', function ($scope, $http) {
+        $scope.$watch('ms_series', function (series) {
             if (!series || !series.epics) {
                 return;
             }
             $scope.epics = [];
             var temp = {};
-            series.epics.forEach(function(epic) {
+            series.epics.forEach(function (epic) {
                 var date = epic.epic_game_from;
                 date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                 temp[date] = temp[date] || [];
                 temp[date].push(epic);
             });
-            Object.keys(temp).forEach(function(key) {
+            Object.keys(temp).forEach(function (key) {
                 $scope.epics.push({
                     date: new Date(key),
                     epics: temp[key]
                 });
             });
-            $scope.epics.sort(function(a, b) {
+            $scope.epics.sort(function (a, b) {
                 return a.date - b.date;
             });
             temp = null;
         });
     }])
-    .controller('countdownCtrl', ['$scope', '$timeout', '$http', function($scope, $timeout, $http) {
+    .controller('countdownCtrl', ['$scope', '$timeout', '$http', function ($scope, $timeout, $http) {
         $scope.countdownMsg = '';
         $scope.showGameLink = false;
         $scope.willStart = false;
@@ -1351,9 +1357,7 @@ angular
         var day = 24 * hour;
 
         function showMettingRoomBtn() {
-            if (!$scope.createMettingRoomSuccess &&
-                !$scope.creatingMettingRoom &&
-                !$scope.showLinkOfMettingRoom) {
+            if (!$scope.createMettingRoomSuccess && !$scope.creatingMettingRoom && !$scope.showLinkOfMettingRoom) {
                 $scope.readyToCreateMettingRoom = true;
             }
         }
@@ -1401,6 +1405,7 @@ angular
             $scope.countdownMsg = (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
             $timeout(countdown, 1000);
         }
+
         $timeout(countdown, 1000);
 
         function showMettingLink() {
@@ -1420,7 +1425,7 @@ angular
                 teamId: $scope.ms_team.team_id,
                 memberName: $scope.ms_member.show_name,
                 memberId: $scope.ms_member.member_id
-            }).success(function(json) {
+            }).success(function (json) {
                 if (json.isSuccess && json.result) {
                     $scope.readyToCreateMettingRoom = false;
                     $scope.creatingMettingRoom = false;
@@ -1432,10 +1437,11 @@ angular
                 $timeout($scope.joinMeetingRoom, 3000);
             });
         }
+
         $scope.joinMeetingRoom = joinMeetingRoom;
         $scope.showSignEnded = true;
     }])
-    .controller('gameRoomCtrl', ['$scope', '$http', function($scope, $http) {
+    .controller('gameRoomCtrl', ['$scope', '$http', function ($scope, $http) {
         function loadTeam(team_id) {
             if (!team_id || !$scope.ms_epic) {
                 return;
@@ -1443,7 +1449,7 @@ angular
             $http.post(cmpt + '/board/epic/team', {
                 epic_id: $scope.ms_epic.epic_id,
                 team_id: team_id,
-            }).success(function(json) {
+            }).success(function (json) {
                 if (json.isSuccess && json.result) {
                     $scope.updateTeamRoom(json.result);
                 }
@@ -1451,7 +1457,7 @@ angular
             $http.post(cmpt + '/board/teamBoard', {
                 epic_id: $scope.ms_epic.epic_id,
                 team_id: team_id,
-            }).success(function(json) {
+            }).success(function (json) {
                 if (!json.isSuccess || !json.result) {
                     return;
                 }
@@ -1470,10 +1476,10 @@ angular
         }
 
         function getRankByRound(round) {
-            var teams = $scope.teamsInRoom.map(function(item) {
+            var teams = $scope.teamsInRoom.map(function (item) {
                 return item;
             });
-            teams.sort(function(a, b) {
+            teams.sort(function (a, b) {
                 if (!a.score) {
                     return 1;
                 }
@@ -1496,9 +1502,10 @@ angular
             });
             return teams;
         }
+
         $scope.teamsInRoom = [];
         $scope.rounds = [];
-        $scope.$watch('ms_epic.round', function(round) {
+        $scope.$watch('ms_epic.round', function (round) {
             if (!round) {
                 $scope.rounds = [0, 1, 2, 3];
                 return;
@@ -1512,7 +1519,7 @@ angular
         $scope.$watch($scope.isSharePage ? 'share_team.team_id' : 'ms_team.team_id', loadTeam);
         $scope.selectedRound = -1;
         $scope.currentRound = -1;
-        $scope.toggleRank = function(round) {
+        $scope.toggleRank = function (round) {
             if (round == $scope.selectedRound) {
                 $scope.selectedRound = -1;
                 $scope.teamsInRoomView = $scope.teamsInRoom;
@@ -1525,49 +1532,49 @@ angular
             $scope.teamsInRoomView = getRankByRound(round);
         };
         $scope.selectedMember = null;
-        $scope.toggleImage = function(team, member) {
+        $scope.toggleImage = function (team, member) {
             if (team.selectedMember === member) {
                 return team.selectedMember = null;
             }
             team.selectedMember = member;
         };
     }])
-    .controller('epicValidateCtrl', ['$scope', '$http', function($scope, $http) {
+    .controller('epicValidateCtrl', ['$scope', '$http', function ($scope, $http) {
         $scope.showError = false;
         $scope.error = null;
-        $scope.submit = function(valid) {
+        $scope.submit = function (valid) {
             this.submitted = true;
             if (!valid) {
                 return;
             }
-            this.validateEpic(this.ms_epic.epic_id, this.security_key, function(json) {
+            this.validateEpic(this.ms_epic.epic_id, this.security_key, function (json) {
                 var valid = json.isSuccess && json.result;
                 $scope.showError = !valid;
                 $scope.error = !valid;
             });
         };
-        $scope.$watch('epicValidateForm.$valid', function(valid) {
+        $scope.$watch('epicValidateForm.$valid', function (valid) {
             $scope.showError = !valid;
             $scope.error = null;
         });
     }])
-    .controller('personalRecordCtrl', ['$scope', '$http', function($scope, $http) {
+    .controller('personalRecordCtrl', ['$scope', '$http', function ($scope, $http) {
         $scope.epics = {};
-        $http.get(cmpt + '/rank/my/').success(function(json) {
+        $http.get(cmpt + '/rank/my/').success(function (json) {
             if (json.isSuccess) {
                 if (!json.result) {
                     json.result = [];
                 }
-                json.result.forEach(function(series) {
+                json.result.forEach(function (series) {
                     if (series.team) {
                         $scope.fixTeam(series.team);
                     }
                     if (series.epics) {
-                        series.epics.forEach(function(epic) {
+                        series.epics.forEach(function (epic) {
                             $scope.fixEpic(epic);
                             $scope.fixTeam(epic.team);
                         });
-                        series.epics.sort(function(a, b) {
+                        series.epics.sort(function (a, b) {
                             return b.epic_game_from - a.epic_game_from;
                         });
                     }
@@ -1576,7 +1583,7 @@ angular
             }
         });
     }])
-    .controller('gameCertificateCtrl', ['$scope', '$http', function($scope, $http) {
+    .controller('gameCertificateCtrl', ['$scope', '$http', function ($scope, $http) {
         $scope.rights = {
             'chinese': $scope.offers.chinese_cert.offerId,
             'english': $scope.offers.english_cert.offerId
@@ -1586,7 +1593,7 @@ angular
             $http.post(cmpt + '/certification/fetch/', {
                 epic_id: $scope.epic_id,
                 certificate_type: $scope.type
-            }).success(function(json) {
+            }).success(function (json) {
                 if (json.isSuccess) {
                     if (!json.result) {
                         return setTimeout(loadCerfification, 1500);
@@ -1595,13 +1602,14 @@ angular
                 }
             });
         }
+
         loadCerfification();
-        $scope.apply = function() {
-            $http.get(cmpt + '/certification/products/').success(function(json) {
+        $scope.apply = function () {
+            $http.get(cmpt + '/certification/products/').success(function (json) {
                 if (json.isSuccess) {
-                    $scope.rights.noRight = json.result.filter(function(item) {
-                        return item.count > 0;
-                    }).length == 0;
+                    $scope.rights.noRight = json.result.filter(function (item) {
+                            return item.count > 0;
+                        }).length == 0;
 
                     if (!$scope.rights.noRight) {
                         location.href = './certification_address?epic_id=' + $scope.epic_id + '&team_id=' + $scope.team_id;
@@ -1610,7 +1618,7 @@ angular
             });
         };
     }])
-    .controller('gameCertAddressCtrl', ['$scope', '$http', function($scope, $http) {
+    .controller('gameCertAddressCtrl', ['$scope', '$http', function ($scope, $http) {
         $scope.info = {};
         $scope.address = {};
         $scope.modal = {};
@@ -1626,10 +1634,10 @@ angular
                 count: 0
             }
         };
-        $http.get(cmpt + '/certification/products/').success(function(json) {
+        $http.get(cmpt + '/certification/products/').success(function (json) {
             if (json.isSuccess) {
                 var count = 0;
-                json.result.forEach(function(item) {
+                json.result.forEach(function (item) {
                     if (item.id == $scope.rights.chinese.id) {
                         count += item.count;
                         $scope.rights.chinese.count = item.count;
@@ -1646,7 +1654,7 @@ angular
                 }
             }
         });
-        $scope.submit = function() {
+        $scope.submit = function () {
             var products = [];
             if ($scope.info.english) {
                 products.push($scope.rights.english.id);
@@ -1657,7 +1665,7 @@ angular
             $http.post(cmpt + '/certification/buyCertificate', {
                 products: products,
                 address: JSON.stringify($scope.address)
-            }).success(function(json) {
+            }).success(function (json) {
                 if (json.isSuccess) {
                     $scope.modal.applied = true;
                 } else {
@@ -1666,17 +1674,18 @@ angular
             });
         };
     }])
-    .controller('gameCertReportCtrl', ['$scope', '$http', function($scope, $http) {
+    .controller('gameCertReportCtrl', ['$scope', '$http', function ($scope, $http) {
         function load() {
             $http.post(cmpt + '/certification/fetchreport/', {
                 epic_id: $scope.epic_id,
                 certificate_type: $scope.type
-            }).success(function(json) {
+            }).success(function (json) {
                 if (json.isSuccess) {
                     $scope.certification = json.result;
                 }
             });
         }
+
         $scope.modal = {};
         $scope.rights = {
             report: {
@@ -1684,11 +1693,11 @@ angular
                 offerId: $scope.offers.report.offerId
             }
         };
-        $scope.sendApply = function() {
+        $scope.sendApply = function () {
             $http.post(cmpt + '/certification/buyReport', {
                 epic_id: $scope.epic_id,
                 products: [$scope.rights.report.id]
-            }).success(function(json) {
+            }).success(function (json) {
                 if (!json.isSuccess) {
                     if (json.code == 70011) {
                         return load();
@@ -1704,8 +1713,8 @@ angular
         load();
     }])
     .controller('rankingCtrl', angular.cmpt.rankingCtrl)
-    .filter('trusted', ['$sce', function($sce) {
-        return function(text) {
+    .filter('trusted', ['$sce', function ($sce) {
+        return function (text) {
             return $sce.trustAsHtml(text);
         };
     }]);

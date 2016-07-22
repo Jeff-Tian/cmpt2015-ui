@@ -939,15 +939,15 @@ angular
         $scope.offers = {
             chinese_cert: {
                 offerId: 'dcb33391-baad-4dd0-9c05-aa2e4f05c940',
-                productTypeId: '7a25f186-d31d-4c88-8070-87776480d853'
+                productTypeId: 'a65777df-c559-4a39-b06e-586e8e9f937b'
             },
             english_cert: {
                 offerId: 'fede0083-1c78-4081-90f4-2ecd534d2977',
-                productTypeId: '5b258c78-a7fa-41d6-9ea9-04132e9de428'
+                productTypeId: 'e7bc71c4-2421-4aae-a227-43e7123bf625'
             },
             report: {
                 offerId: '2c3671fe-90df-45c5-bea4-25cedc5e5431',
-                productTypeId: '35388cd9-9a7e-4955-b72f-3104bf8da90d'
+                productTypeId: '18bc048d-3320-46da-8443-fac66eb346df'
             }
         };
     }])
